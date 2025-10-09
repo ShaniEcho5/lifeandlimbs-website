@@ -64,14 +64,13 @@ const EducationAwarenessPage = () => {
       <Box
         sx={{
           py: { xs: 8, md: 12 },
-          background: 'linear-gradient(135deg, #ff8a80 0%, #ffab91 100%)',
-          color: 'white',
+          backgroundColor: '#ffffff',
+          color: '#1a1a1a',
           textAlign: 'center',
         }}
       >
         <Container maxWidth="lg">
           <motion.div {...fadeInUp}>
-            <FaBullhorn size={80} style={{ marginBottom: '2rem' }} />
             <Typography
               variant="h1"
               sx={{
@@ -79,6 +78,7 @@ const EducationAwarenessPage = () => {
                 fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                 fontWeight: 800,
                 lineHeight: 1.1,
+                color: '#34a3dc',
               }}
             >
               Education & Awareness Campaign
@@ -90,7 +90,7 @@ const EducationAwarenessPage = () => {
                 maxWidth: '700px',
                 mx: 'auto',
                 lineHeight: 1.6,
-                opacity: 0.9,
+                color: '#666',
               }}
             >
               Educating communities and raising awareness about prosthetics, 
@@ -105,10 +105,10 @@ const EducationAwarenessPage = () => {
                 px: 4,
                 py: 1.5,
                 fontWeight: 600,
-                backgroundColor: 'white',
-                color: '#ff8a80',
+                backgroundColor: '#34a3dc',
+                color: 'white',
                 '&:hover': {
-                  backgroundColor: '#f8fafc',
+                  backgroundColor: '#2a8bc2',
                 },
               }}
             >
@@ -119,7 +119,7 @@ const EducationAwarenessPage = () => {
       </Box>
 
       {/* Main Content Section */}
-      <Box className="section-padding" sx={{ backgroundColor: '#ffffff' }}>
+      <Box className="section-padding" sx={{ backgroundColor: '#f8fafc' }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -170,7 +170,7 @@ const EducationAwarenessPage = () => {
                   {services.map((service, index) => (
                     <ListItem key={index} sx={{ px: 0, py: 1 }}>
                       <ListItemIcon sx={{ minWidth: 36 }}>
-                        <FaCheckCircle color="#ff8a80" size={20} />
+                        <FaCheckCircle color="#34a3dc" size={20} />
                       </ListItemIcon>
                       <ListItemText
                         primary={service}
@@ -194,18 +194,22 @@ const EducationAwarenessPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '500px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Awareness Campaign Image
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Awareness Campaign"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -265,7 +269,7 @@ const EducationAwarenessPage = () => {
                     >
                       <Box
                         sx={{
-                          color: '#ff8a80',
+                          color: '#34a3dc',
                           mb: 3,
                         }}
                       >
@@ -312,18 +316,22 @@ const EducationAwarenessPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '400px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Advocacy Mission Image
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Advocacy Mission"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -380,9 +388,9 @@ const EducationAwarenessPage = () => {
                     px: 4,
                     py: 1.5,
                     fontWeight: 600,
-                    backgroundColor: '#ff8a80',
+                    backgroundColor: '#34a3dc',
                     '&:hover': {
-                      backgroundColor: '#f57571',
+                      backgroundColor: '#2a8bc2',
                     },
                   }}
                 >
@@ -398,7 +406,7 @@ const EducationAwarenessPage = () => {
       <Box
         className="section-padding"
         sx={{
-          backgroundColor: '#ff8a80',
+          backgroundColor: '#34a3dc',
           color: 'white',
         }}
       >
@@ -438,7 +446,7 @@ const EducationAwarenessPage = () => {
                     py: 1.5,
                     fontWeight: 600,
                     backgroundColor: 'white',
-                    color: '#ff8a80',
+                    color: '#34a3dc',
                     '&:hover': {
                       backgroundColor: '#f8fafc',
                     },

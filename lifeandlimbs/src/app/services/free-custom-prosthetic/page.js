@@ -38,7 +38,6 @@ const FreeCustomProstheticPage = () => {
     'High-quality materials and components',
     'Comprehensive training included',
     'Ongoing maintenance support',
-    'No financial requirements or means testing',
   ];
 
   const benefits = [
@@ -65,14 +64,13 @@ const FreeCustomProstheticPage = () => {
       <Box
         sx={{
           py: { xs: 8, md: 12 },
-          background: 'linear-gradient(135deg, #34a3dc 0%, #7cc4e8 100%)',
-          color: 'white',
+          backgroundColor: '#ffffff',
+          color: '#1a1a1a',
           textAlign: 'center',
         }}
       >
         <Container maxWidth="lg">
           <motion.div {...fadeInUp}>
-            <FaHandPaper size={80} style={{ marginBottom: '2rem' }} />
             <Typography
               variant="h1"
               sx={{
@@ -80,6 +78,7 @@ const FreeCustomProstheticPage = () => {
                 fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                 fontWeight: 800,
                 lineHeight: 1.1,
+                color: '#34a3dc',
               }}
             >
               Free Custom Prosthetic
@@ -91,7 +90,7 @@ const FreeCustomProstheticPage = () => {
                 maxWidth: '700px',
                 mx: 'auto',
                 lineHeight: 1.6,
-                opacity: 0.9,
+                color: '#666',
               }}
             >
               High-quality, custom-fitted prosthetic limbs provided at absolutely no cost 
@@ -106,10 +105,10 @@ const FreeCustomProstheticPage = () => {
                 px: 4,
                 py: 1.5,
                 fontWeight: 600,
-                backgroundColor: 'white',
-                color: '#34a3dc',
+                backgroundColor: '#34a3dc',
+                color: 'white',
                 '&:hover': {
-                  backgroundColor: '#f8fafc',
+                  backgroundColor: '#2a8bc2',
                 },
               }}
             >
@@ -120,7 +119,7 @@ const FreeCustomProstheticPage = () => {
       </Box>
 
       {/* Main Content Section */}
-      <Box className="section-padding" sx={{ backgroundColor: '#ffffff' }}>
+      <Box className="section-padding" sx={{ backgroundColor: '#f8fafc' }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -196,18 +195,22 @@ const FreeCustomProstheticPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '500px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Prosthetic Fitting Image
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Prosthetic Fitting Process"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -314,18 +317,22 @@ const FreeCustomProstheticPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '400px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Process Illustration
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Process Illustration"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -384,7 +391,7 @@ const FreeCustomProstheticPage = () => {
                     fontWeight: 600,
                     backgroundColor: '#34a3dc',
                     '&:hover': {
-                      backgroundColor: '#2891c7',
+                      backgroundColor: '#2a8bc2',
                     },
                   }}
                 >

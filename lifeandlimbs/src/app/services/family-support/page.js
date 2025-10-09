@@ -64,14 +64,13 @@ const FamilySupportPage = () => {
       <Box
         sx={{
           py: { xs: 8, md: 12 },
-          background: 'linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%)',
-          color: 'white',
+          backgroundColor: '#ffffff',
+          color: '#1a1a1a',
           textAlign: 'center',
         }}
       >
         <Container maxWidth="lg">
           <motion.div {...fadeInUp}>
-            <FaUsers size={80} style={{ marginBottom: '2rem' }} />
             <Typography
               variant="h1"
               sx={{
@@ -79,6 +78,7 @@ const FamilySupportPage = () => {
                 fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                 fontWeight: 800,
                 lineHeight: 1.1,
+                color: '#34a3dc',
               }}
             >
               Family Support Program
@@ -90,7 +90,7 @@ const FamilySupportPage = () => {
                 maxWidth: '700px',
                 mx: 'auto',
                 lineHeight: 1.6,
-                opacity: 0.9,
+                color: '#666',
               }}
             >
               Comprehensive support for families navigating the prosthetic journey 
@@ -105,10 +105,10 @@ const FamilySupportPage = () => {
                 px: 4,
                 py: 1.5,
                 fontWeight: 600,
-                backgroundColor: 'white',
-                color: '#a8e6cf',
+                backgroundColor: '#34a3dc',
+                color: 'white',
                 '&:hover': {
-                  backgroundColor: '#f8fafc',
+                  backgroundColor: '#2a8bc2',
                 },
               }}
             >
@@ -119,7 +119,7 @@ const FamilySupportPage = () => {
       </Box>
 
       {/* Main Content Section */}
-      <Box className="section-padding" sx={{ backgroundColor: '#ffffff' }}>
+      <Box className="section-padding" sx={{ backgroundColor: '#f8fafc' }}>
         <Container maxWidth="xl">
           <Grid container spacing={8} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -131,18 +131,22 @@ const FamilySupportPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '500px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Family Support Image
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Family Support"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -194,7 +198,7 @@ const FamilySupportPage = () => {
                   {services.map((service, index) => (
                     <ListItem key={index} sx={{ px: 0, py: 1 }}>
                       <ListItemIcon sx={{ minWidth: 36 }}>
-                        <FaCheckCircle color="#a8e6cf" size={20} />
+                        <FaCheckCircle color="#34a3dc" size={20} />
                       </ListItemIcon>
                       <ListItemText
                         primary={service}
@@ -265,7 +269,7 @@ const FamilySupportPage = () => {
                     >
                       <Box
                         sx={{
-                          color: '#a8e6cf',
+                          color: '#34a3dc',
                           mb: 3,
                         }}
                       >
@@ -356,9 +360,9 @@ const FamilySupportPage = () => {
                     px: 4,
                     py: 1.5,
                     fontWeight: 600,
-                    backgroundColor: '#a8e6cf',
+                    backgroundColor: '#34a3dc',
                     '&:hover': {
-                      backgroundColor: '#8ddb9f',
+                      backgroundColor: '#2a8bc2',
                     },
                   }}
                 >
@@ -375,18 +379,22 @@ const FamilySupportPage = () => {
               >
                 <Box
                   sx={{
+                    width: '100%',
                     height: '400px',
                     borderRadius: 4,
-                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    overflow: 'hidden',
                     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
                   }}
                 >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Program Activities Image
-                  </Typography>
+                  <img
+                    src="/images/Sleeve_Fitting_3345975_900x600.png"
+                    alt="Program Activities"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                  />
                 </Box>
               </motion.div>
             </Grid>
@@ -398,7 +406,7 @@ const FamilySupportPage = () => {
       <Box
         className="section-padding"
         sx={{
-          backgroundColor: '#a8e6cf',
+          backgroundColor: '#34a3dc',
           color: 'white',
         }}
       >
@@ -438,7 +446,7 @@ const FamilySupportPage = () => {
                     py: 1.5,
                     fontWeight: 600,
                     backgroundColor: 'white',
-                    color: '#a8e6cf',
+                    color: '#34a3dc',
                     '&:hover': {
                       backgroundColor: '#f8fafc',
                     },
