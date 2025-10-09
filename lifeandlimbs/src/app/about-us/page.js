@@ -148,15 +148,20 @@ const AboutUsPage = () => {
                 sx={{
                   height: '400px',
                   borderRadius: 3,
-                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  position: 'relative',
                 }}
               >
-                <Typography variant="h4" color="text.secondary" textAlign="center">
-                  Our Story Image
-                </Typography>
+                <Image
+                  src="/images/our-mission-img_0Z5ajpX.webp"
+                  alt="Prosthetic fitting session showing a healthcare professional helping a patient with their prosthetic leg"
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  priority
+                />
               </Box>
             </Grid>
           </Grid>
