@@ -32,13 +32,31 @@ const AboutUsPage = () => {
         sx={{
           py: 8,
           textAlign: 'center',
+          position: 'relative',
+          minHeight: '70vh',
+          display: 'flex',
+          alignItems: 'center',
+          backgroundImage: 'url(/images/Sleeve_Fitting_3345975_900x600.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.6)', // Dark overlay for text readability
+            zIndex: 1,
+          },
         }}
       >
-        <Container maxWidth="lg">
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
           <Typography
             variant="h6"
             sx={{
-              color: 'primary.main',
+              color: 'white',
               fontWeight: 600,
               mb: 2,
               textTransform: 'uppercase',
@@ -49,20 +67,24 @@ const AboutUsPage = () => {
           </Typography>
           <Typography
             variant="h1"
-            className="gradient-text"
+            className="#fff"
             sx={{
               mb: 3,
+              fontFamily: 'poppins',
               fontSize: { xs: '2.5rem', md: '3.5rem' },
-              fontWeight: 700,
+              fontWeight: 600,
+              color: 'white',
             }}
           >
-            Transforming Lives, One Step at a Time
+            Transforming Lives, One Step at <br /> a Time
           </Typography>
           <Typography
             variant="h5"
             sx={{
               mb: 4,
-              color: 'text.secondary',
+              color: '#fff',
+              fontFamily: 'poppins',
+              fontWeight: 400,
               maxWidth: '800px',
               mx: 'auto',
               lineHeight: 1.6,
