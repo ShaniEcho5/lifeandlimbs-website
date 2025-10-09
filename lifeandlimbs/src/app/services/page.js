@@ -427,16 +427,6 @@ const ServicesPage = () => {
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: services[0].color,
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                            '& .service-icon': {
-                              backgroundColor: 'white',
-                              color: services[0].color,
-                            },
-                          },
                         }}
                       >
                         <Box
@@ -529,16 +519,6 @@ const ServicesPage = () => {
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: services[1].color,
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                            '& .service-icon': {
-                              backgroundColor: 'white',
-                              color: services[1].color,
-                            },
-                          },
                         }}
                       >
                         <Box
@@ -631,16 +611,6 @@ const ServicesPage = () => {
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: services[2].color,
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                            '& .service-icon': {
-                              backgroundColor: 'white',
-                              color: services[2].color,
-                            },
-                          },
                         }}
                       >
                         <Box
@@ -733,16 +703,6 @@ const ServicesPage = () => {
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: services[3].color,
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                            '& .service-icon': {
-                              backgroundColor: 'white',
-                              color: services[3].color,
-                            },
-                          },
                         }}
                       >
                         <Box
@@ -835,16 +795,6 @@ const ServicesPage = () => {
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           textDecoration: 'none',
-                          '&:hover': {
-                            backgroundColor: services[4].color,
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                            '& .service-icon': {
-                              backgroundColor: 'white',
-                              color: services[4].color,
-                            },
-                          },
                         }}
                       >
                         <Box
