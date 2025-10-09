@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaHeart, FaBalanceScale, FaLightbulb, FaLeaf } from 'react-icons/fa';
 
 export const metadata = {
   title: 'About Us - Life and Limb',
@@ -298,9 +299,7 @@ const AboutUsPage = () => {
                     mb: 3,
                   }}
                 >
-                  <Typography variant="h4" color="white">
-                    💙
-                  </Typography>
+                  <FaHeart size={32} color="white" />
                 </Box>
                 <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
                   Compassion
@@ -338,9 +337,7 @@ const AboutUsPage = () => {
                     mb: 3,
                   }}
                 >
-                  <Typography variant="h4" color="white">
-                    ⚖️
-                  </Typography>
+                  <FaBalanceScale size={32} color="white" />
                 </Box>
                 <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
                   Equity
@@ -378,9 +375,7 @@ const AboutUsPage = () => {
                     mb: 3,
                   }}
                 >
-                  <Typography variant="h4" color="white">
-                    💡
-                  </Typography>
+                  <FaLightbulb size={32} color="white" />
                 </Box>
                 <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
                   Innovation
@@ -418,9 +413,7 @@ const AboutUsPage = () => {
                     mb: 3,
                   }}
                 >
-                  <Typography variant="h4" color="white">
-                    🌱
-                  </Typography>
+                  <FaLeaf size={32} color="white" />
                 </Box>
                 <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
                   Sustainability
