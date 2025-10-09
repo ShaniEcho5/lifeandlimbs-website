@@ -253,7 +253,7 @@ const ActionCardsSection = () => {
   const actions = [
     {
       title: 'Donate',
-      description: 'Your support funds life-changing prosthetic limbs for those in need.',
+      description: 'Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India.',
     },
     {
       title: 'Volunteer',
@@ -483,7 +483,7 @@ const ActionCardsSection = () => {
                           position: 'relative',
                           zIndex: 2,
                           backgroundColor: 'transparent',
-                          borderRadius: 2,
+                          borderRadius: 0,
                           cursor: 'pointer',
                           transition: 'all 0.3s ease',
                           '&:hover': {
