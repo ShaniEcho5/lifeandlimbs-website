@@ -250,7 +250,7 @@ const TestimonialSection = () => (
   </Box>
 );
 
-// Action Cards Section - Modern Minimal Grid Layout
+// Action Cards Section - Modern Minimal Grid Layout with Animated Lines
 const ActionCardsSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -274,6 +274,33 @@ const ActionCardsSection = () => {
     },
   ];
 
+  // Animation variants for the grid lines
+  const gridLineVariants = {
+    hidden: { scaleX: 0, scaleY: 0 },
+    visible: {
+      scaleX: 1,
+      scaleY: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+        delay: 0.5
+      }
+    }
+  };
+
+  const dotVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+        delay: 1.2
+      }
+    }
+  };
+
   return (
     <Box 
       className="section-padding" 
@@ -284,7 +311,12 @@ const ActionCardsSection = () => {
       }}
     >
       <Container maxWidth="xl">
-        <motion.div variants={staggerContainer} initial="initial" animate="animate">
+        <motion.div 
+          variants={staggerContainer} 
+          initial="initial" 
+          whileInView="animate"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <Grid container spacing={0} sx={{ minHeight: { xs: 'auto', md: '70vh' } }}>
             {/* Left Side - Vertical Text Block */}
             <Grid 
@@ -334,7 +366,7 @@ const ActionCardsSection = () => {
               </motion.div>
             </Grid>
 
-            {/* Right Side - 2x2 Grid with connecting lines */}
+            {/* Right Side - 2x2 Grid with animated connecting lines */}
             <Grid 
               item 
               xs={12} 
@@ -343,52 +375,84 @@ const ActionCardsSection = () => {
                 position: 'relative',
               }}
             >
-              {/* Grid Lines Background */}
-              <Box
-                sx={{
+              {/* Animated Grid Lines Background */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
                   right: 0,
                   bottom: 0,
                   zIndex: 0,
-                  '&::before': {
-                    content: '""',
+                }}
+              >
+                {/* Horizontal Line */}
+                <motion.div
+                  variants={gridLineVariants}
+                  style={{
                     position: 'absolute',
                     top: '50%',
                     left: 0,
                     right: 0,
                     height: '1px',
                     backgroundColor: '#e5e5e5',
+                    transformOrigin: 'center',
                     transform: 'translateY(-0.5px)',
-                  },
-                  '&::after': {
-                    content: '""',
+                  }}
+                />
+                
+                {/* Vertical Line */}
+                <motion.div
+                  variants={{
+                    hidden: { scaleY: 0 },
+                    visible: {
+                      scaleY: 1,
+                      transition: {
+                        duration: 1.2,
+                        ease: "easeOut",
+                        delay: 0.1
+                      }
+                    }
+                  }}
+                  style={{
                     position: 'absolute',
                     top: 0,
                     bottom: 0,
                     left: '50%',
                     width: '1px',
                     backgroundColor: '#e5e5e5',
+                    transformOrigin: 'center',
                     transform: 'translateX(-0.5px)',
-                  },
-                }}
-              />
+                  }}
+                />
+              </motion.div>
 
-              {/* Grid Dots at intersections */}
-              <Box
-                sx={{
+              {/* Animated Grid Dot at intersection */}
+              <motion.div
+                variants={dotVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                style={{
                   position: 'absolute',
                   top: '50%',
                   left: '50%',
-                  width: '6px',
-                  height: '6px',
-                  backgroundColor: '#ccc',
-                  borderRadius: '50%',
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translate(-50%, -50%) translate(-0.5px, -0.5px)',
                   zIndex: 1,
                 }}
-              />
+              >
+                <Box
+                  sx={{
+                    width: '6px',
+                    height: '6px',
+                    backgroundColor: '#e9b308',
+                    borderRadius: '50%',
+                  }}
+                />
+              </motion.div>
 
               <Grid container sx={{ height: '100%', minHeight: { xs: 'auto', md: '500px' } }}>
                 {actions.map((action, index) => (
@@ -402,7 +466,19 @@ const ActionCardsSection = () => {
                       borderBottom: index < 2 ? { xs: '1px solid #e5e5e5', md: 'none' } : 'none',
                     }}
                   >
-                    <motion.div variants={fadeInUp}>
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.5 + (index * 0.1)
+                          }
+                        }
+                      }}
+                    >
                       <Box
                         sx={{
                           height: '100%',
