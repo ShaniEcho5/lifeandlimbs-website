@@ -168,7 +168,7 @@ const ContactUsPage = () => {
       </Box>
 
       {/* Contact Information Cards */}
-      <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+      {/* <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
         <Container maxWidth="xl">
           <motion.div {...fadeInUp}>
             <Box sx={{ textAlign: 'center', mb: 6 }}>
@@ -226,7 +226,7 @@ const ContactUsPage = () => {
             </Grid>
           </motion.div>
         </Container>
-      </Box>
+      </Box> */}
 
       {/* Contact Form and Map */}
       <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
@@ -294,6 +294,23 @@ const ContactUsPage = () => {
                             onChange={handleInputChange}
                             label="Type of Inquiry"
                             required
+                            MenuProps={{
+                              PaperProps: {
+                                style: {
+                                  maxHeight: 300,
+                                  width: 'auto',
+                                },
+                              },
+                              anchorOrigin: {
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                              },
+                              transformOrigin: {
+                                vertical: 'top',
+                                horizontal: 'left',
+                              },
+                              disableScrollLock: true,
+                            }}
                           >
                             {inquiryTypes.map((type) => (
                               <MenuItem key={type} value={type}>
