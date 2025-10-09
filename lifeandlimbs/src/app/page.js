@@ -457,8 +457,6 @@ const ActionCardsSection = () => {
                     key={action.title}
                     sx={{
                       position: 'relative',
-                      borderRight: index % 2 === 0 ? { xs: '1px solid #e5e5e5', md: 'none' } : 'none',
-                      borderBottom: index < 2 ? { xs: '1px solid #e5e5e5', md: 'none' } : 'none',
                     }}
                   >
                     <motion.div 
@@ -624,6 +622,23 @@ const MissionSection = () => (
         }}
       />
     </Box>
+
+    {/* Mobile Overlay for better text readability */}
+    <Box
+      sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: { 
+          xs: 'rgba(230, 240, 239, 0.85)', // Semi-transparent overlay on mobile
+          md: 'transparent' // No overlay on desktop
+        },
+        zIndex: 1,
+        display: { md: 'none' }, // Only show on mobile
+      }}
+    />
     
     <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
       <Grid container spacing={6} alignItems="center">
@@ -641,19 +656,52 @@ const MissionSection = () => (
             >
               Our Mission
             </Typography>
-            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+            <Typography 
+              variant="h2" 
+              sx={{ 
+                mb: 3, 
+                fontWeight: 700,
+                color: { xs: '#1a1a1a', md: 'inherit' }, // Darker text on mobile
+                textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' } // Text shadow on mobile
+              }}
+            >
               Empowerment Through Free Prosthetics
             </Typography>
-            <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                mb: 4, 
+                lineHeight: 1.8, 
+                fontSize: '1.1rem',
+                color: { xs: '#2c2c2c', md: 'inherit' }, // Darker text on mobile
+                textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' } // Text shadow on mobile
+              }}
+            >
               Founded by Sam Johnson, Life and Limb is driven by a simple yet powerful
               mission: to provide top-quality prosthetic limbs, completely free of charge, to those
               who need them most. From underserved communities in Kerala to other regions
               across India, our work focuses on restoring dignity and independence.
             </Typography>
-            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: '#34a3dc' }}>
+            <Typography 
+              variant="h5" 
+              sx={{ 
+                mb: 3, 
+                fontWeight: 600, 
+                color: '#34a3dc',
+                textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' }
+              }}
+            >
               Aiming to Provide 115 Free Prosthetic Limbs in 2024
             </Typography>
-            <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: '1.1rem' }}>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                lineHeight: 1.8, 
+                fontSize: '1.1rem',
+                color: { xs: '#2c2c2c', md: 'inherit' },
+                textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' }
+              }}
+            >
               We're reaching out to serve 100 individuals this year, many of whom face
               life-changing challenges due to accidents, illnesses, or other difficult circumstances.
               By supporting Life and Limb, you're helping these individuals reclaim their
