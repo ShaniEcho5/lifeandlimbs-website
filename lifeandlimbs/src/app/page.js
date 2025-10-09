@@ -330,7 +330,7 @@ const ActionCardsSection = () => {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: '#666',
+                    color: '#34a3dc',
                     fontWeight: 400,
                     mb: 2,
                     fontSize: { xs: '0.9rem', md: '1rem' },
@@ -632,7 +632,7 @@ const MissionSection = () => (
             <Typography
               variant="h6"
               sx={{
-                color: 'primary.main',
+                color: '#34a3dc',
                 fontWeight: 600,
                 mb: 2,
                 textTransform: 'uppercase',
@@ -650,7 +650,7 @@ const MissionSection = () => (
               who need them most. From underserved communities in Kerala to other regions
               across India, our work focuses on restoring dignity and independence.
             </Typography>
-            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: 'primary.main' }}>
+            <Typography variant="h5" sx={{ mb: 3, fontWeight: 600, color: '#34a3dc' }}>
               Aiming to Provide 115 Free Prosthetic Limbs in 2024
             </Typography>
             <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: '1.1rem' }}>
@@ -711,7 +711,7 @@ const FAQSection = () => {
             <Typography
               variant="h6"
               sx={{
-                color: 'primary.main',
+                color: '#34a3dc',
                 fontWeight: 600,
                 mb: 2,
                 textTransform: 'uppercase',

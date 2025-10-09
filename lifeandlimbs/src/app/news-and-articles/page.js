@@ -191,15 +191,17 @@ const NewsAndArticlesPage = () => {
                 Stay Updated
               </Typography>
               <Typography variant="h6" sx={{ mb: 4, opacity: 0.9 }}>
-                Subscribe to our newsletter to receive the latest news and success stories
+                Got any questions about the product or services? We're here to help.
               </Typography>
               <Button
                 variant="contained"
                 color="secondary"
                 size="large"
+                component={Link}
+                href="/contact-us"
                 sx={{ px: 4, py: 1.5, fontWeight: 600 }}
               >
-                Subscribe to Newsletter
+                Contact Us
               </Button>
             </Box>
           </motion.div>
