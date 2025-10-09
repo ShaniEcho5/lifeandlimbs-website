@@ -8,10 +8,11 @@ import {
   CardContent,
   Avatar,
   Button,
+  IconButton,
 } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaHeart, FaBalanceScale, FaLightbulb, FaLeaf } from 'react-icons/fa';
+import { FaHeart, FaBalanceScale, FaLightbulb, FaLeaf, FaTwitter, FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 export const metadata = {
   title: 'About Us - Life and Limb',
@@ -514,52 +515,155 @@ const AboutUsPage = () => {
           </Box>
 
           <Grid container spacing={4} justifyContent="center">
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={8} lg={6}>
               <Card
                 sx={{
-                  textAlign: 'center',
-                  p: 3,
+                  display: 'flex',
                   borderRadius: 3,
-                  height: '100%',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15)',
                   },
+                  flexDirection: { xs: 'column', sm: 'row' },
                 }}
               >
-                <Avatar
+                {/* Photo Section */}
+                <Box
                   sx={{
-                    width: 320,
-                    height: 320,
-                    mx: 'auto',
-                    mb: 3,
+                    width: { xs: '100%', sm: '200px' },
+                    height: { xs: '250px', sm: '100%' },
+                    minHeight: '250px',
+                    position: 'relative',
+                    backgroundColor: 'grey.100',
                   }}
                 >
                   <Image
                     src="/images/Johnson-Samuel.jpg"
                     alt="Johnson Samuel - Founder & Managing Director"
-                    width={320}
-                    height={320}
+                    fill
                     style={{
                       objectFit: 'cover',
-                      borderRadius: '50%',
                     }}
                   />
-                </Avatar>
-                <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
-                  Johnson Samuel
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="primary.main"
-                  sx={{ mb: 2, fontWeight: 500 }}
+                </Box>
+
+                {/* Content Section */}
+                <Box
+                  sx={{
+                    flex: 1,
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
                 >
-                  Founder & Managing Director
-                </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                  A compassionate visionary who founded Life and Limb with a mission to make prosthetic care accessible to all, regardless of financial circumstances.
-                </Typography>
+                  <Typography 
+                    variant="h4" 
+                    sx={{ 
+                      mb: 1, 
+                      fontWeight: 700,
+                      color: 'text.primary',
+                      fontSize: { xs: '1.5rem', sm: '1.75rem' }
+                    }}
+                  >
+                    Johnson Samuel
+                  </Typography>
+                  <Typography
+                    variant="subtitle1"
+                    sx={{ 
+                      mb: 2, 
+                      fontWeight: 500,
+                      color: 'primary.main',
+                      textTransform: 'uppercase',
+                      fontSize: '0.9rem',
+                      letterSpacing: '0.5px'
+                    }}
+                  >
+                    Founder & Managing Director
+                  </Typography>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      mb: 3, 
+                      lineHeight: 1.6,
+                      color: 'text.secondary',
+                      fontSize: '0.95rem'
+                    }}
+                  >
+                    A compassionate visionary who founded Life and Limb with a mission to make prosthetic care accessible to all, regardless of financial circumstances.
+                  </Typography>
+                  
+                  {/* Social Media Icons */}
+                  <Box sx={{ display: 'flex', gap: 1 }}>
+                    <IconButton
+                      size="small"
+                      sx={{
+                        backgroundColor: 'primary.main',
+                        color: 'white',
+                        width: 36,
+                        height: 36,
+                        '&:hover': {
+                          backgroundColor: 'primary.dark',
+                          transform: 'translateY(-2px)',
+                        },
+                        transition: 'all 0.3s ease',
+                      }}
+                    >
+                      <FaTwitter size={16} />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      sx={{
+                        backgroundColor: 'primary.main',
+                        color: 'white',
+                        width: 36,
+                        height: 36,
+                        '&:hover': {
+                          backgroundColor: 'primary.dark',
+                          transform: 'translateY(-2px)',
+                        },
+                        transition: 'all 0.3s ease',
+                      }}
+                    >
+                      <FaFacebookF size={16} />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      sx={{
+                        backgroundColor: 'primary.main',
+                        color: 'white',
+                        width: 36,
+                        height: 36,
+                        '&:hover': {
+                          backgroundColor: 'primary.dark',
+                          transform: 'translateY(-2px)',
+                        },
+                        transition: 'all 0.3s ease',
+                      }}
+                    >
+                      <FaInstagram size={16} />
+                    </IconButton>
+                    <IconButton
+                      size="small"
+                      sx={{
+                        backgroundColor: 'primary.main',
+                        color: 'white',
+                        width: 36,
+                        height: 36,
+                        '&:hover': {
+                          backgroundColor: 'primary.dark',
+                          transform: 'translateY(-2px)',
+                        },
+                        transition: 'all 0.3s ease',
+                      }}
+                    >
+                      <FaLinkedinIn size={16} />
+                    </IconButton>
+                  </Box>
+                </Box>
               </Card>
             </Grid>
           </Grid>
