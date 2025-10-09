@@ -483,29 +483,38 @@ const ActionCardsSection = () => {
                           position: 'relative',
                           zIndex: 2,
                           backgroundColor: 'transparent',
-                          transition: 'all 0.2s ease',
+                          borderRadius: 2,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
                           '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                            backgroundColor: '#7cc4e8', // Lighter shade of #34a3dc
+                            '& .card-title, & .card-description': {
+                              color: 'white',
+                            },
                           },
                         }}
                       >
                         <Typography 
                           variant="h5" 
+                          className="card-title"
                           sx={{ 
                             mb: 2, 
                             fontWeight: 600,
                             fontSize: { xs: '1.2rem', md: '1.5rem' },
                             color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
                           }}
                         >
                           {action.title}
                         </Typography>
                         <Typography 
-                          variant="body1" 
+                          variant="body1"
+                          className="card-description" 
                           sx={{ 
                             color: '#666',
                             lineHeight: 1.6,
                             fontSize: { xs: '0.9rem', md: '1rem' },
+                            transition: 'color 0.3s ease',
                           }}
                         >
                           {action.description}
