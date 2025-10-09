@@ -374,21 +374,27 @@ const FeaturesSection = () => {
                   <Card
                     sx={{
                       height: '100%',
+                      minHeight: '320px',
                       textAlign: 'center',
                       p: 4,
                       borderRadius: 3,
                       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between',
                     }}
                   >
                     <Box sx={{ mb: 3 }}>
                       {feature.icon}
                     </Box>
-                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
-                      {feature.title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                      {feature.description}
-                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                        {feature.title}
+                      </Typography>
+                      <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                        {feature.description}
+                      </Typography>
+                    </Box>
                   </Card>
                 </motion.div>
               </Grid>
