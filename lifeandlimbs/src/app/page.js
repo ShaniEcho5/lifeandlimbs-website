@@ -408,8 +408,36 @@ const FeaturesSection = () => {
 
 // Mission Section
 const MissionSection = () => (
-  <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
-    <Container maxWidth="xl">
+  <Box 
+    className="section-padding" 
+    sx={{ 
+      backgroundColor: '#e6f0ef',
+      position: 'relative',
+      overflow: 'hidden',
+    }}
+  >
+    {/* Background Image */}
+    <Box
+      sx={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: { xs: '100%', md: '50%' },
+        height: '100%',
+        zIndex: 1,
+      }}
+    >
+      <Image
+        src="/images/Sleeve_Fitting_3345975_900x600.png"
+        alt="Prosthetic Fitting Process"
+        fill
+        style={{
+          objectFit: 'cover',
+        }}
+      />
+    </Box>
+    
+    <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
       <Grid container spacing={6} alignItems="center">
         <Grid item xs={12} md={6}>
           <motion.div {...fadeInUp}>
@@ -443,28 +471,6 @@ const MissionSection = () => (
               By supporting Life and Limb, you're helping these individuals reclaim their
               lives.
             </Typography>
-          </motion.div>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Box
-              sx={{
-                height: '400px',
-                borderRadius: 3,
-                background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography variant="h4" color="text.secondary" textAlign="center">
-                Mission Image Placeholder
-              </Typography>
-            </Box>
           </motion.div>
         </Grid>
       </Grid>
