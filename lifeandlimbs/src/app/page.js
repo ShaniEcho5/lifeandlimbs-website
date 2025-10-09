@@ -196,7 +196,7 @@ const TestimonialSection = () => (
   <Box sx={{ py: 6, backgroundColor: 'primary.50' }}>
     <Container maxWidth="lg">
       <motion.div {...fadeInUp}>
-        <Paper
+        {/* <Paper
           elevation={3}
           sx={{
             p: 4,
@@ -244,7 +244,7 @@ const TestimonialSection = () => (
           <Typography variant="body1" color="text.secondary">
             — Anonymous Beneficiary
           </Typography>
-        </Paper>
+        </Paper> */}
       </motion.div>
     </Container>
   </Box>
@@ -256,19 +256,19 @@ const ActionCardsSection = () => {
     {
       title: 'Donate',
       description: 'Your support funds life-changing prosthetic limbs.',
-      icon: <Image src="/images/placeholders/donate.svg" alt="Donate" width={80} height={80} />,
+      icon: <Image src="/images/donate.png" alt="Donate" width={80} height={80} />,
       color: 'primary',
     },
     {
       title: 'Volunteer',
       description: 'Join us in our mission to uplift and empower.',
-      icon: <Image src="/images/placeholders/volunteer.svg" alt="Volunteer" width={80} height={80} />,
+      icon: <Image src="/images/volunteer.png" alt="Volunteer" width={80} height={80} />,
       color: 'secondary',
     },
     {
       title: 'Share',
       description: 'Spread awareness and inspire others to contribute.',
-      icon: <Image src="/images/placeholders/share.svg" alt="Share" width={80} height={80} />,
+      icon: <Image src="/images/share.png" alt="Share" width={80} height={80} />,
       color: 'success',
     },
   ];
@@ -343,17 +343,17 @@ const FeaturesSection = () => {
     {
       title: 'Prosthetics at No Cost',
       description: 'Every prosthetic limb is provided free, thanks to the generosity of donors and partners who believe in our mission.',
-      icon: <MoneyIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      icon: <Image src="/images/prosthetic-at-no-cost-icon.png" alt="Volunteer" width={80} height={80} />,
     },
-    {
+    { 
       title: 'Advanced Technology',
       description: 'We partner with Ottobock, a leader in prosthetics, to ensure recipients and partners who believe in our mission.',
-      icon: <TechIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      icon: <Image src="/images/advanced-technology-icon.png" alt="Volunteer" width={80} height={80} />,
     },
     {
       title: 'Personalized Support',
       description: 'Each recipient receives custom care, support, and follow-up and partners who believe in our mission.',
-      icon: <SupportIcon sx={{ fontSize: 60, color: 'primary.main' }} />,
+      icon: <Image src="/images/personalized-support.png" alt="Volunteer" width={80} height={80} />,
     },
   ];
 
