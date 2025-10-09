@@ -54,7 +54,6 @@ const HeroSection = () => {
 
   return (
     <Box
-      className="hero-gradient"
       sx={{
         minHeight: '90vh',
         display: 'flex',
@@ -63,7 +62,41 @@ const HeroSection = () => {
         overflow: 'hidden',
       }}
     >
-      <Container maxWidth="xl">
+      {/* Video Background */}
+      <Box
+        component="video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -2,
+        }}
+      >
+        <source src="/videos/hero-background.webm" type="video/webm" />
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+      </Box>
+      
+      {/* Video Overlay */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: -1,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={4} alignItems="center" sx={{ minHeight: '70vh' }}>
           <Grid item xs={12} md={6}>
             <motion.div
@@ -74,7 +107,7 @@ const HeroSection = () => {
               <Typography
                 variant="h6"
                 sx={{
-                  color: 'primary.main',
+                  color: 'white',
                   fontWeight: 600,
                   mb: 2,
                   textTransform: 'uppercase',
@@ -85,12 +118,12 @@ const HeroSection = () => {
               </Typography>
               <Typography
                 variant="h1"
-                className="gradient-text"
                 sx={{
                   mb: 3,
                   fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                   lineHeight: 1.1,
                   fontWeight: 700,
+                  color: 'white',
                 }}
               >
                 Restoring Independence, Free of Charge
@@ -99,9 +132,10 @@ const HeroSection = () => {
                 variant="h5"
                 sx={{
                   mb: 4,
-                  color: 'text.secondary',
+                  color: 'white',
                   lineHeight: 1.6,
                   fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                 }}
               >
                 A nonprofit organization dedicated to providing free prosthetic limbs to
@@ -129,7 +163,6 @@ const HeroSection = () => {
                 </Button>
                 <Button
                   variant="outlined"
-                  color="primary"
                   size="large"
                   component={Link}
                   href="/about-us"
@@ -139,44 +172,16 @@ const HeroSection = () => {
                     fontSize: '1.1rem',
                     fontWeight: 600,
                     borderRadius: 3,
+                    color: 'white',
+                    borderColor: 'white',
+                    '&:hover': {
+                      borderColor: 'white',
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    },
                   }}
                 >
                   Learn More
                 </Button>
-              </Box>
-            </motion.div>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Box
-                sx={{
-                  position: 'relative',
-                  height: { xs: '300px', md: '500px' },
-                  borderRadius: 3,
-                  overflow: 'hidden',
-                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-                }}
-              >
-                {/* Placeholder for hero image */}
-                <Box
-                  sx={{
-                    width: '100%',
-                    height: '100%',
-                    background: 'linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                  }}
-                >
-                  <Typography variant="h4" textAlign="center">
-                    Hero Image Placeholder
-                  </Typography>
-                </Box>
               </Box>
             </motion.div>
           </Grid>
