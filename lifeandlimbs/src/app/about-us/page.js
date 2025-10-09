@@ -486,15 +486,19 @@ const AboutUsPage = () => {
                 sx={{
                   height: '400px',
                   borderRadius: 3,
-                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  position: 'relative',
                 }}
               >
-                <Typography variant="h4" color="text.secondary" textAlign="center">
-                  Why We Exist Image
-                </Typography>
+                <Image
+                  src="/images/why-we-exist.jpg"
+                  alt="Why we exist - supporting amputees and providing accessible prosthetic care"
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
               </Box>
             </Grid>
           </Grid>
