@@ -61,6 +61,7 @@ const Footer = () => {
         pt: 6,
         pb: 3,
         mt: 'auto',
+        px: { xs: 3, sm: 4, md: 6 }, // Add horizontal padding
       }}
     >
       <Container maxWidth="xl">
