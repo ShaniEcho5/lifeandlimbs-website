@@ -233,11 +233,11 @@ const Navbar = () => {
     >
       <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Image
-          src="/images/logo.svg"
+          src="/images/life-and-limb-logo.png"
           alt="Life and Limb Logo"
-          width={40}
-          height={40}
-          style={{ borderRadius: '50%' }}
+          width={100}
+          height={100}
+          style={{ borderRadius: '8px' }}
         />
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
@@ -350,8 +350,8 @@ const Navbar = () => {
         position="fixed"
         elevation={scrolled ? 4 : 0}
         sx={{
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
+          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(0, 0, 0, 0.95)',
+          backdropFilter: scrolled ? 'blur(10px)' : 'blur(10px)',
           transition: 'all 0.3s ease-in-out',
           borderBottom: scrolled ? '1px solid rgba(0, 0, 0, 0.1)' : 'none',
         }}
@@ -362,11 +362,11 @@ const Navbar = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 } }}>
               <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <Image
-                  src="/images/logo.svg"
+                  src="/images/life-and-limb-logo.png"
                   alt="Life and Limb Logo"
-                  width={50}
+                  width={120}
                   height={50}
-                  style={{ borderRadius: '50%' }}
+                  style={{ borderRadius: '8px' }}
                   priority
                 />
               </Link>
