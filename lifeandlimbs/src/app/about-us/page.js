@@ -512,7 +512,7 @@ const AboutUsPage = () => {
             <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
               Our Team
             </Typography>
-            <Typography variant="h6" color="text.secondary">
+            <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
               Behind every transformed life is a team of passionate professionals, volunteers,
               and partners. Under Sam Johnson's leadership, our team continues to grow and
               innovate, building stronger pathways to a future where mobility is accessible to
@@ -537,16 +537,22 @@ const AboutUsPage = () => {
               >
                 <Avatar
                   sx={{
-                    width: 120,
-                    height: 120,
+                    width: 320,
+                    height: 320,
                     mx: 'auto',
                     mb: 3,
-                    backgroundColor: 'primary.main',
                   }}
                 >
-                  <Typography variant="h3" color="white">
-                    JS
-                  </Typography>
+                  <Image
+                    src="/images/Johnson-Samuel.jpg"
+                    alt="Johnson Samuel - Founder & Managing Director"
+                    width={320}
+                    height={320}
+                    style={{
+                      objectFit: 'cover',
+                      borderRadius: '50%',
+                    }}
+                  />
                 </Avatar>
                 <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
                   Johnson Samuel
@@ -574,7 +580,7 @@ const AboutUsPage = () => {
             <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
               Join Our Mission
             </Typography>
-            <Typography variant="h6" sx={{ mb: 4, maxWidth: '600px', mx: 'auto', opacity: 0.9 }}>
+            <Typography variant="h6" sx={{ mb: 4, maxWidth: '600px', mx: 'auto', opacity: 0.9, fontWeight: 400 }}>
               Whether through donation, volunteering, or spreading awareness, 
               you can help us continue changing lives.
             </Typography>
