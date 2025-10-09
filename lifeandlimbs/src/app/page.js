@@ -250,86 +250,203 @@ const TestimonialSection = () => (
   </Box>
 );
 
-// Action Cards Section
+// Action Cards Section - Modern Minimal Grid Layout
 const ActionCardsSection = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   const actions = [
     {
       title: 'Donate',
-      description: 'Your support funds life-changing prosthetic limbs.',
-      icon: <Image src="/images/donate.png" alt="Donate" width={80} height={80} />,
-      color: 'primary',
+      description: 'Your support funds life-changing prosthetic limbs for those in need.',
     },
     {
       title: 'Volunteer',
-      description: 'Join us in our mission to uplift and empower.',
-      icon: <Image src="/images/volunteer.png" alt="Volunteer" width={80} height={80} />,
-      color: 'secondary',
+      description: 'Join us in our mission to uplift and empower communities.',
     },
     {
       title: 'Share',
-      description: 'Spread awareness and inspire others to contribute.',
-      icon: <Image src="/images/share.png" alt="Share" width={80} height={80} />,
-      color: 'success',
+      description: 'Spread awareness and inspire others to contribute to our cause.',
+    },
+    {
+      title: 'Support',
+      description: 'Provide ongoing assistance and care for prosthetic recipients.',
     },
   ];
 
   return (
-    <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+    <Box 
+      className="section-padding" 
+      sx={{ 
+        backgroundColor: '#ffffff',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
       <Container maxWidth="xl">
         <motion.div variants={staggerContainer} initial="initial" animate="animate">
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 600,
-                mb: 2,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
+          <Grid container spacing={0} sx={{ minHeight: { xs: 'auto', md: '70vh' } }}>
+            {/* Left Side - Vertical Text Block */}
+            <Grid 
+              item 
+              xs={12} 
+              md={5} 
+              sx={{ 
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                pr: { xs: 0, md: 6 },
+                mb: { xs: 6, md: 0 },
               }}
             >
-              Empowering Mobility, Restoring Lives
-            </Typography>
-            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-              We Believe We Can Save More Lives
-            </Typography>
-            <Typography variant="h6" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto' }}>
-              At Life and Limb, we are committed to restoring mobility and independence for
-              amputees. Together, we can transform lives, bring hope, and empower individuals to
-              step into a brighter future.
-            </Typography>
-          </Box>
+              <motion.div variants={fadeInUp}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: '#666',
+                    fontWeight: 400,
+                    mb: 2,
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    letterSpacing: '0.5px',
+                  }}
+                >
+                  Innovative solutions that
+                </Typography>
+                <Typography 
+                  variant="h1" 
+                  sx={{ 
+                    fontWeight: 800,
+                    fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem', lg: '4.5rem' },
+                    lineHeight: { xs: 1.1, md: 1 },
+                    color: '#1a1a1a',
+                    mb: 3,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  EMPOWERING
+                  <br />
+                  MOBILITY,
+                  <br />
+                  RESTORING
+                  <br />
+                  LIVES
+                </Typography>
+              </motion.div>
+            </Grid>
 
-          <Grid container spacing={4}>
-            {actions.map((action, index) => (
-              <Grid item xs={12} md={4} key={action.title}>
-                <motion.div variants={fadeInUp}>
-                  <Card
+            {/* Right Side - 2x2 Grid with connecting lines */}
+            <Grid 
+              item 
+              xs={12} 
+              md={7} 
+              sx={{ 
+                position: 'relative',
+              }}
+            >
+              {/* Grid Lines Background */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 0,
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    left: 0,
+                    right: 0,
+                    height: '1px',
+                    backgroundColor: '#e5e5e5',
+                    transform: 'translateY(-0.5px)',
+                  },
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: '50%',
+                    width: '1px',
+                    backgroundColor: '#e5e5e5',
+                    transform: 'translateX(-0.5px)',
+                  },
+                }}
+              />
+
+              {/* Grid Dots at intersections */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  width: '6px',
+                  height: '6px',
+                  backgroundColor: '#ccc',
+                  borderRadius: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 1,
+                }}
+              />
+
+              <Grid container sx={{ height: '100%', minHeight: { xs: 'auto', md: '500px' } }}>
+                {actions.map((action, index) => (
+                  <Grid 
+                    item 
+                    xs={6} 
+                    key={action.title}
                     sx={{
-                      height: '100%',
-                      textAlign: 'center',
-                      p: 3,
-                      borderRadius: 3,
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        transform: 'translateY(-8px)',
-                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-                      },
+                      position: 'relative',
+                      borderRight: index % 2 === 0 ? { xs: '1px solid #e5e5e5', md: 'none' } : 'none',
+                      borderBottom: index < 2 ? { xs: '1px solid #e5e5e5', md: 'none' } : 'none',
                     }}
                   >
-                    <Box sx={{ mb: 3 }}>
-                      {action.icon}
-                    </Box>
-                    <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
-                      {action.title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                      {action.description}
-                    </Typography>
-                  </Card>
-                </motion.div>
+                    <motion.div variants={fadeInUp}>
+                      <Box
+                        sx={{
+                          height: '100%',
+                          minHeight: { xs: '200px', md: '250px' },
+                          p: { xs: 3, md: 4 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                          },
+                        }}
+                      >
+                        <Typography 
+                          variant="h5" 
+                          sx={{ 
+                            mb: 2, 
+                            fontWeight: 600,
+                            fontSize: { xs: '1.2rem', md: '1.5rem' },
+                            color: '#1a1a1a',
+                          }}
+                        >
+                          {action.title}
+                        </Typography>
+                        <Typography 
+                          variant="body1" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.6,
+                            fontSize: { xs: '0.9rem', md: '1rem' },
+                          }}
+                        >
+                          {action.description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
+            </Grid>
           </Grid>
         </motion.div>
       </Container>
@@ -483,7 +600,7 @@ const FAQSection = () => {
   const faqs = [
     {
       question: 'What is the age requirement for applicants?',
-      answer: 'We serve individuals of all ages who require prosthetic limbs, from children to elderly adults.',
+      answer: 'We serve individuals of all ages who require prosthetic limbs, from children to elderly adults.',    
     },
     {
       question: 'What is the income limit for eligibility?',
@@ -530,7 +647,7 @@ const FAQSection = () => {
                 letterSpacing: '1px',
               }}
             >
-              Recently Asked Questions
+              Common Inquiries
             </Typography>
             <Typography variant="h2" sx={{ fontWeight: 700 }}>
               Frequently Asked Questions

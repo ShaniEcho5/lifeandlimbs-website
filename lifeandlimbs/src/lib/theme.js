@@ -47,7 +47,6 @@ const theme = createTheme({
   typography: {
     fontFamily: [
       'Inter',
-      'Poppins',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
@@ -57,7 +56,7 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
     h1: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '2.5rem',
       fontWeight: 700,
       lineHeight: 1.2,
@@ -67,7 +66,7 @@ const theme = createTheme({
       },
     },
     h2: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '2rem',
       fontWeight: 600,
       lineHeight: 1.3,
@@ -77,7 +76,7 @@ const theme = createTheme({
       },
     },
     h3: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '1.75rem',
       fontWeight: 600,
       lineHeight: 1.4,
@@ -86,19 +85,19 @@ const theme = createTheme({
       },
     },
     h4: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '1.5rem',
       fontWeight: 600,
       lineHeight: 1.4,
     },
     h5: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '1.25rem',
       fontWeight: 600,
       lineHeight: 1.5,
     },
     h6: {
-      fontFamily: 'Poppins, Inter, sans-serif',
+      fontFamily: 'Inter, sans-serif',
       fontSize: '1.125rem',
       fontWeight: 600,
       lineHeight: 1.5,
