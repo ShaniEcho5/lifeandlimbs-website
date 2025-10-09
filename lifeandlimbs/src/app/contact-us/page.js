@@ -39,7 +39,6 @@ const ContactUsPage = () => {
     name: '',
     email: '',
     phone: '',
-    subject: '',
     inquiryType: '',
     message: '',
     agreeToTerms: false,
@@ -66,7 +65,6 @@ const ContactUsPage = () => {
       name: '',
       email: '',
       phone: '',
-      subject: '',
       inquiryType: '',
       message: '',
       agreeToTerms: false,
@@ -105,14 +103,11 @@ const ContactUsPage = () => {
   ];
 
   const inquiryTypes = [
-    'New Application',
-    'Medical Consultation',
-    'Follow-up Care',
-    'Technical Support',
-    'Volunteer Opportunities',
-    'Donation Inquiry',
-    'General Information',
-    'Other',
+    'Prosthetic Limbs ',
+    'Prosthetic Repair and Maintenance',
+    'Counseling Services',
+    'Public Education Campaigns',
+    'Family Counselling',
   ];
 
   return (
@@ -320,17 +315,7 @@ const ContactUsPage = () => {
                           </Select>
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          fullWidth
-                          label="Subject"
-                          name="subject"
-                          value={formData.subject}
-                          onChange={handleInputChange}
-                          required
-                          variant="outlined"
-                        />
-                      </Grid>
+
                       <Grid item xs={12}>
                         <TextField
                           fullWidth
