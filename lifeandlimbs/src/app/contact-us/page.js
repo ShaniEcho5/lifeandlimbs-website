@@ -122,18 +122,7 @@ const ContactUsPage = () => {
       >
         <Container maxWidth="lg">
           <motion.div {...fadeInUp}>
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 600,
-                mb: 2,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-              }}
-            >
-              Contact Us
-            </Typography>
+
             <Typography
               variant="h1"
               className="gradient-text"
