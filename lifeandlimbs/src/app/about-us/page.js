@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import {
   Box,
@@ -9,10 +7,8 @@ import {
   Card,
   CardContent,
   Avatar,
-  Chip,
   Button,
 } from '@mui/material';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -28,35 +24,6 @@ const fadeInUp = {
 };
 
 const AboutUsPage = () => {
-  const teamMembers = [
-    {
-      name: 'Sam Johnson',
-      role: 'Founder & CEO',
-      bio: 'Passionate about making prosthetic limbs accessible to all. Founded Life and Limb with a vision to restore independence.',
-      image: '/images/placeholders/team-member.svg',
-    },
-    {
-      name: 'Dr. Sarah Wilson',
-      role: 'Medical Director',
-      bio: 'Leading prosthetist with 15 years of experience in rehabilitation medicine and prosthetic fitting.',
-      image: '/images/placeholders/team-member.svg',
-    },
-    {
-      name: 'Rajesh Kumar',
-      role: 'Operations Manager',
-      bio: 'Coordinates our field operations across Kerala and manages patient care processes.',
-      image: '/images/placeholders/team-member.svg',
-    },
-  ];
-
-  const milestones = [
-    { year: '2013', event: 'Life and Limb founded', description: 'Started with a mission to provide free prosthetic limbs' },
-    { year: '2015', event: 'First 100 recipients', description: 'Reached our first major milestone of helping 100 individuals' },
-    { year: '2018', event: 'Partnership with Ottobock', description: 'Partnered with leading prosthetic technology provider' },
-    { year: '2020', event: '500+ lives changed', description: 'Expanded our reach to serve over 500 beneficiaries' },
-    { year: '2024', event: 'Goal: 115 new limbs', description: 'Aiming to provide 115 free prosthetic limbs this year' },
-  ];
-
   return (
     <Box>
       {/* Hero Section */}
@@ -68,344 +35,550 @@ const AboutUsPage = () => {
         }}
       >
         <Container maxWidth="lg">
-          <motion.div {...fadeInUp}>
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 600,
-                mb: 2,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-              }}
-            >
-              About Life and Limb
-            </Typography>
-            <Typography
-              variant="h1"
-              className="gradient-text"
-              sx={{
-                mb: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' },
-                fontWeight: 700,
-              }}
-            >
-              Empowerment Through Free Prosthetics
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{
-                mb: 4,
-                color: 'text.secondary',
-                maxWidth: '800px',
-                mx: 'auto',
-                lineHeight: 1.6,
-              }}
-            >
-              Since 2013, we've been dedicated to restoring mobility and dignity to amputees
-              across India through our comprehensive prosthetic support program.
-            </Typography>
-          </motion.div>
+          <Typography
+            variant="h6"
+            sx={{
+              color: 'primary.main',
+              fontWeight: 600,
+              mb: 2,
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+            }}
+          >
+            About Us
+          </Typography>
+          <Typography
+            variant="h1"
+            className="gradient-text"
+            sx={{
+              mb: 3,
+              fontSize: { xs: '2.5rem', md: '3.5rem' },
+              fontWeight: 700,
+            }}
+          >
+            Transforming Lives, One Step at a Time
+          </Typography>
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 4,
+              color: 'text.secondary',
+              maxWidth: '800px',
+              mx: 'auto',
+              lineHeight: 1.6,
+            }}
+          >
+            At Life and Limb, we believe that mobility is more than just a physical
+            ability—it's the foundation for independence, dignity, and hope. Since our inception in
+            2013, we have been dedicated to providing free, high-quality prosthetic limbs to
+            individuals in need, empowering them to reclaim their lives and dreams.
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            component={Link}
+            href="https://www.gofundme.com/f/fzcv9-life-and-limb/donate"
+            target="_blank"
+            sx={{ px: 4, py: 1.5, fontWeight: 600 }}
+          >
+            Donate Now
+          </Button>
         </Container>
       </Box>
 
-      {/* Mission Section */}
+      {/* Our Story Section */}
       <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
         <Container maxWidth="xl">
           <Grid container spacing={6} alignItems="center">
             <Grid item xs={12} md={6}>
-              <motion.div {...fadeInUp}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    color: 'primary.main',
-                    fontWeight: 600,
-                    mb: 2,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                  }}
-                >
-                  Our Story
-                </Typography>
-                <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-                  Founded with Purpose
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
-                  Life and Limb was founded by Sam Johnson with a simple yet powerful belief: 
-                  that everyone deserves access to mobility, regardless of their financial circumstances. 
-                  What started as a grassroots initiative in Kerala has grown into a comprehensive 
-                  program serving amputees across India.
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
-                  Our work focuses on providing top-quality prosthetic limbs completely free of charge, 
-                  along with the necessary fitting, training, and follow-up care. We believe that 
-                  restoring physical mobility is just the beginning – our goal is to restore 
-                  confidence, independence, and hope.
-                </Typography>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  component={Link}
-                  href="/services"
-                  sx={{ fontWeight: 600 }}
-                >
-                  Learn About Our Services
-                </Button>
-              </motion.div>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'primary.main',
+                  fontWeight: 600,
+                  mb: 2,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
+                Our Story
+              </Typography>
+              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+                Our Story
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Life and Limb was founded by Sam Johnson, a compassionate visionary who saw the
+                struggles of amputees in rural Kerala firsthand. Moved by the stories of those
+                who lost their limbs due to tragic accidents, illnesses, or congenital
+                conditions, Sam set out on a mission to make prosthetic care accessible to all, regardless
+                of financial circumstances.
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Initially a small, family-supported initiative aimed at helping ten amputees per
+                year, Life and Limb quickly grew as the demand for affordable prosthetics
+                increased. In 2018, we opened our doors to public donations, enabling us to expand
+                our impact and touch the lives of more individuals across India.
+              </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
+              <Box
+                sx={{
+                  height: '400px',
+                  borderRadius: 3,
+                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
               >
-                <Box
-                  sx={{
-                    height: '400px',
-                    borderRadius: 3,
-                    background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography variant="h4" color="text.secondary" textAlign="center">
-                    Our Story Image
-                  </Typography>
-                </Box>
-              </motion.div>
+                <Typography variant="h4" color="text.secondary" textAlign="center">
+                  Our Story Image
+                </Typography>
+              </Box>
             </Grid>
           </Grid>
         </Container>
       </Box>
 
-      {/* Timeline Section */}
+      {/* Mission Section */}
+      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  height: '400px',
+                  borderRadius: 3,
+                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography variant="h4" color="text.secondary" textAlign="center">
+                  Mission Image
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+                Our Mission
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                At Life and Limb, our mission is to restore hope, mobility, and independence to
+                individuals who have experienced the life-changing loss of a limb. We are
+                dedicated to empowering lives by providing state-of-the-art prosthetic limbs free of
+                charge to those in need, ensuring that financial challenges do not stand in the
+                way of mobility.
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                We are committed to fostering a compassionate environment that addresses the
+                physical, emotional, and social struggles faced by individuals with limb loss.
+                Through advocacy and education, we aim to raise awareness about the realities of
+                limb loss and the transformative potential of prosthetic solutions, inspiring
+                communities to support and uplift those in need.
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Vision Section */}
+      <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+                Our Vision
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                Our vision is to build a world where no one is limited by the loss of a limb—a
+                world where access to prosthetic care is a universal right, not a privilege. We
+                dream of a future where every individual, regardless of socioeconomic background,
+                can live with dignity, confidence, and independence.
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                By blending cutting-edge technology with compassion, we aspire to become a
+                global leader in transforming lives. Through innovation and collaboration, we aim to
+                create inclusive communities that empower individuals with limb loss, breaking
+                barriers and enabling them to reclaim their potential and pursue their dreams.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  height: '400px',
+                  borderRadius: 3,
+                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography variant="h4" color="text.secondary" textAlign="center">
+                  Vision Image
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Values Section */}
       <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
         <Container maxWidth="lg">
-          <motion.div {...fadeInUp}>
-            <Box sx={{ textAlign: 'center', mb: 6 }}>
-              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-                Our Journey
-              </Typography>
-              <Typography variant="h6" color="text.secondary">
-                Key milestones in our mission to serve amputees across India
-              </Typography>
-            </Box>
+          <Box sx={{ textAlign: 'center', mb: 6 }}>
+            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+              Our Values
+            </Typography>
+          </Box>
 
-            <Box sx={{ position: 'relative' }}>
-              {milestones.map((milestone, index) => (
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                sx={{
+                  textAlign: 'center',
+                  p: 3,
+                  borderRadius: 3,
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
                 <Box
-                  key={milestone.year}
                   sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 2,
+                    backgroundColor: 'primary.main',
                     display: 'flex',
                     alignItems: 'center',
-                    mb: 4,
-                    flexDirection: { xs: 'column', md: index % 2 === 0 ? 'row' : 'row-reverse' },
-                    textAlign: { xs: 'center', md: index % 2 === 0 ? 'left' : 'right' },
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
                   }}
                 >
-                  <Box sx={{ flex: 1, px: { xs: 0, md: 3 } }}>
-                    <Card
-                      sx={{
-                        p: 3,
-                        borderRadius: 3,
-                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                        border: '2px solid',
-                        borderColor: 'primary.main',
-                      }}
-                    >
-                      <Chip
-                        label={milestone.year}
-                        color="primary"
-                        sx={{ mb: 2, fontWeight: 600 }}
-                      />
-                      <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
-                        {milestone.event}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary">
-                        {milestone.description}
-                      </Typography>
-                    </Card>
-                  </Box>
-                  <Box
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: '50%',
-                      backgroundColor: 'primary.main',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      my: { xs: 2, md: 0 },
-                      mx: { xs: 0, md: 2 },
-                    }}
-                  >
-                    <Typography variant="body2" color="white" fontWeight={600}>
-                      {index + 1}
-                    </Typography>
-                  </Box>
-                  <Box sx={{ flex: 1 }} />
+                  <Typography variant="h4" color="white">
+                    💙
+                  </Typography>
                 </Box>
-              ))}
-            </Box>
-          </motion.div>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                  Compassion
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                  Every individual deserves to live with dignity and confidence.
+                </Typography>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                sx={{
+                  textAlign: 'center',
+                  p: 3,
+                  borderRadius: 3,
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 2,
+                    backgroundColor: 'primary.main',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <Typography variant="h4" color="white">
+                    ⚖️
+                  </Typography>
+                </Box>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                  Equity
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                  Access to mobility solutions should not depend on financial ability.
+                </Typography>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                sx={{
+                  textAlign: 'center',
+                  p: 3,
+                  borderRadius: 3,
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 2,
+                    backgroundColor: 'primary.main',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <Typography variant="h4" color="white">
+                    💡
+                  </Typography>
+                </Box>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                  Innovation
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                  We partner with leading prosthetic manufacturers to provide cutting-edge solutions.
+                </Typography>
+              </Card>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={3}>
+              <Card
+                sx={{
+                  textAlign: 'center',
+                  p: 3,
+                  borderRadius: 3,
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 2,
+                    backgroundColor: 'primary.main',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    mb: 3,
+                  }}
+                >
+                  <Typography variant="h4" color="white">
+                    🌱
+                  </Typography>
+                </Box>
+                <Typography variant="h5" sx={{ mb: 2, fontWeight: 600 }}>
+                  Sustainability
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                  We ensure long-term impact through durable prosthetics and follow-up care.
+                </Typography>
+              </Card>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Why We Exist Section */}
+      <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+        <Container maxWidth="xl">
+          <Grid container spacing={6} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+                Why We Exist
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                In India, there are thousands of amputees—men, women, and children—who face
+                overwhelming challenges every day. Most come from impoverished families and live in
+                rural areas with little or no access to healthcare. Here's why Life and Limb is
+                essential:
+              </Typography>
+              
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                  Lack of accessibility:
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+                  Quality prosthetics are expensive and out of reach for the majority.
+                </Typography>
+              </Box>
+              
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                  Stigma and Isolation:
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+                  Amputees often face social ostracism and discrimination.
+                </Typography>
+              </Box>
+              
+              <Box sx={{ mb: 4 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                  Emotional and Financial Burden:
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.6 }}>
+                  Families struggle with the costs of treatment while coping with emotional trauma.
+                </Typography>
+              </Box>
+              
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.8, fontSize: '1.1rem' }}>
+                We step in to break these barriers, offering not only physical mobility but also
+                emotional and social reintegration for amputees and their families.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  height: '400px',
+                  borderRadius: 3,
+                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Typography variant="h4" color="text.secondary" textAlign="center">
+                  Why We Exist Image
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
         </Container>
       </Box>
 
       {/* Team Section */}
-      <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
-        <Container maxWidth="xl">
-          <motion.div {...fadeInUp}>
-            <Box sx={{ textAlign: 'center', mb: 6 }}>
-              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-                Meet Our Team
-              </Typography>
-              <Typography variant="h6" color="text.secondary">
-                Dedicated professionals working to change lives every day
-              </Typography>
-            </Box>
-
-            <Grid container spacing={4}>
-              {teamMembers.map((member, index) => (
-                <Grid item xs={12} md={4} key={member.name}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    <Card
-                      sx={{
-                        textAlign: 'center',
-                        p: 3,
-                        borderRadius: 3,
-                        height: '100%',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'translateY(-8px)',
-                          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-                        },
-                      }}
-                    >
-                      <Avatar
-                        sx={{
-                          width: 120,
-                          height: 120,
-                          mx: 'auto',
-                          mb: 3,
-                          backgroundColor: 'primary.main',
-                        }}
-                      >
-                        <Typography variant="h3" color="white">
-                          {member.name.charAt(0)}
-                        </Typography>
-                      </Avatar>
-                      <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
-                        {member.name}
-                      </Typography>
-                      <Typography
-                        variant="subtitle1"
-                        color="primary.main"
-                        sx={{ mb: 2, fontWeight: 500 }}
-                      >
-                        {member.role}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                        {member.bio}
-                      </Typography>
-                    </Card>
-                  </motion.div>
-                </Grid>
-              ))}
-            </Grid>
-          </motion.div>
-        </Container>
-      </Box>
-
-      {/* Impact Stats */}
-      <Box className="section-padding" sx={{ backgroundColor: 'primary.main', color: 'white' }}>
+      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
         <Container maxWidth="lg">
-          <motion.div {...fadeInUp}>
-            <Box sx={{ textAlign: 'center', mb: 6 }}>
-              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-                Our Impact in Numbers
-              </Typography>
-            </Box>
+          <Box sx={{ textAlign: 'center', mb: 6 }}>
+            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+              Our Team
+            </Typography>
+            <Typography variant="h6" color="text.secondary">
+              Behind every transformed life is a team of passionate professionals, volunteers,
+              and partners. Under Sam Johnson's leadership, our team continues to grow and
+              innovate, building stronger pathways to a future where mobility is accessible to
+              all.
+            </Typography>
+          </Box>
 
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={3}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
-                    500+
+          <Grid container spacing={4} justifyContent="center">
+            <Grid item xs={12} md={6} lg={4}>
+              <Card
+                sx={{
+                  textAlign: 'center',
+                  p: 3,
+                  borderRadius: 3,
+                  height: '100%',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'translateY(-8px)',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                  },
+                }}
+              >
+                <Avatar
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    mx: 'auto',
+                    mb: 3,
+                    backgroundColor: 'primary.main',
+                  }}
+                >
+                  <Typography variant="h3" color="white">
+                    JS
                   </Typography>
-                  <Typography variant="h6">Lives Changed</Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
-                    11
-                  </Typography>
-                  <Typography variant="h6">Years of Service</Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
-                    100%
-                  </Typography>
-                  <Typography variant="h6">Free of Charge</Typography>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
-                    24/7
-                  </Typography>
-                  <Typography variant="h6">Support Available</Typography>
-                </Box>
-              </Grid>
+                </Avatar>
+                <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
+                  Johnson Samuel
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="primary.main"
+                  sx={{ mb: 2, fontWeight: 500 }}
+                >
+                  Founder & Managing Director
+                </Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                  A compassionate visionary who founded Life and Limb with a mission to make prosthetic care accessible to all, regardless of financial circumstances.
+                </Typography>
+              </Card>
             </Grid>
-          </motion.div>
+          </Grid>
         </Container>
       </Box>
 
       {/* Call to Action */}
-      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
+      <Box className="section-padding" sx={{ backgroundColor: 'primary.main', color: 'white' }}>
         <Container maxWidth="lg">
-          <motion.div {...fadeInUp}>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-                Join Our Mission
-              </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 4, maxWidth: '600px', mx: 'auto' }}>
-                Whether through donation, volunteering, or spreading awareness, 
-                you can help us continue changing lives.
-              </Typography>
-              <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  component={Link}
-                  href="https://www.gofundme.com/f/fzcv9-life-and-limb/donate"
-                  target="_blank"
-                  sx={{ px: 4, py: 1.5, fontWeight: 600 }}
-                >
-                  Donate Now
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="large"
-                  component={Link}
-                  href="/contact-us"
-                  sx={{ px: 4, py: 1.5, fontWeight: 600 }}
-                >
-                  Get Involved
-                </Button>
-              </Box>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+              Join Our Mission
+            </Typography>
+            <Typography variant="h6" sx={{ mb: 4, maxWidth: '600px', mx: 'auto', opacity: 0.9 }}>
+              Whether through donation, volunteering, or spreading awareness, 
+              you can help us continue changing lives.
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button
+                variant="contained"
+                size="large"
+                component={Link}
+                href="https://www.gofundme.com/f/fzcv9-life-and-limb/donate"
+                target="_blank"
+                sx={{ 
+                  px: 4, 
+                  py: 1.5, 
+                  fontWeight: 600,
+                  backgroundColor: 'white',
+                  color: 'primary.main',
+                  '&:hover': {
+                    backgroundColor: 'grey.100',
+                  }
+                }}
+              >
+                Donate Now
+              </Button>
+              <Button
+                variant="outlined"
+                size="large"
+                component={Link}
+                href="/contact-us"
+                sx={{ 
+                  px: 4, 
+                  py: 1.5, 
+                  fontWeight: 600,
+                  borderColor: 'white',
+                  color: 'white',
+                  '&:hover': {
+                    borderColor: 'white',
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  }
+                }}
+              >
+                Get Involved
+              </Button>
             </Box>
-          </motion.div>
+          </Box>
         </Container>
       </Box>
     </Box>
