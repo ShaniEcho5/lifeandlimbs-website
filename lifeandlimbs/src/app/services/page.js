@@ -35,6 +35,33 @@ const staggerContainer = {
   },
 };
 
+// Animation variants for the grid lines
+const gridLineVariants = {
+  hidden: { scaleX: 0, scaleY: 0 },
+  visible: {
+    scaleX: 1,
+    scaleY: 1,
+    transition: {
+      duration: 1.2,
+      ease: "easeOut",
+      delay: 0.5
+    }
+  }
+};
+
+const dotVariants = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: 1.2
+    }
+  }
+};
+
 const ServicesPage = () => {
   const services = [
     {
@@ -161,251 +188,713 @@ const ServicesPage = () => {
         </Container>
       </Box>
 
-      {/* Services Grid Section */}
-      <Box className="section-padding" sx={{ backgroundColor: '#f8fafc', py: 8 }}>
-        <Container maxWidth="xl" sx={{ px: 4 }}>
+      {/* Reasons To Choose Us Section - Innovative Solutions Style */}
+      <Box 
+        className="section-padding" 
+        sx={{ 
+          backgroundColor: '#ffffff',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Container maxWidth="xl">
           <motion.div 
-            variants={staggerContainer}
-            initial="initial"
+            variants={staggerContainer} 
+            initial="initial" 
             whileInView="animate"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <Box sx={{ textAlign: 'center', mb: 8 }}>
-              <Typography 
-                variant="h2" 
+            <Grid container spacing={0} sx={{ minHeight: { xs: 'auto', md: '70vh' } }}>
+              {/* Left Side - Vertical Text Block */}
+              <Grid 
+                item 
+                xs={12} 
+                md={5} 
                 sx={{ 
-                  mb: 6, 
-                  fontWeight: 700,
-                  fontSize: '2.5rem',
-                  color: '#1a1a1a',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  pr: { xs: 0, md: 6 },
+                  mb: { xs: 6, md: 0 },
                 }}
               >
-                Reasons To Choose Us
-              </Typography>
-            </Box>
-
-            {/* First Row - 3 Cards */}
-            <Grid container spacing={4} justifyContent="center" sx={{ maxWidth: '1000px', mx: 'auto', mb: 6 }}>
-              {services.slice(0, 3).map((service, index) => (
-                <Grid item xs={12} sm={6} md={4} key={service.title}>
-                  <motion.div
-                    variants={fadeInUp}
-                    whileHover={{ y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                <motion.div variants={fadeInUp}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: '#34a3dc',
+                      fontWeight: 400,
+                      mb: 2,
+                      fontSize: { xs: '0.9rem', md: '1rem' },
+                      letterSpacing: '0.5px',
+                    }}
                   >
-                    <Box sx={{ position: 'relative', mb: 4 }}>
-                      {/* Top connecting line */}
+                    Quality services that
+                  </Typography>
+                  <Typography 
+                    variant="h1" 
+                    sx={{ 
+                      fontWeight: 800,
+                      fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem', lg: '4.5rem' },
+                      lineHeight: { xs: 1.1, md: 1 },
+                      color: '#1a1a1a',
+                      mb: 3,
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    RESTORE
+                    <br />
+                    HOPE &
+                    <br />
+                    TRANSFORM
+                    <br />
+                    LIVES
+                  </Typography>
+                </motion.div>
+              </Grid>
+
+              {/* Right Side - Modified Grid for 5 Services with animated connecting lines */}
+              <Grid 
+                item 
+                xs={12} 
+                md={7} 
+                sx={{ 
+                  position: 'relative',
+                }}
+              >
+                {/* Animated Grid Lines Background */}
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 0,
+                  }}
+                >
+                  {/* Horizontal Lines */}
+                  <motion.div
+                    variants={gridLineVariants}
+                    style={{
+                      position: 'absolute',
+                      top: '33.33%',
+                      left: 0,
+                      right: 0,
+                      height: '1px',
+                      backgroundColor: '#e5e5e5',
+                      transformOrigin: 'center',
+                      transform: 'translateY(-0.5px)',
+                    }}
+                  />
+                  <motion.div
+                    variants={gridLineVariants}
+                    style={{
+                      position: 'absolute',
+                      top: '66.66%',
+                      left: 0,
+                      right: 0,
+                      height: '1px',
+                      backgroundColor: '#e5e5e5',
+                      transformOrigin: 'center',
+                      transform: 'translateY(-0.5px)',
+                    }}
+                  />
+                  
+                  {/* Vertical Lines */}
+                  <motion.div
+                    variants={{
+                      hidden: { scaleY: 0 },
+                      visible: {
+                        scaleY: 1,
+                        transition: {
+                          duration: 1.2,
+                          ease: "easeOut",
+                          delay: 0.1
+                        }
+                      }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: '33.33%',
+                      width: '1px',
+                      backgroundColor: '#e5e5e5',
+                      transformOrigin: 'center',
+                      transform: 'translateX(-0.5px)',
+                    }}
+                  />
+                  <motion.div
+                    variants={{
+                      hidden: { scaleY: 0 },
+                      visible: {
+                        scaleY: 1,
+                        transition: {
+                          duration: 1.2,
+                          ease: "easeOut",
+                          delay: 0.1
+                        }
+                      }
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      left: '66.66%',
+                      width: '1px',
+                      backgroundColor: '#e5e5e5',
+                      transformOrigin: 'center',
+                      transform: 'translateX(-0.5px)',
+                    }}
+                  />
+                </motion.div>
+
+                {/* Animated Grid Dots at intersections */}
+                {[
+                  { top: '33.33%', left: '33.33%' },
+                  { top: '33.33%', left: '66.66%' },
+                  { top: '66.66%', left: '33.33%' },
+                  { top: '66.66%', left: '66.66%' }
+                ].map((position, index) => (
+                  <motion.div
+                    key={index}
+                    variants={dotVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    style={{
+                      position: 'absolute',
+                      top: position.top,
+                      left: position.left,
+                      transform: 'translate(-50%, -50%) translate(-0.5px, -0.5px)',
+                      zIndex: 1,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: '6px',
+                        height: '6px',
+                        backgroundColor: '#34a3dc',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  </motion.div>
+                ))}
+
+                {/* 3x3 Grid for 5 services with specific placement */}
+                <Grid container sx={{ height: '100%', minHeight: { xs: 'auto', md: '500px' } }}>
+                  {/* Row 1: Service 1, Empty, Service 2 */}
+                  <Grid 
+                    item 
+                    xs={4} 
+                    sx={{
+                      position: 'relative',
+                    }}
+                  >
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.5
+                          }
+                        }
+                      }}
+                    >
                       <Box
+                        component={Link}
+                        href={services[0].link}
                         sx={{
-                          position: 'absolute',
-                          top: -20,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '80%',
-                          height: '40px',
-                          border: '3px solid #e2e8f0',
-                          borderBottom: 'none',
-                          borderRadius: '20px 20px 0 0',
-                          zIndex: 1,
-                        }}
-                      />
-                      
-                      <Card
-                        sx={{
-                          height: '280px',
-                          borderRadius: 3,
-                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                          transition: 'all 0.3s ease',
-                          border: '2px solid #e2e8f0',
-                          overflow: 'hidden',
+                          height: '100%',
+                          minHeight: { xs: '160px', md: '166px' },
+                          p: { xs: 2, md: 3 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
                           position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          borderRadius: 0,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textDecoration: 'none',
                           '&:hover': {
-                            boxShadow: '0 12px 32px rgba(0, 0, 0, 0.15)',
-                            transform: 'translateY(-4px)',
-                            borderColor: service.color,
+                            backgroundColor: services[0].color,
+                            '& .card-title, & .card-description': {
+                              color: 'white',
+                            },
+                            '& .service-icon': {
+                              backgroundColor: 'white',
+                              color: services[0].color,
+                            },
                           },
                         }}
                       >
-                        <CardContent sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                          {/* Icon */}
-                          <Box
-                            sx={{
-                              width: 60,
-                              height: 60,
-                              borderRadius: 2,
-                              backgroundColor: service.color,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              mb: 3,
-                              color: 'white',
-                            }}
-                          >
-                            {service.icon}
-                          </Box>
-                          
-                          <Typography 
-                            variant="h6" 
-                            sx={{ 
-                              mb: 2, 
-                              fontWeight: 700,
-                              fontSize: '1.1rem',
-                              color: '#1a1a1a',
-                              lineHeight: 1.3,
-                            }}
-                          >
-                            {service.title}
-                          </Typography>
-                          
-                          <Typography 
-                            variant="body2" 
-                            sx={{ 
-                              mb: 3,
-                              color: '#666',
-                              lineHeight: 1.5,
-                              fontSize: '0.9rem',
-                              flexGrow: 1,
-                            }}
-                          >
-                            {service.description}
-                          </Typography>
-                          
-                          <Button
-                            variant="text"
-                            component={Link}
-                            href={service.link}
-                            sx={{
-                              // color: service.color,
-                              fontWeight: 600,
-                              fontSize: '0.9rem',
-                              textTransform: 'none',
-                              justifyContent: 'flex-start',
-                              p: 0,
-                              
-                            }}
-                          >
-                            Read More  →
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </Box>
-                  </motion.div>
-                </Grid>
-              ))}
-            </Grid>
-
-            {/* Second Row - 2 Cards Centered */}
-            <Grid container spacing={4} justifyContent="center" sx={{ maxWidth: '700px', mx: 'auto' }}>
-              {services.slice(3, 5).map((service, index) => (
-                <Grid item xs={12} sm={6} md={6} key={service.title}>
-                  <motion.div
-                    variants={fadeInUp}
-                    whileHover={{ y: -4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                        <Box
+                          className="service-icon"
+                          sx={{
+                            width: { xs: 40, md: 48 },
+                            height: { xs: 40, md: 48 },
+                            borderRadius: 2,
+                            backgroundColor: services[0].color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            color: 'white',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {services[0].icon}
+                        </Box>
+                        <Typography 
+                          variant="h6" 
+                          className="card-title"
+                          sx={{ 
+                            mb: 1, 
+                            fontWeight: 600,
+                            fontSize: { xs: '0.85rem', md: '1rem' },
+                            color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {services[0].title}
+                        </Typography>
+                        <Typography 
+                          variant="body2"
+                          className="card-description" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.4,
+                            fontSize: { xs: '0.7rem', md: '0.8rem' },
+                            transition: 'color 0.3s ease',
+                          }}
+                        >
+                          {services[0].description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                  
+                  {/* Row 1: Empty middle */}
+                  <Grid item xs={4} />
+                  
+                  {/* Row 1: Service 2 */}
+                  <Grid 
+                    item 
+                    xs={4} 
+                    sx={{
+                      position: 'relative',
+                    }}
                   >
-                    <Box sx={{ position: 'relative', mb: 4 }}>
-                      {/* Top connecting line */}
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.6
+                          }
+                        }
+                      }}
+                    >
                       <Box
+                        component={Link}
+                        href={services[1].link}
                         sx={{
-                          position: 'absolute',
-                          top: -20,
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '80%',
-                          height: '40px',
-                          border: '3px solid #e2e8f0',
-                          borderBottom: 'none',
-                          borderRadius: '20px 20px 0 0',
-                          zIndex: 1,
-                        }}
-                      />
-                      
-                      <Card
-                        sx={{
-                          height: '280px',
-                          borderRadius: 3,
-                          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                          transition: 'all 0.3s ease',
-                          border: '2px solid #e2e8f0',
-                          overflow: 'hidden',
+                          height: '100%',
+                          minHeight: { xs: '160px', md: '166px' },
+                          p: { xs: 2, md: 3 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
                           position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          borderRadius: 0,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textDecoration: 'none',
                           '&:hover': {
-                            boxShadow: '0 12px 32px rgba(0, 0, 0, 0.15)',
-                            transform: 'translateY(-4px)',
-                            borderColor: service.color,
+                            backgroundColor: services[1].color,
+                            '& .card-title, & .card-description': {
+                              color: 'white',
+                            },
+                            '& .service-icon': {
+                              backgroundColor: 'white',
+                              color: services[1].color,
+                            },
                           },
                         }}
                       >
-                        <CardContent sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                          {/* Icon */}
-                          <Box
-                            sx={{
-                              width: 60,
-                              height: 60,
-                              borderRadius: 2,
-                              backgroundColor: service.color,
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              mb: 3,
+                        <Box
+                          className="service-icon"
+                          sx={{
+                            width: { xs: 40, md: 48 },
+                            height: { xs: 40, md: 48 },
+                            borderRadius: 2,
+                            backgroundColor: services[1].color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            color: 'white',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {services[1].icon}
+                        </Box>
+                        <Typography 
+                          variant="h6" 
+                          className="card-title"
+                          sx={{ 
+                            mb: 1, 
+                            fontWeight: 600,
+                            fontSize: { xs: '0.85rem', md: '1rem' },
+                            color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {services[1].title}
+                        </Typography>
+                        <Typography 
+                          variant="body2"
+                          className="card-description" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.4,
+                            fontSize: { xs: '0.7rem', md: '0.8rem' },
+                            transition: 'color 0.3s ease',
+                          }}
+                        >
+                          {services[1].description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                  
+                  {/* Row 2: Empty left */}
+                  <Grid item xs={4} />
+                  
+                  {/* Row 2: Service 3 in center */}
+                  <Grid 
+                    item 
+                    xs={4} 
+                    sx={{
+                      position: 'relative',
+                    }}
+                  >
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.7
+                          }
+                        }
+                      }}
+                    >
+                      <Box
+                        component={Link}
+                        href={services[2].link}
+                        sx={{
+                          height: '100%',
+                          minHeight: { xs: '160px', md: '166px' },
+                          p: { xs: 2, md: 3 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          borderRadius: 0,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textDecoration: 'none',
+                          '&:hover': {
+                            backgroundColor: services[2].color,
+                            '& .card-title, & .card-description': {
                               color: 'white',
-                            }}
-                          >
-                            {service.icon}
-                          </Box>
-                          
-                          <Typography 
-                            variant="h6" 
-                            sx={{ 
-                              mb: 2, 
-                              fontWeight: 700,
-                              fontSize: '1.1rem',
-                              color: '#1a1a1a',
-                              lineHeight: 1.3,
-                            }}
-                          >
-                            {service.title}
-                          </Typography>
-                          
-                          <Typography 
-                            variant="body2" 
-                            sx={{ 
-                              mb: 3,
-                              color: '#666',
-                              lineHeight: 1.5,
-                              fontSize: '0.9rem',
-                              flexGrow: 1,
-                            }}
-                          >
-                            {service.description}
-                          </Typography>
-                          
-                          <Button
-                            variant="text"
-                            component={Link}
-                            href={service.link}
-                            sx={{
-                              color: service.color,
-                              fontWeight: 600,
-                              fontSize: '0.9rem',
-                              textTransform: 'none',
-                              justifyContent: 'flex-start',
-                              p: 0,
-                              backgroundColor: 'transparent',
-                              '&:hover': {
-                                backgroundColor: 'transparent',
-                                textDecoration: 'underline',
-                              },
-                            }}
-                          >
-                            Read More →
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </Box>
-                  </motion.div>
+                            },
+                            '& .service-icon': {
+                              backgroundColor: 'white',
+                              color: services[2].color,
+                            },
+                          },
+                        }}
+                      >
+                        <Box
+                          className="service-icon"
+                          sx={{
+                            width: { xs: 40, md: 48 },
+                            height: { xs: 40, md: 48 },
+                            borderRadius: 2,
+                            backgroundColor: services[2].color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            color: 'white',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {services[2].icon}
+                        </Box>
+                        <Typography 
+                          variant="h6" 
+                          className="card-title"
+                          sx={{ 
+                            mb: 1, 
+                            fontWeight: 600,
+                            fontSize: { xs: '0.85rem', md: '1rem' },
+                            color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {services[2].title}
+                        </Typography>
+                        <Typography 
+                          variant="body2"
+                          className="card-description" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.4,
+                            fontSize: { xs: '0.7rem', md: '0.8rem' },
+                            transition: 'color 0.3s ease',
+                          }}
+                        >
+                          {services[2].description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                  
+                  {/* Row 2: Empty right */}
+                  <Grid item xs={4} />
+                  
+                  {/* Row 3: Service 4 */}
+                  <Grid 
+                    item 
+                    xs={4} 
+                    sx={{
+                      position: 'relative',
+                    }}
+                  >
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.8
+                          }
+                        }
+                      }}
+                    >
+                      <Box
+                        component={Link}
+                        href={services[3].link}
+                        sx={{
+                          height: '100%',
+                          minHeight: { xs: '160px', md: '166px' },
+                          p: { xs: 2, md: 3 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          borderRadius: 0,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textDecoration: 'none',
+                          '&:hover': {
+                            backgroundColor: services[3].color,
+                            '& .card-title, & .card-description': {
+                              color: 'white',
+                            },
+                            '& .service-icon': {
+                              backgroundColor: 'white',
+                              color: services[3].color,
+                            },
+                          },
+                        }}
+                      >
+                        <Box
+                          className="service-icon"
+                          sx={{
+                            width: { xs: 40, md: 48 },
+                            height: { xs: 40, md: 48 },
+                            borderRadius: 2,
+                            backgroundColor: services[3].color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            color: 'white',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {services[3].icon}
+                        </Box>
+                        <Typography 
+                          variant="h6" 
+                          className="card-title"
+                          sx={{ 
+                            mb: 1, 
+                            fontWeight: 600,
+                            fontSize: { xs: '0.85rem', md: '1rem' },
+                            color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {services[3].title}
+                        </Typography>
+                        <Typography 
+                          variant="body2"
+                          className="card-description" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.4,
+                            fontSize: { xs: '0.7rem', md: '0.8rem' },
+                            transition: 'color 0.3s ease',
+                          }}
+                        >
+                          {services[3].description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                  
+                  {/* Row 3: Empty middle */}
+                  <Grid item xs={4} />
+                  
+                  {/* Row 3: Service 5 */}
+                  <Grid 
+                    item 
+                    xs={4} 
+                    sx={{
+                      position: 'relative',
+                    }}
+                  >
+                    <motion.div 
+                      variants={{
+                        initial: { opacity: 0, y: 30 },
+                        animate: { 
+                          opacity: 1, 
+                          y: 0,
+                          transition: {
+                            duration: 0.6,
+                            delay: 1.9
+                          }
+                        }
+                      }}
+                    >
+                      <Box
+                        component={Link}
+                        href={services[4].link}
+                        sx={{
+                          height: '100%',
+                          minHeight: { xs: '160px', md: '166px' },
+                          p: { xs: 2, md: 3 },
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          textAlign: 'center',
+                          position: 'relative',
+                          zIndex: 2,
+                          backgroundColor: 'transparent',
+                          borderRadius: 0,
+                          cursor: 'pointer',
+                          transition: 'all 0.3s ease',
+                          textDecoration: 'none',
+                          '&:hover': {
+                            backgroundColor: services[4].color,
+                            '& .card-title, & .card-description': {
+                              color: 'white',
+                            },
+                            '& .service-icon': {
+                              backgroundColor: 'white',
+                              color: services[4].color,
+                            },
+                          },
+                        }}
+                      >
+                        <Box
+                          className="service-icon"
+                          sx={{
+                            width: { xs: 40, md: 48 },
+                            height: { xs: 40, md: 48 },
+                            borderRadius: 2,
+                            backgroundColor: services[4].color,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            mb: 2,
+                            color: 'white',
+                            transition: 'all 0.3s ease',
+                          }}
+                        >
+                          {services[4].icon}
+                        </Box>
+                        <Typography 
+                          variant="h6" 
+                          className="card-title"
+                          sx={{ 
+                            mb: 1, 
+                            fontWeight: 600,
+                            fontSize: { xs: '0.85rem', md: '1rem' },
+                            color: '#1a1a1a',
+                            transition: 'color 0.3s ease',
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {services[4].title}
+                        </Typography>
+                        <Typography 
+                          variant="body2"
+                          className="card-description" 
+                          sx={{ 
+                            color: '#666',
+                            lineHeight: 1.4,
+                            fontSize: { xs: '0.7rem', md: '0.8rem' },
+                            transition: 'color 0.3s ease',
+                          }}
+                        >
+                          {services[4].description}
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
                 </Grid>
-              ))}
+              </Grid>
             </Grid>
           </motion.div>
         </Container>
