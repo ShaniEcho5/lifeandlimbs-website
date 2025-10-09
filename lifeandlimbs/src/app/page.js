@@ -99,11 +99,7 @@ const HeroSection = () => {
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={4} alignItems="center" sx={{ minHeight: '70vh' }}>
           <Grid item xs={12} md={6}>
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
+            
               <Typography
                 variant="h6"
                 sx={{
@@ -183,7 +179,6 @@ const HeroSection = () => {
                   Learn More
                 </Button>
               </Box>
-            </motion.div>
           </Grid>
         </Grid>
       </Container>
