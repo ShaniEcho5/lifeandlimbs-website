@@ -110,12 +110,26 @@ const Navbar = () => {
                 anchorEl={anchorEls[item.label]}
                 open={isMenuOpen(item.label)}
                 onClose={() => handleMenuClose(item.label)}
+                disableScrollLock={true}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
                 PaperProps={{
                   sx: {
                     mt: 1,
                     borderRadius: 2,
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
                     minWidth: 200,
+                    position: 'absolute',
+                    zIndex: 1300,
                   },
                 }}
               >
@@ -233,11 +247,10 @@ const Navbar = () => {
     >
       <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Image
-          src="/images/life-and-limb-logo.png"
+          src="/images/life-and-limb-logo copy.png"
           alt="Life and Limb Logo"
           width={100}
           height={100}
-          style={{ borderRadius: '8px' }}
         />
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
@@ -362,11 +375,10 @@ const Navbar = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 } }}>
               <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <Image
-                  src="/images/life-and-limb-logo.png"
+                  src="/images/life-and-limb-logo copy.png"
                   alt="Life and Limb Logo"
                   width={120}
                   height={50}
-                  style={{ borderRadius: '8px' }}
                   priority
                 />
               </Link>
