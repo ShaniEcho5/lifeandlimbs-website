@@ -533,11 +533,12 @@ const AboutUsPage = () => {
                 {/* Photo Section */}
                 <Box
                   sx={{
-                    width: { xs: '100%', sm: '200px' },
-                    height: { xs: '250px', sm: '100%' },
-                    minHeight: '250px',
+                    width: { xs: '100%', sm: '220px' },
+                    height: { xs: '300px', sm: '300px' },
                     position: 'relative',
                     backgroundColor: 'grey.100',
+                    overflow: 'hidden',
+                    flexShrink: 0,
                   }}
                 >
                   <Image
@@ -546,6 +547,7 @@ const AboutUsPage = () => {
                     fill
                     style={{
                       objectFit: 'cover',
+                      objectPosition: 'center 15%',
                     }}
                   />
                 </Box>
