@@ -177,15 +177,20 @@ const AboutUsPage = () => {
                 sx={{
                   height: '400px',
                   borderRadius: 3,
-                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  position: 'relative',
                 }}
               >
-                <Typography variant="h4" color="text.secondary" textAlign="center">
-                  Mission Image
-                </Typography>
+                <Image
+                  src="/images/our-mission-img.webp"
+                  alt="Our mission - providing prosthetic care and support"
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                  priority
+                />
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -237,15 +242,19 @@ const AboutUsPage = () => {
                 sx={{
                   height: '400px',
                   borderRadius: 3,
-                  background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                  position: 'relative',
                 }}
               >
-                <Typography variant="h4" color="text.secondary" textAlign="center">
-                  Vision Image
-                </Typography>
+                <Image
+                  src="/images/our-vision.webp"
+                  alt="Our vision - empowering lives through accessible prosthetic care"
+                  fill
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
               </Box>
             </Grid>
           </Grid>
