@@ -1,0 +1,13 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="teamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e2e8f0"/>
+      <stop offset="100%" style="stop-color:#cbd5e1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#teamGradient)"/>
+  <circle cx="60" cy="45" r="15" fill="#0369a1"/>
+  <path d="M35 85 Q60 70, 85 85 L85 100 Q60 85, 35 100 Z" fill="#0369a1"/>
+  <text x="60" y="115" text-anchor="middle" fill="#64748b" font-family="Arial" font-size="8">Team Member</text>
+</svg>
