@@ -88,10 +88,10 @@ const ContactUsPage = () => {
     },
     {
       title: 'Address',
-      content: '6JG8+879, Kochalummoodu, Pandalam Rd, Vettiyar, Kerala 690534',
+      content: '6JG8+879, Kochalummoodu - Pandalam Rd, Vettiyar, Kerala 690534',
       description: 'Visit our clinic',
       icon: <LocationIcon sx={{ fontSize: 40, color: 'primary.main' }} />,
-      link: 'https://maps.google.com/?q=6JG8+879,+Kochalummoodu,+Pandalam+Rd,+Vettiyar,+Kerala+690534',
+      link: 'https://www.google.com/maps/place/Life+and+Limb+Service+Center/@9.225888,76.615971,17z/data=!3m1!4b1!4m6!3m5!1s0x3b06190015f1e0cb:0x5f988476f6a937bd!8m2!3d9.225888!4d76.615971!16s%2Fg%2F11y3k5r8qg',
     },
     {
       title: 'Office Hours',
@@ -396,9 +396,8 @@ const ContactUsPage = () => {
                   </Typography>
                   <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7 }}>
                     <strong>Life and Limb</strong><br />
-                    6JG8+879, Kochalummoodu<br />
-                    Pandalam Rd, Vettiyar<br />
-                    Kerala 690534
+                    6JG8+879, Kochalummoodu - Pandalam Rd<br />
+                    Vettiyar, Kerala 690534
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                     Please call ahead to schedule an appointment for consultations 
@@ -408,7 +407,7 @@ const ContactUsPage = () => {
                     variant="outlined"
                     color="primary"
                     fullWidth
-                    href="https://maps.google.com/?q=6JG8+879,+Kochalummoodu,+Pandalam+Rd,+Vettiyar,+Kerala+690534"
+                    href="https://www.google.com/maps/place/Life+and+Limb+Service+Center/@9.225888,76.615971,17z/data=!3m1!4b1!4m6!3m5!1s0x3b06190015f1e0cb:0x5f988476f6a937bd!8m2!3d9.225888!4d76.615971!16s%2Fg%2F11y3k5r8qg"
                     target="_blank"
                     rel="noopener noreferrer"
                     sx={{ py: 1.5, fontWeight: 600 }}
