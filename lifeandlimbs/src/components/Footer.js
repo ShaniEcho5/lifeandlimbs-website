@@ -56,8 +56,8 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: 'primary.900',
-        color: 'white',
+        backgroundColor: 'white',
+        color: 'black',
         pt: 6,
         pb: 3,
         mt: 'auto',
@@ -69,14 +69,13 @@ const Footer = () => {
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 3 }}>
               <Image
-                src="/images/logo.svg"
+                src="/images/life-and-limb-logo copy.png"
                 alt="Life and Limb Logo"
-                width={60}
-                height={60}
-                style={{ borderRadius: '50%' }}
+                width={120}
+                height={70}
               />
             </Box>
-            <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'grey.300' }}>
+            <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'black' }}>
               A nonprofit organization dedicated to providing free prosthetic limbs to
               amputees across India.
             </Typography>
@@ -89,7 +88,7 @@ const Footer = () => {
                   component={NextLink}
                   href={link.href}
                   sx={{
-                    color: 'grey.400',
+                    color: 'black',
                     textDecoration: 'none',
                     fontSize: '0.875rem',
                     '&:hover': {
@@ -111,7 +110,7 @@ const Footer = () => {
               sx={{
                 mb: 3,
                 fontWeight: 600,
-                color: 'white',
+                color: 'black',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
               }}
@@ -125,7 +124,7 @@ const Footer = () => {
                   component={NextLink}
                   href={link.href}
                   sx={{
-                    color: 'grey.300',
+                    color: 'black',
                     textDecoration: 'none',
                     fontSize: '0.95rem',
                     transition: 'all 0.2s ease',
@@ -148,7 +147,7 @@ const Footer = () => {
               sx={{
                 mb: 3,
                 fontWeight: 600,
-                color: 'white',
+                color: 'black',
                 textTransform: 'uppercase',
                 letterSpacing: '0.5px',
               }}
@@ -163,7 +162,7 @@ const Footer = () => {
                   <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }}>
                     Life and Limb
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'grey.300', lineHeight: 1.6 }}>
+                  <Typography variant="body2" sx={{ color: 'black', lineHeight: 1.6 }}>
                     6JG8+879, Kochalummoodu,<br />
                     Pandalam Rd, Vettiyar,<br />
                     Kerala 690534
@@ -173,13 +172,13 @@ const Footer = () => {
               
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Phone sx={{ color: 'secondary.main', mr: 1 }} />
-                <Typography variant="body2" sx={{ color: 'grey.300', mr: 1 }}>
+                <Typography variant="body2" sx={{ color: 'black', mr: 1 }}>
                   Office:
                 </Typography>
                 <Link
                   href="tel:0479-2998836"
                   sx={{
-                    color: 'white',
+                    color: 'black',
                     textDecoration: 'none',
                     '&:hover': {
                       color: 'secondary.main',
@@ -193,13 +192,13 @@ const Footer = () => {
               
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Email sx={{ color: 'secondary.main', mr: 1 }} />
-                <Typography variant="body2" sx={{ color: 'grey.300', mr: 1 }}>
+                <Typography variant="body2" sx={{ color: 'black', mr: 1 }}>
                   Email:
                 </Typography>
                 <Link
                   href="mailto:founder@lifeandlimbs.org"
                   sx={{
-                    color: 'white',
+                    color: 'black',
                     textDecoration: 'none',
                     '&:hover': {
                       color: 'secondary.main',
@@ -214,7 +213,7 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+        <Divider sx={{ my: 4, borderColor: 'rgba(0, 0, 0, 0.2)' }} />
 
         {/* Bottom Footer */}
         <Box
@@ -229,7 +228,7 @@ const Footer = () => {
           <Typography
             variant="body2"
             sx={{
-              color: 'grey.400',
+              color: 'black',
               order: { xs: 2, md: 1 },
             }}
           >
