@@ -20,7 +20,7 @@ import {
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
-  KeyboardArrowDown as ArrowDownIcon,
+  KeyboardArrowDown as ArrowDownIcon
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -37,10 +37,14 @@ const navigationItems = [
   },
   {
     label: 'Services',
+    href: '/services',
     submenu: [
-      { label: 'Free Prosthetics', href: '/services' },
-      { label: 'Consultation', href: '/services#consultation' },
-      { label: 'Follow-up Care', href: '/services#followup' },
+      { label: 'All Services', href: '/services' },
+      { label: 'Free Custom Prosthetic', href: '/services/free-custom-prosthetic' },
+      { label: 'Prosthetic Repair & Maintenance', href: '/services/repair-maintenance' },
+      { label: 'Counselling Services', href: '/services/counselling' },
+      { label: 'Family Support Program', href: '/services/family-support' },
+      { label: 'Public Education & Awareness Campaign', href: '/services/education-awareness' },
     ],
   },
   { label: 'News & Articles', href: '/news-and-articles' },
@@ -112,13 +116,27 @@ const Navbar = () => {
             <>
               <Button
                 color="inherit"
+                component={item.href ? Link : undefined}
+                href={item.href}
                 endIcon={<ArrowDownIcon />}
                 sx={{
                   color: scrolled ? 'text.primary' : 'white',
                   fontWeight: 500,
+                  position: 'relative',
                   '&:hover': {
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   },
+                  '&::after': pathname === item.href ? {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: 0,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '80%',
+                    height: 2,
+                    backgroundColor: 'secondary.main',
+                    borderRadius: 1,
+                  } : {},
                 }}
               >
                 {item.label}
