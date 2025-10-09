@@ -84,17 +84,34 @@ const Navbar = () => {
     }));
   };
 
+  const handleMenuEnter = (event, menuId) => {
+    setAnchorEls(prev => ({
+      ...prev,
+      [menuId]: event.currentTarget,
+    }));
+  };
+
+  const handleMenuLeave = (menuId) => {
+    setAnchorEls(prev => ({
+      ...prev,
+      [menuId]: null,
+    }));
+  };
+
   const isMenuOpen = (menuId) => Boolean(anchorEls[menuId]);
 
   const renderDesktopNavigation = () => (
     <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 2 }}>
       {navigationItems.map((item) => (
-        <Box key={item.label}>
+        <Box 
+          key={item.label}
+          onMouseEnter={item.submenu ? (e) => handleMenuEnter(e, item.label) : undefined}
+          onMouseLeave={item.submenu ? () => handleMenuLeave(item.label) : undefined}
+        >
           {item.submenu ? (
             <>
               <Button
                 color="inherit"
-                onClick={(e) => handleMenuOpen(e, item.label)}
                 endIcon={<ArrowDownIcon />}
                 sx={{
                   color: scrolled ? 'text.primary' : 'white',
@@ -113,6 +130,7 @@ const Navbar = () => {
                 disableScrollLock={true}
                 MenuListProps={{
                   'aria-labelledby': 'basic-button',
+                  onMouseLeave: () => handleMenuLeave(item.label),
                 }}
                 anchorOrigin={{
                   vertical: 'bottom',
