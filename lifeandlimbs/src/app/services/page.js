@@ -20,16 +20,16 @@ import {
   Paper,
 } from '@mui/material';
 import {
-  CheckCircle as CheckIcon,
-  Engineering as EngineeringIcon,
-  SupportAgent as SupportIcon,
-  MonetizationOff as FreeIcon,
-  AccessTime as TimeIcon,
-  LocalHospital as MedicalIcon,
-  Build as FittingIcon,
-  School as TrainingIcon,
-  Psychology as FollowUpIcon,
-} from '@mui/icons-material';
+  FaCheckCircle as CheckIcon,
+  FaCogs as EngineeringIcon,
+  FaHandsHelping as SupportIcon,
+  FaDollarSign as FreeIcon,
+  FaClock as TimeIcon,
+  FaHospital as MedicalIcon,
+  FaTools as FittingIcon,
+  FaGraduationCap as TrainingIcon,
+  FaUserMd as FollowUpIcon,
+} from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
