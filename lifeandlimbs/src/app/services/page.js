@@ -162,7 +162,7 @@ const ServicesPage = () => {
       </Box>
 
       {/* Services Grid Section */}
-      <Box className="section-padding" sx={{ backgroundColor: '#ffffff', py: 8 }}>
+      <Box className="section-padding" sx={{ backgroundColor: '#f8fafc', py: 8 }}>
         <Container maxWidth="xl" sx={{ px: 4 }}>
           <motion.div 
             variants={staggerContainer}
@@ -275,19 +275,16 @@ const ServicesPage = () => {
                             component={Link}
                             href={service.link}
                             sx={{
-                              color: service.color,
+                              // color: service.color,
                               fontWeight: 600,
                               fontSize: '0.9rem',
                               textTransform: 'none',
                               justifyContent: 'flex-start',
                               p: 0,
-                              '&:hover': {
-                                backgroundColor: 'transparent',
-                                textDecoration: 'underline',
-                              },
+                              
                             }}
                           >
-                            Read More →
+                            Read More  →
                           </Button>
                         </CardContent>
                       </Card>
@@ -394,6 +391,7 @@ const ServicesPage = () => {
                               textTransform: 'none',
                               justifyContent: 'flex-start',
                               p: 0,
+                              backgroundColor: 'transparent',
                               '&:hover': {
                                 backgroundColor: 'transparent',
                                 textDecoration: 'underline',
@@ -482,7 +480,7 @@ const ServicesPage = () => {
                     },
                   }}
                 >
-                  Learn More
+                  About Us
                 </Button>
               </Box>
             </Box>
