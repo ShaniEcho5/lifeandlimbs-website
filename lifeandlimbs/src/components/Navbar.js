@@ -47,7 +47,14 @@ const navigationItems = [
       { label: 'Public Education & Awareness Campaign', href: '/services/education-awareness' },
     ],
   },
-  { label: 'Blogs', href: '/news-and-articles' },
+  { 
+    label: 'Blogs', 
+    href: '/news-and-articles',
+    submenu: [
+      { label: 'All Blogs', href: '/news-and-articles' },
+      // { label: 'Add New Blog', href: '/blog-admin' },
+    ],
+  },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact Us', href: '/contact-us' },
 ];
