@@ -446,6 +446,8 @@ const ActionCardsSection = () => {
                     height: '6px',
                     backgroundColor: '#e9b308',
                     borderRadius: '50%',
+                    mx:'-3px',
+                    my:'-3px',
                   }}
                 />
               </motion.div>

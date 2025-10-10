@@ -171,7 +171,7 @@ const AboutUsPage = () => {
       </Box>
 
       {/* Mission Section */}
-      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
+      <Box id="mission" className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
         <Container maxWidth="xl">
           <Grid container spacing={6} alignItems="center">
             <Grid item xs={12} md={6}>
@@ -500,7 +500,7 @@ const AboutUsPage = () => {
       </Box>
 
       {/* Team Section */}
-      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
+      <Box id="team" className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 6 }}>
             <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
