@@ -70,10 +70,10 @@ const Footer = () => {
           <Grid item xs={12} md={4}>
             <Box sx={{ mb: 3 }}>
               <Image
-                src="/images/life-and-limb-logo copy.png"
+                src="/images/life-and-limb-logo-03.png"
                 alt="Life and Limb Logo"
                 width={120}
-                height={70}
+                height={60}
               />
             </Box>
             <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'black' }}>

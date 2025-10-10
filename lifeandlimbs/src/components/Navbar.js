@@ -309,7 +309,7 @@ const Navbar = () => {
     >
       <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Image
-          src="/images/life-and-limb-logo copy.png"
+          src="/images/life-and-limb-logo-03.png"
           alt="Life and Limb Logo"
           width={100}
           height={100}
@@ -467,7 +467,7 @@ const Navbar = () => {
             <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: { xs: 1, lg: 0 } }}>
               <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <Image
-                  src="/images/life-and-limb-logo copy.png"
+                  src="/images/life-and-limb-logo-03.png"
                   alt="Life and Limb Logo"
                   width={120}
                   height={50}
