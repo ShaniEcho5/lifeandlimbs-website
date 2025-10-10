@@ -16,11 +16,14 @@ import {
   MenuItem,
   useMediaQuery,
   useTheme,
+  Collapse,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
-  KeyboardArrowDown as ArrowDownIcon
+  KeyboardArrowDown as ArrowDownIcon,
+  ExpandMore as ExpandMoreIcon,
+  ExpandLess as ExpandLessIcon
 } from '@mui/icons-material';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -59,6 +62,7 @@ const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [anchorEls, setAnchorEls] = useState({});
+  const [expandedMobileMenus, setExpandedMobileMenus] = useState({});
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
   const pathname = usePathname();
@@ -75,6 +79,17 @@ const Navbar = () => {
 
   const handleDrawerToggle = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
+    // Reset expanded menus when closing drawer
+    if (mobileDrawerOpen) {
+      setExpandedMobileMenus({});
+    }
+  };
+
+  const handleMobileMenuToggle = (menuLabel) => {
+    setExpandedMobileMenus(prev => ({
+      ...prev,
+      [menuLabel]: !prev[menuLabel]
+    }));
   };
 
   const handleMenuOpen = (event, menuId) => {
@@ -309,7 +324,17 @@ const Navbar = () => {
           <React.Fragment key={item.label}>
             {item.submenu ? (
               <>
-                <ListItem sx={{ py: 2, px: 3 }}>
+                <ListItem 
+                  button
+                  onClick={() => handleMobileMenuToggle(item.label)}
+                  sx={{ 
+                    py: 2, 
+                    px: 3,
+                    '&:hover': {
+                      backgroundColor: 'primary.50',
+                    },
+                  }}
+                >
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
@@ -317,30 +342,42 @@ const Navbar = () => {
                       color: 'text.primary',
                     }}
                   />
+                  {expandedMobileMenus[item.label] ? (
+                    <ExpandLessIcon color="primary" />
+                  ) : (
+                    <ExpandMoreIcon color="primary" />
+                  )}
                 </ListItem>
-                {item.submenu.map((subItem) => (
-                  <ListItem
-                    key={subItem.label}
-                    component={Link}
-                    href={subItem.href}
-                    onClick={handleDrawerToggle}
-                    sx={{
-                      py: 1,
-                      px: 4,
-                      '&:hover': {
-                        backgroundColor: 'primary.50',
-                      },
-                    }}
-                  >
-                    <ListItemText
-                      primary={subItem.label}
-                      primaryTypographyProps={{
-                        color: 'text.secondary',
-                        fontSize: '0.9rem',
+                <Collapse 
+                  in={expandedMobileMenus[item.label]} 
+                  timeout="auto" 
+                  unmountOnExit
+                >
+                  {item.submenu.map((subItem) => (
+                    <ListItem
+                      key={subItem.label}
+                      component={Link}
+                      href={subItem.href}
+                      onClick={handleDrawerToggle}
+                      sx={{
+                        py: 1,
+                        px: 4,
+                        pl: 6, // More indentation for sub-items
+                        '&:hover': {
+                          backgroundColor: 'primary.50',
+                        },
                       }}
-                    />
-                  </ListItem>
-                ))}
+                    >
+                      <ListItemText
+                        primary={subItem.label}
+                        primaryTypographyProps={{
+                          color: 'text.secondary',
+                          fontSize: '0.9rem',
+                        }}
+                      />
+                    </ListItem>
+                  ))}
+                </Collapse>
               </>
             ) : (
               <ListItem
