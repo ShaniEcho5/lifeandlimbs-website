@@ -49,11 +49,7 @@ const navigationItems = [
   },
   { 
     label: 'Blogs', 
-    href: '/news-and-articles',
-    submenu: [
-      { label: 'All Blogs', href: '/news-and-articles' },
-      // { label: 'Add New Blog', href: '/blog-admin' },
-    ],
+    href: '/news-and-articles'
   },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact Us', href: '/contact-us' },
