@@ -857,7 +857,7 @@ const ServicesPage = () => {
       <Box 
         className="section-padding" 
         sx={{ 
-          backgroundColor: '#34a3dc',
+          backgroundColor: 'primary.main',
           color: 'white',
         }}
       >
@@ -897,7 +897,7 @@ const ServicesPage = () => {
                     py: 1.5, 
                     fontWeight: 600,
                     backgroundColor: 'white',
-                    color: '#34a3dc',
+                    color: 'primary.main',
                     '&:hover': {
                       backgroundColor: '#f8fafc',
                     },

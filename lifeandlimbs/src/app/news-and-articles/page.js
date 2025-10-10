@@ -71,7 +71,7 @@ const NewsAndArticlesPage = () => {
                 letterSpacing: '1px',
               }}
             >
-              News & Articles
+              Blogs
             </Typography>
             <Typography
               variant="h1"
@@ -82,7 +82,7 @@ const NewsAndArticlesPage = () => {
                 fontWeight: 700,
               }}
             >
-              Inspiring Stories, Latest News & Articles
+              Inspiring Stories, Latest Blogs
             </Typography>
             <Typography
               variant="h5"

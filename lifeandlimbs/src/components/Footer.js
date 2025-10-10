@@ -31,7 +31,7 @@ const Footer = () => {
     { label: 'Homepage', href: '/' },
     { label: 'About Us', href: '/about-us' },
     { label: 'Services', href: '/services' },
-    { label: 'News & Articles', href: '/news-and-articles' },
+    { label: 'Blogs', href: '/news-and-articles' },
     { label: 'Events', href: '/upcoming-events' },
     { label: 'Contact Us', href: '/contact-us' },
     { label: 'Gallery', href: '/gallery' },

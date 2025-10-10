@@ -50,7 +50,7 @@ a {
 
 /* Custom utility classes */
 .gradient-text {
-  background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+  background: linear-gradient(135deg, #0369a1 0%, #0369a1 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

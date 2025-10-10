@@ -78,7 +78,7 @@ const FamilySupportPage = () => {
                 fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
                 fontWeight: 800,
                 lineHeight: 1.1,
-                color: '#34a3dc',
+                color: 'primary.main',
               }}
             >
               Family Support Program
@@ -105,10 +105,10 @@ const FamilySupportPage = () => {
                 px: 4,
                 py: 1.5,
                 fontWeight: 600,
-                backgroundColor: '#34a3dc',
+                backgroundColor: 'primary.main',
                 color: 'white',
                 '&:hover': {
-                  backgroundColor: '#2a8bc2',
+                  backgroundColor: 'primary.main',
                 },
               }}
             >
@@ -198,7 +198,7 @@ const FamilySupportPage = () => {
                   {services.map((service, index) => (
                     <ListItem key={index} sx={{ px: 0, py: 1 }}>
                       <ListItemIcon sx={{ minWidth: 36 }}>
-                        <FaCheckCircle color="#34a3dc" size={20} />
+                        <FaCheckCircle color="primary.main" size={20} />
                       </ListItemIcon>
                       <ListItemText
                         primary={service}
@@ -269,7 +269,7 @@ const FamilySupportPage = () => {
                     >
                       <Box
                         sx={{
-                          color: '#34a3dc',
+                          color: 'primary.main',
                           mb: 3,
                         }}
                       >
@@ -360,9 +360,9 @@ const FamilySupportPage = () => {
                     px: 4,
                     py: 1.5,
                     fontWeight: 600,
-                    backgroundColor: '#34a3dc',
+                    backgroundColor: 'primary.main',
                     '&:hover': {
-                      backgroundColor: '#2a8bc2',
+                      backgroundColor: 'primary.main',
                     },
                   }}
                 >
@@ -406,7 +406,7 @@ const FamilySupportPage = () => {
       <Box
         className="section-padding"
         sx={{
-          backgroundColor: '#34a3dc',
+          backgroundColor: 'primary.main',
           color: 'white',
         }}
       >
@@ -446,7 +446,7 @@ const FamilySupportPage = () => {
                     py: 1.5,
                     fontWeight: 600,
                     backgroundColor: 'white',
-                    color: '#34a3dc',
+                    color: 'primary.main',
                     '&:hover': {
                       backgroundColor: '#f8fafc',
                     },

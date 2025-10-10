@@ -841,10 +841,10 @@ const NewsSection = () => (
               letterSpacing: '1px',
             }}
           >
-            News & Articles
+            Blogs
           </Typography>
           <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-            Inspiring Stories, Latest News & Articles
+            Inspiring Stories, Latest Blogs
           </Typography>
           <Button
             variant="outlined"
