@@ -67,37 +67,37 @@ const ServicesPage = () => {
     {
       title: 'Free Custom Prosthetic',
       description: 'High-quality, custom-fitted prosthetic limbs provided at no cost to those in need.',
-      icon: <FaHandPaper size={48} />,
+      icon: <FaHandPaper size={30} />,
       link: '/services/free-custom-prosthetic',
-      color: '#34a3dc',
+      color: 'primary.main',
     },
     {
       title: 'Prosthetic Repair & Maintenance',
       description: 'Professional repair and maintenance services to keep your prosthetic in optimal condition.',
-      icon: <FaTools size={48} />,
+      icon: <FaTools size={30} />,
       link: '/services/repair-maintenance',
-      color: '#34a3dc',
+      color: 'primary.main',
     },
     {
       title: 'Counselling Services',
       description: 'Emotional and psychological support to help you adapt to life with a prosthetic limb.',
-      icon: <FaComments size={48} />,
+      icon: <FaComments size={30} />,
       link: '/services/counselling',
-      color: '#34a3dc',
+      color: 'primary.main',
     },
     {
       title: 'Family Support Program',
       description: 'Comprehensive support for families navigating the prosthetic journey together.',
-      icon: <FaUsers size={48} />,
+      icon: <FaUsers size={30} />,
       link: '/services/family-support',
-      color: '#34a3dc',
+      color: 'primary.main',
     },
     {
       title: 'Public Education & Awareness Campaign',
       description: 'Educational programs to raise awareness about prosthetics and disability rights.',
-      icon: <FaBullhorn size={48} />,
+      icon: <FaBullhorn size={30} />,
       link: '/services/education-awareness',
-      color: '#34a3dc',
+      color: 'primary.main',
     },
   ];
 
@@ -118,7 +118,7 @@ const ServicesPage = () => {
                 <Typography
                   variant="h6"
                   sx={{
-                    color: '#34a3dc',
+                    color: 'primary.main',
                     fontWeight: 600,
                     mb: 2,
                     textTransform: 'uppercase',
@@ -222,7 +222,7 @@ const ServicesPage = () => {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: '#34a3dc',
+                      color: 'primary.main',
                       fontWeight: 400,
                       mb: 2,
                       fontSize: { xs: '0.9rem', md: '1rem' },
@@ -378,8 +378,11 @@ const ServicesPage = () => {
                       sx={{
                         width: '6px',
                         height: '6px',
-                        backgroundColor: '#34a3dc',
+                        backgroundColor: 'primary.main',
                         borderRadius: '50%',
+                        px:-4,
+                        py:-4,
+                        
                       }}
                     />
                   </motion.div>
