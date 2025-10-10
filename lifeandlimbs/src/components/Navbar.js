@@ -242,6 +242,10 @@ const Navbar = () => {
         </Button>
         <Button
           variant="outlined"
+          component={Link}
+          href="https://backoffice.lifeandlimbs.org/Account/Login"
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{
             color: scrolled ? 'primary.main' : 'white',
             borderColor: scrolled ? 'primary.main' : 'white',
@@ -258,6 +262,10 @@ const Navbar = () => {
         </Button>
         <Button
           variant="text"
+          component={Link}
+          href="https://backoffice.lifeandlimbs.org/Home/NewPatientRegister#!/"
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{
             color: scrolled ? 'primary.main' : 'white',
             fontWeight: 500,
@@ -378,6 +386,10 @@ const Navbar = () => {
               variant="outlined"
               color="primary"
               fullWidth
+              component={Link}
+              href="https://backoffice.lifeandlimbs.org/Account/Login"
+              target="_blank"
+              rel="noopener noreferrer"
               sx={{ py: 1, fontWeight: 500 }}
             >
               Login
@@ -386,6 +398,10 @@ const Navbar = () => {
               variant="text"
               color="primary"
               fullWidth
+              component={Link}
+              href="https://backoffice.lifeandlimbs.org/Home/NewPatientRegister#!/"
+              target="_blank"
+              rel="noopener noreferrer"
               sx={{ py: 1, fontWeight: 500 }}
             >
               Register
