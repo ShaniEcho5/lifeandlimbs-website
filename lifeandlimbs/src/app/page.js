@@ -330,7 +330,7 @@ const ActionCardsSection = () => {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: '#34a3dc',
+                    color: 'primary.main',
                     fontWeight: 400,
                     mb: 2,
                     fontSize: { xs: '0.9rem', md: '1rem' },
@@ -368,6 +368,7 @@ const ActionCardsSection = () => {
               md={7} 
               sx={{ 
                 position: 'relative',
+                
               }}
             >
               {/* Animated Grid Lines Background */}
@@ -457,6 +458,14 @@ const ActionCardsSection = () => {
                     key={action.title}
                     sx={{
                       position: 'relative',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        backgroundColor: 'primary.main',
+                        '& .card-title, & .card-description': {
+                          color: 'white',
+                        },
+                      },
                     }}
                   >
                     <motion.div 
@@ -484,14 +493,6 @@ const ActionCardsSection = () => {
                           zIndex: 2,
                           backgroundColor: 'transparent',
                           borderRadius: 0,
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          '&:hover': {
-                            backgroundColor: '#7cc4e8', // Lighter shade of #34a3dc
-                            '& .card-title, & .card-description': {
-                              color: 'white',
-                            },
-                          },
                         }}
                       >
                         <Typography 
@@ -656,7 +657,7 @@ const MissionSection = () => (
             <Typography
               variant="h6"
               sx={{
-                color: '#34a3dc',
+                color: 'primary.main',
                 fontWeight: 600,
                 mb: 2,
                 textTransform: 'uppercase',
@@ -696,7 +697,7 @@ const MissionSection = () => (
               sx={{ 
                 mb: 3, 
                 fontWeight: 600, 
-                color: '#34a3dc',
+                color: 'primary.main',
                 textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' }
               }}
             >
@@ -768,7 +769,7 @@ const FAQSection = () => {
             <Typography
               variant="h6"
               sx={{
-                color: '#34a3dc',
+                color: 'primary.main',
                 fontWeight: 600,
                 mb: 2,
                 textTransform: 'uppercase',
