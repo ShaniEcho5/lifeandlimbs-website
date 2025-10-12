@@ -1,0 +1,39 @@
+# Use test-repo for local development (no authentication required)
+backend:
+  name: test-repo
+
+# Media storage configuration
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Site URL
+site_url: http://localhost:3000
+display_url: http://localhost:3000
+
+# Collections configuration
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "Publication Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+      - label: "Description"
+        name: "description"
+        widget: "text"
+      - label: "Featured Image"
+        name: "banner"
+        widget: "image"
+        required: false
+      - label: "Content"
+        name: "body"
+        widget: "markdown"

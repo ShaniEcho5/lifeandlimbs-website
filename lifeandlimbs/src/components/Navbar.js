@@ -52,7 +52,7 @@ const navigationItems = [
   },
   { 
     label: 'Blogs', 
-    href: '/news-and-articles'
+    href: '/blog'
   },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact Us', href: '/contact-us' },
