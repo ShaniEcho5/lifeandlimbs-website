@@ -100,6 +100,52 @@
       border-radius: 8px;
     }
     
+    .image-upload-section {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .upload-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+    
+    .upload-btn:hover {
+      background: #2563eb;
+    }
+    
+    .clear-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: background-color 0.2s;
+    }
+    
+    .clear-btn:hover {
+      background: #dc2626;
+    }
+    
+    .image-preview {
+      margin-top: 10px;
+    }
+    
+    #banner {
+      flex: 1;
+      min-width: 200px;
+    }
+    
     .instructions { 
       background: #dbeafe; 
       border: 1px solid #93c5fd; 
@@ -157,8 +203,16 @@
           </div>
           
           <div class="form-group">
-            <label for="banner">Featured Image URL</label>
-            <input type="url" id="banner" placeholder="/images/your-image.jpg (optional)">
+            <label for="banner">Featured Image</label>
+            <div class="image-upload-section">
+              <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+              <button type="button" id="uploadBtn" class="upload-btn">📁 Choose Image</button>
+              <input type="text" id="banner" placeholder="/images/your-image.jpg" readonly>
+              <button type="button" id="clearImage" class="clear-btn" style="display: none;">✖ Clear</button>
+            </div>
+            <div id="imagePreview" class="image-preview" style="display: none;">
+              <img id="previewImg" src="" alt="Preview" style="max-width: 200px; max-height: 150px; border-radius: 4px; margin-top: 10px;">
+            </div>
           </div>
           
           <div class="form-group">
@@ -218,6 +272,103 @@
   <script>
     // Set today's date as default
     document.getElementById('date').valueAsDate = new Date();
+    
+    // Image upload functionality
+    const imageUpload = document.getElementById('imageUpload');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const bannerInput = document.getElementById('banner');
+    const clearBtn = document.getElementById('clearImage');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewImg = document.getElementById('previewImg');
+    
+    uploadBtn.addEventListener('click', () => {
+      imageUpload.click();
+    });
+    
+    imageUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+          alert('Please select an image file.');
+          return;
+        }
+        
+        // Validate file size (5MB limit)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('File size must be less than 5MB.');
+          return;
+        }
+        
+        // Generate filename with timestamp to avoid conflicts
+        const timestamp = Date.now();
+        const extension = file.name.split('.').pop();
+        const filename = `blog-${timestamp}.${extension}`;
+        
+        // Set the banner path
+        bannerInput.value = `/images/${filename}`;
+        
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          imagePreview.style.display = 'block';
+          clearBtn.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+        
+        // Show instructions for manual file placement
+        showUploadInstructions(filename);
+      }
+    });
+    
+    clearBtn.addEventListener('click', () => {
+      bannerInput.value = '';
+      imagePreview.style.display = 'none';
+      clearBtn.style.display = 'none';
+      imageUpload.value = '';
+    });
+    
+    function showUploadInstructions(filename) {
+      const instructions = `
+📋 UPLOAD INSTRUCTIONS:
+1. Save the selected image as: ${filename}
+2. Copy it to: /public/images/
+3. The banner path is already set to: /images/${filename}
+
+Note: You need to manually copy the image file to the public/images directory in your project.
+      `;
+      
+      // Create a temporary alert or add to the form
+      const existingAlert = document.querySelector('.upload-alert');
+      if (existingAlert) {
+        existingAlert.remove();
+      }
+      
+      const alert = document.createElement('div');
+      alert.className = 'upload-alert';
+      alert.style.cssText = `
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        color: #92400e;
+        padding: 12px;
+        border-radius: 6px;
+        margin: 10px 0;
+        white-space: pre-line;
+        font-family: monospace;
+        font-size: 12px;
+      `;
+      alert.textContent = instructions;
+      
+      document.querySelector('.image-upload-section').appendChild(alert);
+      
+      // Auto-remove after 30 seconds
+      setTimeout(() => {
+        if (alert.parentNode) {
+          alert.remove();
+        }
+      }, 30000);
+    }
     
     document.getElementById('postForm').addEventListener('submit', function(e) {
       e.preventDefault();

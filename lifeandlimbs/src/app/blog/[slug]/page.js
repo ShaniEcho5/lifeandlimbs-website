@@ -12,7 +12,8 @@ import {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) return {};
   return generatePostMetadata(post);
 }
@@ -23,8 +24,9 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export default function BlogPost({ params }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPost({ params }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();

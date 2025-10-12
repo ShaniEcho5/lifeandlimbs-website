@@ -1,8 +1,8 @@
 ---
-title: "Test Post"
+title: "Why do we use it?"
 date: "2025-10-12"
-description: "For tesing purpose"
-banner: "/images/personalized-support.png"
+description: "Why do we use it?"
+banner: "/images/our-mission-img_0Z5ajpX.webp"
 ---
 
 What is Lorem Ipsum?

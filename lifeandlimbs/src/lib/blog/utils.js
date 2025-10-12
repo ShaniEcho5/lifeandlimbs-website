@@ -119,11 +119,23 @@ export function getPostsMetadata() {
  */
 export function formatDate(dateString) {
   try {
+    // Handle various date formats
+    if (!dateString) {
+      return 'Unknown date';
+    }
+    
     const date = new Date(dateString);
+    
+    // Check if date is valid
+    if (isNaN(date.getTime())) {
+      console.error('Invalid date string:', dateString);
+      return dateString;
+    }
+    
     return format(date, 'MMMM dd, yyyy');
   } catch (error) {
     console.error('Error formatting date:', error);
-    return dateString;
+    return dateString || 'Unknown date';
   }
 }
 
