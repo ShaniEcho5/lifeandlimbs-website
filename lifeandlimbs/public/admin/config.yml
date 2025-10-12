@@ -7,8 +7,8 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 # Site URL
-site_url: http://localhost:3000
-display_url: http://localhost:3000
+site_url: http://localhost:3002
+display_url: http://localhost:3002
 
 # Collections configuration
 collections:

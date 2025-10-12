@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog Post Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+    .post { border: 1px solid #ddd; margin: 10px 0; padding: 15px; border-radius: 5px; }
+    .form { background: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0; }
+    input, textarea { width: 100%; margin: 5px 0; padding: 8px; border: 1px solid #ddd; border-radius: 3px; }
+    button { background: #007cba; color: white; padding: 10px 20px; border: none; border-radius: 3px; cursor: pointer; }
+    button:hover { background: #005a87; }
+  </style>
+</head>
+<body>
+  <h1>Life and Limb Blog Manager</h1>
+  
+  <div class="form">
+    <h2>Create New Post</h2>
+    <form id="postForm">
+      <input type="text" id="title" placeholder="Post Title" required>
+      <input type="date" id="date" required>
+      <textarea id="description" placeholder="Post Description" rows="3" required></textarea>
+      <input type="url" id="banner" placeholder="Banner Image URL (optional)">
+      <textarea id="content" placeholder="Post Content (Markdown)" rows="10" required></textarea>
+      <button type="submit">Generate Markdown File</button>
+    </form>
+  </div>
+  
+  <div id="output"></div>
+  
+  <div class="existing-posts">
+    <h2>Existing Posts</h2>
+    <div class="post">
+      <h3>welcome-to-our-blog.md</h3>
+      <p>Welcome to Life and Limb Blog</p>
+      <small>2024-01-15</small>
+    </div>
+    <div class="post">
+      <h3>3d-printing-technology.md</h3>
+      <p>Advanced 3D Printing Technology Revolutionizes Prosthetic Care</p>
+      <small>2024-02-01</small>
+    </div>
+    <div class="post">
+      <h3>community-support-program.md</h3>
+      <p>Community Support Program: Empowering Families Beyond Prosthetics</p>
+      <small>2024-02-15</small>
+    </div>
+  </div>
+  
+  <script>
+    document.getElementById('postForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const title = document.getElementById('title').value;
+      const date = document.getElementById('date').value;
+      const description = document.getElementById('description').value;
+      const banner = document.getElementById('banner').value;
+      const content = document.getElementById('content').value;
+      
+      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      
+      const markdown = `---
+title: "${title}"
+date: "${date}"
+description: "${description}"${banner ? `\nbanner: "${banner}"` : ''}
+---
+
+${content}`;
+      
+      const output = document.getElementById('output');
+      output.innerHTML = `
+        <div class="form">
+          <h3>Generated Markdown File: ${slug}.md</h3>
+          <textarea readonly rows="20" style="font-family: monospace;">${markdown}</textarea>
+          <p><strong>Instructions:</strong></p>
+          <ol>
+            <li>Copy the content above</li>
+            <li>Create a new file: <code>posts/${slug}.md</code></li>
+            <li>Paste the content and save</li>
+            <li>Your post will appear at: <code>/blog/${slug}</code></li>
+          </ol>
+        </div>
+      `;
+    });
+    
+    // Set today's date as default
+    document.getElementById('date').valueAsDate = new Date();
+  </script>
+</body>
+</html>
