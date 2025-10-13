@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Container,
@@ -828,74 +828,128 @@ const FAQSection = () => {
 };
 
 // News Section
-const NewsSection = () => (
-  <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
-    <Container maxWidth="xl">
-      <motion.div variants={staggerContainer} initial="initial" animate="animate">
-        <Box sx={{ textAlign: 'center', mb: 6 }}>
-          <Typography
-            variant="h6"
-            sx={{
-              color: 'primary.main',
-              fontWeight: 600,
-              mb: 2,
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-            }}
-          >
-            Blogs
-          </Typography>
-          <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-            Inspiring Stories, Latest Blogs
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            component={Link}
-            href="/news-and-articles"
-            sx={{ fontWeight: 600 }}
-          >
-            Read More
-          </Button>
-        </Box>
+const NewsSection = () => {
+  const [blogPosts, setBlogPosts] = useState([]);
 
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6} lg={4}>
-            <motion.div variants={fadeInUp}>
-              <Card sx={{ borderRadius: 3, overflow: 'hidden' }}>
-                <CardMedia
-                  sx={{
-                    height: 200,
-                    background: 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography color="text.secondary">Article Image</Typography>
-                </CardMedia>
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                    20 Jan, 2025
-                  </Typography>
-                  <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                    Testing
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Lorem Ipsum is simply dummy text of the printing …
-                  </Typography>
-                  <Button size="small" color="primary">
-                    Read More
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('/api/blog/posts');
+        if (response.ok) {
+          const posts = await response.json();
+          setBlogPosts(posts.slice(0, 3)); // Get latest 3 posts
+        }
+      } catch (error) {
+        console.error('Error fetching blog posts:', error);
+        // Fallback to dummy data if API fails
+        setBlogPosts([
+          {
+            slug: 'life-and-limbs-restoring-mobility',
+            title: 'Life and Limb: Restoring Mobility, Dignity, and Hope',
+            description: 'Life and Limb provides affordable prosthetic care, empowering amputees across India to regain mobility, confidence, and a new beginning.',
+            formattedDate: 'October 13, 2025',
+            banner: '/images/Sleeve_Fitting_3345975_900x600.png'
+          }
+        ]);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  return (
+    <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+      <Container maxWidth="xl">
+        <motion.div variants={staggerContainer} initial="initial" animate="animate">
+          <Box sx={{ textAlign: 'center', mb: 6 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: 'primary.main',
+                fontWeight: 600,
+                mb: 2,
+                textTransform: 'uppercase',
+                letterSpacing: '1px',
+              }}
+            >
+              Blogs
+            </Typography>
+            <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+              Inspiring Stories, Latest Blogs
+            </Typography>
+            <Button
+              variant="outlined"
+              color="primary"
+              component={Link}
+              href="/blog"
+              sx={{ fontWeight: 600 }}
+            >
+              Read More
+            </Button>
+          </Box>
+
+          <Grid container spacing={4}>
+            {blogPosts.map((post, index) => (
+              <Grid item xs={12} md={6} lg={4} key={post.slug}>
+                <motion.div variants={fadeInUp}>
+                  <Box
+                    component={Link}
+                    href={`/blog/${post.slug}`}
+                    sx={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+                  >
+                    <Card 
+                      sx={{ 
+                        borderRadius: 3, 
+                        overflow: 'hidden',
+                        cursor: 'pointer',
+                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                        '&:hover': {
+                          transform: 'translateY(-8px)',
+                          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+                        }
+                      }}
+                    >
+                    <CardMedia
+                      sx={{
+                        height: 200,
+                        backgroundImage: post.banner ? `url(${post.banner})` : 
+                          'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {!post.banner && (
+                        <Typography color="text.secondary">Blog Image</Typography>
+                      )}
+                    </CardMedia>
+                    <CardContent sx={{ p: 3 }}>
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                        {post.formattedDate}
+                      </Typography>
+                      <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, lineHeight: 1.3 }}>
+                        {post.title}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                        {post.description?.substring(0, 100)}...
+                      </Typography>
+                      <Button size="small" color="primary">
+                        Read More
+                      </Button>
+                    </CardContent>
+                    </Card>
+                  </Box>
+                </motion.div>
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
-      </motion.div>
-    </Container>
-  </Box>
-);
+        </motion.div>
+      </Container>
+    </Box>
+  );
+};
 
 // Main Homepage Component
 export default function HomePage() {

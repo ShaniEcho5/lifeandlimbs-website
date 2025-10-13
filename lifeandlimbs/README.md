@@ -28,7 +28,7 @@ src/
 │   ├── about-us/          # About page
 │   ├── contact-us/        # Contact page
 │   ├── gallery/           # Gallery page
-│   ├── news-and-articles/ # News & Articles page
+│   ├── blog/             # Blog system (replaces news-and-articles)
 │   ├── services/          # Services page
 │   ├── globals.css        # Global styles
 │   ├── layout.js          # Root layout
@@ -90,7 +90,7 @@ npm start
 - Features section (Why We're Different)
 - Mission section with image
 - FAQ accordion
-- News & Articles preview
+- Blog posts preview with real content
 
 ### About Us (`/about-us`)
 - Organization story and mission
@@ -111,7 +111,7 @@ npm start
 - Office location and hours
 - FAQ section
 
-### News & Articles (`/news-and-articles`)
+### Blog System (`/blog`)
 - Article grid with categories
 - Newsletter signup
 - Article previews
