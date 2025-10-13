@@ -1,4 +1,4 @@
-import { generateRSSFeed } from '../../../lib/blog/utils';
+import { generateRSSFeed } from '../../lib/blog/utils';
 
 export async function GET() {
   try {

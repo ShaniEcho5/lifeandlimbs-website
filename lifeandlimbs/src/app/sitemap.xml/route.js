@@ -1,4 +1,4 @@
-import { generateBlogSitemap } from '../../../lib/blog/utils';
+import { generateBlogSitemap } from '../../lib/blog/utils';
 
 export async function GET() {
   try {

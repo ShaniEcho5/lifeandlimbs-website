@@ -8,15 +8,15 @@ backend:
   auth_type: implicit
   auth_url: https://github.com/login/oauth/authorize
   auth_token_url: /api/auth/callback
-  base_url: https://your-domain.vercel.app  # Replace with your actual domain
+  base_url: https://lifeandlimbs-website.vercel.app  # Updated with your actual domain
 
 # Media storage configuration
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 # Site configuration
-site_url: https://your-site.vercel.app  # Replace with your Vercel domain
-display_url: https://your-site.vercel.app
+site_url: https://lifeandlimbs-website.vercel.app  # Updated with your actual domain
+display_url: https://lifeandlimbs-website.vercel.app
 logo_url: "/images/life-and-limb-logo.png"
 
 # Publishing workflow
