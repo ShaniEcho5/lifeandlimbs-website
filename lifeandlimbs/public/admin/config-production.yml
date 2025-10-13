@@ -1,0 +1,99 @@
+# Production configuration with GitHub backend and OAuth
+backend:
+  name: github
+  repo: ShaniEcho5/lifeandlimbs-website  # Replace with your GitHub username/repo
+  branch: main
+  squash_merges: true
+  # Custom OAuth authentication using your Next.js serverless function
+  auth_type: implicit
+  auth_url: https://github.com/login/oauth/authorize
+  auth_token_url: /api/auth/callback
+  base_url: https://your-domain.vercel.app  # Replace with your actual domain
+
+# Media storage configuration
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Site configuration
+site_url: https://your-site.vercel.app  # Replace with your Vercel domain
+display_url: https://your-site.vercel.app
+logo_url: "/images/life-and-limb-logo.png"
+
+# Publishing workflow
+publish_mode: editorial_workflow
+
+# Collections configuration
+collections:
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    preview_path: "blog/{{slug}}"
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "The title of your blog post"
+      - label: "Publication Date"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+        default: ""
+      - label: "Description"
+        name: "description"
+        widget: "text"
+        hint: "Brief description for SEO and social sharing (150-160 characters recommended)"
+        pattern: ['.{10,160}', "Description must be between 10 and 160 characters"]
+      - label: "Featured Image"
+        name: "banner"
+        widget: "image"
+        required: false
+        hint: "Upload a featured image for your blog post"
+        media_library:
+          config:
+            multiple: false
+      - label: "Author"
+        name: "author"
+        widget: "string"
+        default: "Life and Limb Team"
+        required: false
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Add tags to categorize your post"
+      - label: "Featured Post"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Mark this post as featured to highlight it"
+      - label: "Content"
+        name: "body"
+        widget: "markdown"
+        hint: "Write your blog post content using Markdown"
+        buttons:
+          - bold
+          - italic
+          - code
+          - link
+          - heading-two
+          - heading-three
+          - heading-four
+          - quote
+          - code-block
+          - bulleted-list
+          - numbered-list
+        editor_components:
+          - image
+          - code-block
+
+# Editor settings
+editor:
+  preview: true
+
+# Local backend for development
+local_backend: true

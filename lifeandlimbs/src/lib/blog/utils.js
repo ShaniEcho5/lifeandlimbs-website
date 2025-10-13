@@ -110,7 +110,11 @@ export function getPostsMetadata() {
     date: post.frontmatter.date,
     description: post.frontmatter.description,
     banner: post.frontmatter.banner,
-    formattedDate: formatDate(post.frontmatter.date)
+    author: post.frontmatter.author || 'Life and Limb Team',
+    tags: post.frontmatter.tags || [],
+    featured: post.frontmatter.featured || false,
+    formattedDate: formatDate(post.frontmatter.date),
+    readingTime: getReadingTime(post.rawContent)
   }));
 }
 
@@ -206,7 +210,7 @@ export function generatePostStructuredData(post) {
     'dateModified': frontmatter.date,
     'author': {
       '@type': 'Organization',
-      'name': 'Life and Limb'
+      'name': frontmatter.author || 'Life and Limb Team'
     },
     'publisher': {
       '@type': 'Organization',
@@ -215,6 +219,101 @@ export function generatePostStructuredData(post) {
         '@type': 'ImageObject',
         'url': 'https://lifeandlimbs.org/images/life-and-limb-logo.png'
       }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://lifeandlimbs.org/blog/${post.slug}`
     }
   };
+}
+
+/**
+ * Get featured posts
+ */
+export function getFeaturedPosts() {
+  const posts = getAllPosts();
+  return posts.filter(post => post.frontmatter.featured);
+}
+
+/**
+ * Get posts by tag
+ */
+export function getPostsByTag(tag) {
+  const posts = getAllPosts();
+  return posts.filter(post => 
+    post.frontmatter.tags && 
+    post.frontmatter.tags.includes(tag)
+  );
+}
+
+/**
+ * Get all unique tags
+ */
+export function getAllTags() {
+  const posts = getAllPosts();
+  const tags = new Set();
+  
+  posts.forEach(post => {
+    if (post.frontmatter.tags) {
+      post.frontmatter.tags.forEach(tag => tags.add(tag));
+    }
+  });
+  
+  return Array.from(tags).sort();
+}
+
+/**
+ * Generate RSS feed
+ */
+export function generateRSSFeed() {
+  const posts = getAllPosts().slice(0, 10); // Latest 10 posts
+  
+  const rssItems = posts.map(post => `
+    <item>
+      <title><![CDATA[${post.frontmatter.title}]]></title>
+      <description><![CDATA[${post.frontmatter.description}]]></description>
+      <link>https://lifeandlimbs.org/blog/${post.slug}</link>
+      <guid>https://lifeandlimbs.org/blog/${post.slug}</guid>
+      <pubDate>${new Date(post.frontmatter.date).toUTCString()}</pubDate>
+      ${post.frontmatter.banner ? `<enclosure url="https://lifeandlimbs.org${post.frontmatter.banner}" type="image/jpeg" />` : ''}
+    </item>
+  `).join('');
+
+  return `<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Life and Limb Blog</title>
+    <description>Stories of hope, innovation, and transformation in prosthetic care</description>
+    <link>https://lifeandlimbs.org/blog</link>
+    <atom:link href="https://lifeandlimbs.org/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    ${rssItems}
+  </channel>
+</rss>`;
+}
+
+/**
+ * Generate sitemap for blog posts
+ */
+export function generateBlogSitemap() {
+  const posts = getAllPosts();
+  
+  const urlEntries = posts.map(post => `
+  <url>
+    <loc>https://lifeandlimbs.org/blog/${post.slug}</loc>
+    <lastmod>${post.frontmatter.date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`).join('');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lifeandlimbs.org/blog</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>${urlEntries}
+</urlset>`;
 }
