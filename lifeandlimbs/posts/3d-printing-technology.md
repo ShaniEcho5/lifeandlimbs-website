@@ -79,10 +79,7 @@ We are continuously investing in research and development to:
 
 If you or someone you know could benefit from our advanced prosthetic services, please don't hesitate to reach out. We are committed to making this life-changing technology accessible to all.
 
-### Contact Information
-- **Phone**: +91-XXX-XXX-XXXX
-- **Email**: info@lifeandlimbs.org
-- **Visit**: Schedule a consultation at our center
+
 
 ---
 
