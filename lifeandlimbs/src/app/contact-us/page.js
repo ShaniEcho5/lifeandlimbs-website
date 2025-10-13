@@ -18,6 +18,9 @@ import {
   Checkbox,
   Alert,
   Paper,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material';
 import {
   Phone as PhoneIcon,
@@ -25,6 +28,7 @@ import {
   LocationOn as LocationIcon,
   AccessTime as TimeIcon,
   Send as SendIcon,
+  ExpandMore as ExpandMoreIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
@@ -461,10 +465,22 @@ const ContactUsPage = () => {
       </Box>
 
       {/* FAQ Section */}
-      <Box className="section-padding" sx={{ backgroundColor: 'background.default' }}>
+      <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
         <Container maxWidth="lg">
           <motion.div {...fadeInUp}>
             <Box sx={{ textAlign: 'center', mb: 6 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'primary.main',
+                  fontWeight: 600,
+                  mb: 2,
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
+                Common Inquiries
+              </Typography>
               <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
                 Frequently Asked Questions
               </Typography>
@@ -473,52 +489,72 @@ const ContactUsPage = () => {
               </Typography>
             </Box>
 
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
-                <Card sx={{ p: 3, borderRadius: 3, height: '100%' }}>
-                  <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                    How do I apply for services?
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    You can apply by filling out our contact form, calling us directly, 
-                    or visiting our clinic. We'll guide you through the application process.
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Card sx={{ p: 3, borderRadius: 3, height: '100%' }}>
-                  <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                    How long does the process take?
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    The timeline varies based on individual needs, but typically ranges 
-                    from 4-8 weeks from initial consultation to receiving your prosthetic.
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Card sx={{ p: 3, borderRadius: 3, height: '100%' }}>
-                  <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                    Do I need to bring anything for consultation?
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    Please bring your medical records, any previous prosthetic devices, 
-                    and identification documents for your initial consultation.
-                  </Typography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Card sx={{ p: 3, borderRadius: 3, height: '100%' }}>
-                  <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-                    Is follow-up care really free?
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    Yes, all our services including follow-up care, adjustments, 
-                    and repairs are provided completely free of charge.
-                  </Typography>
-                </Card>
-              </Grid>
-            </Grid>
+            <Box sx={{ maxWidth: '800px', mx: 'auto' }}>
+              {[
+                {
+                  question: 'What is the age requirement for applicants?',
+                  answer: 'Applicants must be under the age of 55.'
+                },
+                {
+                  question: 'What is the income limit for eligibility?',
+                  answer: 'Monthly income should not exceed ₹20,000.'
+                },
+                {
+                  question: 'What is the asset cap for applicants?',
+                  answer: 'Total assets should be valued at ₹10 lakhs or less.'
+                },
+                {
+                  question: 'Do I need a specific ration card to apply?',
+                  answer: ' Yes, a valid priority category ration card is required.'
+                },
+                {
+                  question: 'Do I need to visit the clinic?',
+                  answer: 'Yes, applicants must visit our clinic at their own expense for foot measurements and a mandatory 10-day training program.'
+                },
+                {
+                  question: 'Is there a minimum recovery period after losing a limb?',
+                  answer: 'Yes, at least 6 months should have passed since the loss of the limb.'
+                },
+                {
+                  question: 'Do I need to have physical ability to walk?',
+                  answer: 'Yes, applicants must be able to walk with the assistance of crutches or a walker.'
+                },
+                {
+                  question: 'Are individuals with a history of alcoholism eligible to apply?',
+                  answer: 'No, individuals with a history of alcoholism are not eligible.'
+                }
+              ].map((faq, index) => (
+                <Accordion
+                  key={index}
+                  sx={{
+                    mb: 2,
+                    borderRadius: 2,
+                    '&:before': { display: 'none' },
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    sx={{
+                      px: 3,
+                      py: 2,
+                      '&.Mui-expanded': {
+                        borderBottom: '1px solid #e2e8f0',
+                      },
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                      {faq.question}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails sx={{ px: 3, py: 2 }}>
+                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                      {faq.answer}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+            </Box>
           </motion.div>
         </Container>
       </Box>
