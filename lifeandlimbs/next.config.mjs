@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: {
-    root: '.',
-  },
+  // Remove turbopack config for Vercel compatibility
   async rewrites() {
     return [
       {
@@ -10,6 +8,17 @@ const nextConfig = {
         destination: '/admin/index.html',
       },
     ];
+  },
+  // Optimize for production builds
+  experimental: {
+    optimizePackageImports: ['@mui/material', '@mui/icons-material'],
+  },
+  // Better error handling in production
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
   },
 };
 

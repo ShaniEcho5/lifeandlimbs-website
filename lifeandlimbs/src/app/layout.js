@@ -18,6 +18,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lifeandlimbs-website.vercel.app'),
   title: "Life and Limb -  Prosthetic Limbs for Those in Need | India",
   description: "Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India. Empowering mobility, restoring lives since 2013.",
   keywords: "free prosthetic limbs, nonprofit India, prosthetics charity, amputee support, mobility restoration, artificial limbs, life and limb, prosthetic donation, disability support India, free artificial limbs",

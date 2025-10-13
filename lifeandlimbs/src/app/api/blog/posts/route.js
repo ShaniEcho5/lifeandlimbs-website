@@ -1,4 +1,4 @@
-import { getPostsMetadata } from '../../../lib/blog/utils';
+import { getPostsMetadata } from '../../../../lib/blog/utils';
 
 export async function GET() {
   try {
