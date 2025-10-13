@@ -166,10 +166,10 @@ export default async function BlogPost({ params }) {
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/services"
+                  href="https://www.gofundme.com/f/fzcv9-life-and-limb/donate"
                   className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
                 >
-                  Our Services
+                  Dinate Now
                 </Link>
                 <Link
                   href="/contact-us"
