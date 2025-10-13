@@ -10,6 +10,7 @@ import {
   IconButton,
   Divider,
   useTheme,
+  Stack,
 } from '@mui/material';
 import {
   Facebook,
@@ -32,7 +33,6 @@ const Footer = () => {
     { label: 'About Us', href: '/about-us' },
     { label: 'Services', href: '/services' },
     { label: 'Blogs', href: '/blog' },
-    { label: 'Events', href: '/upcoming-events' },
     { label: 'Contact Us', href: '/contact-us' },
     { label: 'Gallery', href: '/gallery' },
   ];
@@ -56,165 +56,237 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: 'white',
-        color: 'black',
-        pt: 6,
-        pb: 3,
+        backgroundColor: '#f8f9fa',
+        color: '#2c3e50',
+        pt: { xs: 3, md: 4 },
+        pb: 2,
         mt: 'auto',
-        px: { xs: 3, sm: 4, md: 6 }, // Add horizontal padding
+        borderTop: '1px solid #e9ecef',
       }}
     >
-      <Container maxWidth="xl">
-        <Grid container spacing={4}>
+      <Container maxWidth="lg">
+        <Grid container spacing={{ xs: 3, md: 4 }} justifyContent="space-between">
           {/* Logo and Description */}
           <Grid item xs={12} md={4}>
-            <Box sx={{ mb: 3 }}>
-              <Image
-                src="/images/life-and-limb-logo-03.png"
-                alt="Life and Limb Logo"
-                width={120}
-                height={60}
-              />
-            </Box>
-            <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, color: 'black' }}>
-              A nonprofit organization dedicated to providing free prosthetic limbs to
-              amputees across India.
-            </Typography>
-            
-            {/* Legal Links */}
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 3 }}>
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  component={NextLink}
-                  href={link.href}
-                  sx={{
-                    color: 'black',
-                    textDecoration: 'none',
-                    fontSize: '0.875rem',
-                    '&:hover': {
-                      color: 'secondary.main',
-                      textDecoration: 'underline',
-                    },
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </Box>
+            <Stack spacing={3}>
+              <Box>
+                <Image
+                  src="/images/life-and-limb-logo-03.png"
+                  alt="Life and Limb Logo"
+                  width={140}
+                  height={70}
+                  style={{ maxWidth: '100%', height: 'auto' }}
+                />
+              </Box>
+              
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  lineHeight: 1.7, 
+                  color: '#6c757d',
+                  fontSize: { xs: '0.95rem', md: '1rem' }
+                }}
+              >
+                A nonprofit organization dedicated to providing free prosthetic limbs to
+                amputees across India.
+              </Typography>
+              
+              {/* Legal Links */}
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 1.5, md: 2 } }}>
+                {legalLinks.map((link, index) => (
+                  <React.Fragment key={link.label}>
+                    <Link
+                      component={NextLink}
+                      href={link.href}
+                      sx={{
+                        color: '#6c757d',
+                        textDecoration: 'none',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        transition: 'all 0.2s ease',
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                          textDecoration: 'underline',
+                        },
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                    {index < legalLinks.length - 1 && (
+                      <Typography sx={{ color: '#dee2e6', fontSize: '0.875rem' }}>
+                        |
+                      </Typography>
+                    )}
+                  </React.Fragment>
+                ))}
+              </Box>
+            </Stack>
           </Grid>
 
           {/* Organization Links */}
           <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              sx={{
-                mb: 3,
-                fontWeight: 600,
-                color: 'black',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-              }}
-            >
-              Organization
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-              {organizationLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  component={NextLink}
-                  href={link.href}
-                  sx={{
-                    color: 'black',
-                    textDecoration: 'none',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.2s ease',
-                    '&:hover': {
-                      color: 'secondary.main',
-                      paddingLeft: 1,
-                    },
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </Box>
+            <Stack spacing={3}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: '#2c3e50',
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  letterSpacing: '0.5px',
+                }}
+              >
+                Organization
+              </Typography>
+              
+              <Stack spacing={1.5}>
+                {organizationLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    component={NextLink}
+                    href={link.href}
+                    sx={{
+                      color: '#6c757d',
+                      textDecoration: 'none',
+                      fontSize: '0.95rem',
+                      fontWeight: 500,
+                      transition: 'all 0.3s ease',
+                      display: 'block',
+                      '&:hover': {
+                        color: theme.palette.primary.main,
+                        transform: 'translateX(4px)',
+                      },
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </Stack>
+            </Stack>
           </Grid>
 
           {/* Contact Information */}
-          <Grid item xs={12} sm={6} md={5}>
-            <Typography
-              variant="h6"
-              sx={{
-                mb: 3,
-                fontWeight: 600,
-                color: 'black',
-                textTransform: 'uppercase',
-                letterSpacing: '0.5px',
-              }}
-            >
-              Address:
-            </Typography>
-            
-            <Box sx={{ mb: 4 }}>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
-                <LocationOn sx={{ color: 'secondary.main', mr: 1, mt: 0.5 }} />
-                <Box>
-                  <Typography variant="body1" sx={{ fontWeight: 600, mb: 1 }}>
-                    Life and Limb
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'black', lineHeight: 1.6 }}>
-                    6JG8+879, Kochalummoodu,<br />
-                    Pandalam Rd, Vettiyar,<br />
-                    Kerala 690534
-                  </Typography>
+          <Grid item xs={12} sm={6} md={4}>
+            <Stack spacing={3}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: '#2c3e50',
+                  fontSize: { xs: '1.1rem', md: '1.25rem' },
+                  letterSpacing: '0.5px',
+                }}
+              >
+                Get in Touch
+              </Typography>
+              
+              <Stack spacing={2.5}>
+                {/* Address */}
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+                  <LocationOn sx={{ 
+                    color: theme.palette.primary.main, 
+                    fontSize: '1.4rem',
+                    mt: 0.2 
+                  }} />
+                  <Box>
+                    <Typography 
+                      variant="subtitle2" 
+                      sx={{ 
+                        fontWeight: 600, 
+                        color: '#2c3e50',
+                        mb: 0.5
+                      }}
+                    >
+                      Life and Limb
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: '#6c757d', 
+                        lineHeight: 1.6,
+                        fontSize: '0.9rem'
+                      }}
+                    >
+                      6JG8+879, Kochalummoodu,<br />
+                      Pandalam Rd, Vettiyar,<br />
+                      Kerala 690534
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Phone sx={{ color: 'secondary.main', mr: 1 }} />
-                <Typography variant="body2" sx={{ color: 'black', mr: 1 }}>
-                  Office:
-                </Typography>
-                <Link
-                  href="tel:0479-2998836"
-                  sx={{
-                    color: 'black',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      color: 'secondary.main',
-                      textDecoration: 'underline',
-                    },
-                  }}
-                >
-                  0479-2998836
-                </Link>
-              </Box>
-              
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Email sx={{ color: 'secondary.main', mr: 1 }} />
-                <Typography variant="body2" sx={{ color: 'black', mr: 1 }}>
-                  Email:
-                </Typography>
-                <Link
-                  href="mailto:founder@lifeandlimbs.org"
-                  sx={{
-                    color: 'black',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      color: 'secondary.main',
-                      textDecoration: 'underline',
-                    },
-                  }}
-                >
-                  founder@lifeandlimbs.org
-                </Link>
-              </Box>
-            </Box>
+                
+                {/* Phone */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  <Phone sx={{ 
+                    color: theme.palette.primary.main, 
+                    fontSize: '1.4rem' 
+                  }} />
+                  <Box>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ color: '#6c757d', fontSize: '0.9rem' }}
+                    >
+                      Office:
+                    </Typography>
+                    <Link
+                      href="tel:0479-2998836"
+                      sx={{
+                        color: '#2c3e50',
+                        textDecoration: 'none',
+                        fontSize: '0.95rem',
+                        fontWeight: 500,
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                          textDecoration: 'underline',
+                        },
+                      }}
+                    >
+                      0479-2998836
+                    </Link>
+                  </Box>
+                </Box>
+                
+                {/* Email */}
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  <Email sx={{ 
+                    color: theme.palette.primary.main, 
+                    fontSize: '1.4rem' 
+                  }} />
+                  <Box>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ color: '#6c757d', fontSize: '0.9rem' }}
+                    >
+                      Email:
+                    </Typography>
+                    <Link
+                      href="mailto:founder@lifeandlimbs.org"
+                      sx={{
+                        color: '#2c3e50',
+                        textDecoration: 'none',
+                        fontSize: '0.95rem',
+                        fontWeight: 500,
+                        wordBreak: 'break-word',
+                        '&:hover': {
+                          color: theme.palette.primary.main,
+                          textDecoration: 'underline',
+                        },
+                      }}
+                    >
+                      founder@lifeandlimbs.org
+                    </Link>
+                  </Box>
+                </Box>
+              </Stack>
+            </Stack>
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, borderColor: 'rgba(0, 0, 0, 0.2)' }} />
+        <Divider 
+          sx={{ 
+            my: { xs: 3, md: 3 }, 
+            borderColor: '#dee2e6',
+            opacity: 0.8
+          }} 
+        />
 
         {/* Bottom Footer */}
         <Box
@@ -222,25 +294,28 @@ const Footer = () => {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             justifyContent: 'space-between',
-            alignItems: { xs: 'center', md: 'flex-start' },
-            gap: 3,
+            alignItems: 'center',
+            gap: { xs: 2, md: 1 },
           }}
         >
+          {/* Copyright */}
           <Typography
             variant="body2"
             sx={{
-              color: 'black',
+              color: '#6c757d',
+              fontSize: '0.875rem',
               order: { xs: 2, md: 1 },
+              textAlign: { xs: 'center', md: 'left' }
             }}
           >
-            Copyright © 2025 Life and Limb. All Rights Reserved
+            © 2025 Life and Limb. All Rights Reserved
           </Typography>
 
           {/* Social Media Links */}
           <Box
             sx={{
               display: 'flex',
-              gap: 1,
+              gap: 1.5,
               order: { xs: 1, md: 2 },
             }}
           >
@@ -253,39 +328,40 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 aria-label={`Follow us on ${social.label}`}
                 sx={{
-                  color: 'grey.400',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  width: 40,
-                  height: 40,
-                  '&:hover': {
-                    color: 'secondary.main',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    transform: 'translateY(-2px)',
-                  },
+                  color: '#6c757d',
+                  width: 44,
+                  height: 44,
                   transition: 'all 0.3s ease',
+                  '&:hover': {
+                    color: theme.palette.primary.main,
+                    transform: 'scale(1.1)',
+                  },
                 }}
               >
-                <social.icon fontSize="small" />
+                <social.icon fontSize="medium" />
               </IconButton>
             ))}
           </Box>
 
+          {/* Developer Credit */}
           <Typography
             variant="body2"
             sx={{
-              color: 'grey.400',
+              color: '#6c757d',
+              fontSize: '0.875rem',
               order: { xs: 3, md: 3 },
+              textAlign: { xs: 'center', md: 'right' }
             }}
           >
-            Designed and developed by{' '}
+            Designed by{' '}
             <Link
               href="https://www.echo5digital.com/"
               target="_blank"
               rel="noopener noreferrer"
               sx={{
-                color: 'secondary.main',
+                color: theme.palette.primary.main,
                 textDecoration: 'none',
+                fontWeight: 600,
                 '&:hover': {
                   textDecoration: 'underline',
                 },
