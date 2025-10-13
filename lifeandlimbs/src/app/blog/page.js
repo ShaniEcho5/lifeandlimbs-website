@@ -21,7 +21,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <div className="bg-[#026aa1] text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -124,13 +124,13 @@ function BlogPostCard({ post, featured = false }) {
           </div>
           <div className="lg:w-1/2 p-8 lg:p-12">
             <div className="flex items-center mb-4">
-              <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+              <span className="bg-blue-100 text-[#026aa1] text-sm font-medium px-3 py-1 rounded-full">
                 Featured
               </span>
               <span className="text-gray-500 text-sm ml-4">{post.formattedDate}</span>
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4 leading-tight">
-              <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors">
+              <Link href={`/blog/${post.slug}`} className="hover:text-[#026aa1] transition-colors">
                 {post.title}
               </Link>
             </h2>
@@ -139,7 +139,7 @@ function BlogPostCard({ post, featured = false }) {
             </p>
             <Link
               href={`/blog/${post.slug}`}
-              className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+              className="inline-flex items-center text-[#026aa1] font-semibold hover:text-[#026aa1] transition-colors"
             >
               Read Full Story
               <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -175,7 +175,7 @@ function BlogPostCard({ post, featured = false }) {
             </p>
             <Link
               href={`/blog/${post.slug}`}
-              className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors"
+              className="inline-flex items-center text-[#026aa1] font-medium hover:text-blue-700 transition-colors"
             >
               Read More
               <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
