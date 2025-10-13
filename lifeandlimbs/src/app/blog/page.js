@@ -76,7 +76,7 @@ export default function BlogPage() {
       {/* Newsletter Signup */}
       <div className="bg-white border-t">
         <div className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center">
+          {/* <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Stay Updated
             </h2>
@@ -93,7 +93,7 @@ export default function BlogPage() {
                 Subscribe
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

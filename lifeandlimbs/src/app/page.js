@@ -308,6 +308,8 @@ const ActionCardsSection = () => {
       <Container maxWidth="xl">
         <motion.div 
           variants={staggerContainer} 
+
+
           initial="initial" 
           whileInView="animate"
           viewport={{ once: true, amount: 0.3 }}

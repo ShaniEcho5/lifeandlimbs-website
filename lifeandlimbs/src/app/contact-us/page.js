@@ -44,6 +44,8 @@ const ContactUsPage = () => {
     agreeToTerms: false,
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value, checked, type } = event.target;
@@ -53,22 +55,52 @@ const ContactUsPage = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setShowSuccess(true);
-    setTimeout(() => setShowSuccess(false), 5000);
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      inquiryType: '',
-      message: '',
-      agreeToTerms: false,
-    });
+    setIsSubmitting(true);
+    setShowError(false);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "3761a92a-d86b-4f69-a6fb-416fc0af6422", //this will change
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          inquiryType: formData.inquiryType,
+          message: formData.message,
+          subject: `New Contact Form Submission - ${formData.inquiryType}`,
+          from_name: formData.name,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 5000);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          inquiryType: '',
+          message: '',
+          agreeToTerms: false,
+        });
+      } else {
+        setShowError(true);
+        setTimeout(() => setShowError(false), 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setShowError(true);
+      setTimeout(() => setShowError(false), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -234,6 +266,12 @@ const ContactUsPage = () => {
                     </Alert>
                   )}
 
+                  {showError && (
+                    <Alert severity="error" sx={{ mb: 3 }}>
+                      Failed to send message. Please try again or contact us directly.
+                    </Alert>
+                  )}
+
                   <Box component="form" onSubmit={handleSubmit}>
                     <Grid container spacing={3}>
                       <Grid item xs={12} sm={6}>
@@ -338,6 +376,7 @@ const ContactUsPage = () => {
                           variant="contained"
                           color="primary"
                           size="large"
+                          disabled={isSubmitting}
                           startIcon={<SendIcon />}
                           sx={{
                             px: 4,
@@ -346,7 +385,7 @@ const ContactUsPage = () => {
                             borderRadius: 2,
                           }}
                         >
-                          Send Message
+                          {isSubmitting ? 'Sending...' : 'Send Message'}
                         </Button>
                       </Grid>
                     </Grid>
