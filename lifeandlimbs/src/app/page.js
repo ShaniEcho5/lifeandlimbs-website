@@ -10,16 +10,12 @@ import {
   Card,
   CardContent,
   CardMedia,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
   Paper,
   Avatar,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import {
-  ExpandMore as ExpandMoreIcon,
   Favorite as HeartIcon,
   People as PeopleIcon,
   Share as ShareIcon,
@@ -31,6 +27,8 @@ import {
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import FAQ from '../components/FAQ';
+import { contactFAQ } from '../data/faqData';
 
 // Animation variants
 const fadeInUp = {
@@ -728,104 +726,7 @@ const MissionSection = () => (
   </Box>
 );
 
-// FAQ Section
-const FAQSection = () => {
-  const faqs = [
-    {
-      question: 'What is the age requirement for applicants?',
-      answer: 'We serve individuals of all ages who require prosthetic limbs, from children to elderly adults.',    
-    },
-    {
-      question: 'What is the income limit for eligibility?',
-      answer: 'Our services are primarily for those who cannot afford prosthetic limbs through other means.',
-    },
-    {
-      question: 'What is the asset cap for applicants?',
-      answer: 'We evaluate each case individually to ensure our help reaches those who need it most.',
-    },
-    {
-      question: 'Do I need a specific ration card to apply?',
-      answer: 'While documentation helps with verification, we work with individuals on a case-by-case basis.',
-    },
-    {
-      question: 'Do I need to visit the clinic?',
-      answer: 'Yes, a clinic visit is necessary for proper fitting and customization of the prosthetic limb.',
-    },
-    {
-      question: 'Is there a minimum recovery period after losing a limb?',
-      answer: 'We typically recommend allowing adequate healing time before prosthetic fitting.',
-    },
-    {
-      question: 'Do I need to have physical ability to walk?',
-      answer: 'We assess each individual\'s capabilities and provide appropriate prosthetic solutions.',
-    },
-    {
-      question: 'Are individuals with a history of alcoholism eligible to apply?',
-      answer: 'We evaluate all applications based on current circumstances and commitment to the program.',
-    },
-  ];
 
-  return (
-    <Box className="section-padding" sx={{ backgroundColor: 'grey.50' }}>
-      <Container maxWidth="lg">
-        <motion.div variants={staggerContainer} initial="initial" animate="animate">
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography
-              variant="h6"
-              sx={{
-                color: 'primary.main',
-                fontWeight: 600,
-                mb: 2,
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-              }}
-            >
-              Common Inquiries
-            </Typography>
-            <Typography variant="h2" sx={{ fontWeight: 700 }}>
-              Frequently Asked Questions
-            </Typography>
-          </Box>
-
-          <Box sx={{ maxWidth: '800px', mx: 'auto' }}>
-            {faqs.map((faq, index) => (
-              <motion.div key={index} variants={fadeInUp}>
-                <Accordion
-                  sx={{
-                    mb: 2,
-                    borderRadius: 2,
-                    '&:before': { display: 'none' },
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    sx={{
-                      px: 3,
-                      py: 2,
-                      '&.Mui-expanded': {
-                        borderBottom: '1px solid #e2e8f0',
-                      },
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {faq.question}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails sx={{ px: 3, py: 2 }}>
-                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                      {faq.answer}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-              </motion.div>
-            ))}
-          </Box>
-        </motion.div>
-      </Container>
-    </Box>
-  );
-};
 
 // News Section
 const NewsSection = () => {
@@ -960,7 +861,14 @@ export default function HomePage() {
       <ActionCardsSection />
       <FeaturesSection />
       <MissionSection />
-      <FAQSection />
+      <FAQ 
+        sectionTitle="Common Inquiries"
+        title="Frequently Asked Questions"
+        subtitle="Quick answers to common questions about our services"
+        questions={contactFAQ}
+        backgroundColor="grey.50"
+        maxWidth="lg"
+      />
       <NewsSection />
     </Box>
   );
