@@ -166,6 +166,6 @@ Together, we can ensure that everyone who needs a prosthetic device has access t
 *Dr. Sarah Chen is the Director of Innovation at Life and Limb, leading our research into advanced prosthetic technologies. She holds a Ph.D. in Biomedical Engineering and has over 15 years of experience in prosthetic design and development.*
 
 **Resources:**
-- [International Association of Prosthetics and Orthotics](https://www.ispoint.org/)
-- [3D Printing in Healthcare Research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8234199/)
-- [Advances in Myoelectric Control](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0245206)
+- [International Association of Prosthetics and Orthotics]()
+- [3D Printing in Healthcare Research]()
+- [Advances in Myoelectric Control]()

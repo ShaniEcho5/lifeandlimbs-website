@@ -79,8 +79,6 @@ We are continuously investing in research and development to:
 
 If you or someone you know could benefit from our advanced prosthetic services, please don't hesitate to reach out. We are committed to making this life-changing technology accessible to all.
 
-
-
 ---
 
 *Learn more about our technology and services on our [website](/services/free-custom-prosthetic) or follow us for more updates on prosthetic innovations.*

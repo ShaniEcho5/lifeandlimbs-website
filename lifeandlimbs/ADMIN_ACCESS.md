@@ -8,13 +8,11 @@
    ```yaml
    backend:
      name: test-repo
-   ```
-
+  ```
 2. **Start development server**:
    ```bash
    npm run dev
    ```
-
 3. **Access admin at**: `http://localhost:3000/admin`
 
 This will allow you to test the CMS interface without any authentication setup.
@@ -39,7 +37,6 @@ For production, you'll need to:
      name: git-gateway
      branch: main
    ```
-
 ## Current Status
 
 - ✅ Blog system is fully implemented

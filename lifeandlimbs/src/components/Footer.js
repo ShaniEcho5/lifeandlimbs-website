@@ -92,7 +92,7 @@ const Footer = () => {
               </Typography>
               
               {/* Legal Links */}
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 1.5, md: 2 } }}>
+              {/* <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 1.5, md: 2 } }}>
                 {legalLinks.map((link, index) => (
                   <React.Fragment key={link.label}>
                     <Link
@@ -119,7 +119,7 @@ const Footer = () => {
                     )}
                   </React.Fragment>
                 ))}
-              </Box>
+              </Box> */}
             </Stack>
           </Grid>
 
