@@ -224,7 +224,7 @@ const Footer = () => {
                       variant="body2" 
                       sx={{ color: '#6c757d', fontSize: '0.9rem' }}
                     >
-                      Office:
+                      Phone:
                     </Typography>
                     <Link
                       href="tel:0479-2998836"
