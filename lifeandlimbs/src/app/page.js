@@ -340,7 +340,7 @@ const ActionCardsSection = () => {
                   Innovative solutions that
                 </Typography>
                 <Typography 
-                  variant="h1" 
+                  variant="h2" 
                   sx={{ 
                     fontWeight: 800,
                     fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4rem', lg: '4.5rem' },
