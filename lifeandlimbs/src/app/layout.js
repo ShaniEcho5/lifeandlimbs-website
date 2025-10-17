@@ -19,21 +19,21 @@ const poppins = Poppins({
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://lifeandlimbs-website.vercel.app'),
-  title: "Life and Limb -  Prosthetic Limbs for Those in Need | India",
+  title: "Life and Limb - Prosthetic Limbs for Those in Need | India",
   description: "Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India. Empowering mobility, restoring lives since 2013.",
-  keywords: "free prosthetic limbs, nonprofit India, prosthetics charity, amputee support, mobility restoration, artificial limbs, life and limb, prosthetic donation, disability support India, free artificial limbs",
+  keywords: "free prosthetic limbs, prosthetics charity, amputee support, mobility restoration, artificial limbs, life and limb, prosthetic donation, disability support India, free artificial limbs",
   authors: [{ name: "Life and Limb" }],
   openGraph: {
-    title: "Life and Limb -  Prosthetic Limbs for Those in Need | India",
+    title: "Life and Limb - Prosthetic Limbs for Those in Need | India",
     description: "Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India.",
-    url: "https://lifeandlimbs.org",
+    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lifeandlimbs-website.vercel.app',
     siteName: "Life and Limb",
     images: [
       {
-        url: "/images/logo.svg",
+        url: "/images/our-mission-img_0Z5ajpX.webp",
         width: 1200,
         height: 630,
-        alt: "Life and Limb Logo",
+        alt: "Life and Limb - Empowering mobility",
       },
     ],
     locale: "en_US",
@@ -41,9 +41,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Life and Limb -  Prosthetic Limbs for Those in Need | India",
+    title: "Life and Limb - Prosthetic Limbs for Those in Need | India",
     description: "Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India.",
-    images: ["/images/logo.svg"],
+    images: ["/images/our-mission-img_0Z5ajpX.webp"],
   },
   robots: {
     index: true,
@@ -59,13 +59,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lifeandlimbs-website.vercel.app';
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "NonProfit",
     "name": "Life and Limb",
     "description": "Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India.",
-    "url": "https://lifeandlimbs.org",
-    "logo": "https://lifeandlimbs.org/images/logo.svg",
+    "url": siteUrl,
+    "logo": `${siteUrl}/images/logo.svg`,
     "foundingDate": "2013",
     "areaServed": "India",
     "mission": "Empowering mobility, restoring lives through free prosthetic limbs",
@@ -81,7 +82,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://lifeandlimbs.org" />
+        <link rel="canonical" href={siteUrl} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
