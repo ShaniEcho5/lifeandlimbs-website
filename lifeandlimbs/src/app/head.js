@@ -1,6 +1,6 @@
 export default function Head() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://lifeandlimbs-website.vercel.app';
-  const title = 'Life and Limb - Prosthetic Limbs for Those in Need | India';
+  const title = 'Shani- Prosthetic Limbs for Those in Need | India';
   const description = 'Life and Limb is a non-profit organization that provides free, high-quality prosthetic limbs to those in need across India. Empowering mobility, restoring lives since 2013.';
   const image = `${siteUrl}/images/our-mission-img_0Z5ajpX.webp`;
 
