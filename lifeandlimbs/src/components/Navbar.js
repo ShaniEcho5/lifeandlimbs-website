@@ -31,7 +31,7 @@ import { usePathname } from 'next/navigation';
 
 const navigationItems = [
   {
-    label: 'Organization',
+    label: 'Life and Limb',
     submenu: [
       { label: 'About Us', href: '/about-us' },
       { label: 'Our Mission', href: '/about-us#mission' },

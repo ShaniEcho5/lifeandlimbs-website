@@ -53,133 +53,139 @@ const HeroSection = () => {
   return (
     <Box
       sx={{
-        minHeight: '90vh',
+        height: '100vh',
         display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
+        width: '100%',
       }}
     >
-      {/* Video Background */}
+      {/* Left Half - Video Section */}
       <Box
-        component="video"
-        autoPlay
-        loop
-        muted
-        playsInline
         sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: -2,
+          width: '50%',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <source src="/videos/hero-background.webm" type="video/webm" />
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
+        <Box
+          component="video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          sx={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        >
+          <source src="/videos/hero-background.webm" type="video/webm" />
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
+        </Box>
+        
+        {/* Video Overlay */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          }}
+        />
       </Box>
-      
-      {/* Video Overlay */}
+
+      {/* Right Half - Content Section */}
       <Box
         sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          zIndex: -1,
+          width: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#f5f5f5',
+          padding: theme.spacing(6),
+          position: 'relative',
+          overflow: 'hidden',
         }}
-      />
+      >
+        {/* Background Pattern */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.03,
+            backgroundImage: `linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(30deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(150deg, #000 12%, transparent 12.5%, transparent 87%, #000 87.5%, #000),
+            linear-gradient(60deg, #77777777 25%, transparent 25.5%, transparent 75%, #77777777 75%, #77777777)`,
+            backgroundSize: '80px 140px',
+            backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0',
+          }}
+        />
 
-      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
-        <Grid container spacing={4} alignItems="center" sx={{ minHeight: '70vh' }}>
-          <Grid item xs={12} md={6}>
-            
-              <Typography
-                variant="h6"
-                sx={{
-                  color: 'white',
-                  fontWeight: 600,
-                  mb: 2,
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                }}
-              >
-                Welcome to Life and Limb
-              </Typography>
-              <Typography
-                variant="h1"
-                sx={{
-                  mb: 3,
-                  fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
-                  lineHeight: 1.1,
-                  fontWeight: 700,
-                  color: 'white',
-                }}
-              >
-                Restoring Independence, Free of Charge
-              </Typography>
-              <Typography
-                variant="h5"
-                sx={{
-                  mb: 4,
-                  color: 'white',
-                  lineHeight: 1.6,
-                  fontSize: { xs: '1.1rem', md: '1.25rem' },
-                  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-                }}
-              >
-                A nonprofit organization dedicated to providing free prosthetic limbs to
-                amputees across India. Since 2013, Life and Limb has helped hundreds regain mobility
-                and confidence, enabling them to lead fulfilling lives. Join us in our mission to
-                make mobility accessible to all, regardless of financial circumstances.
-              </Typography>
-              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  component={Link}
-                  href="https://www.gofundme.com/f/fzcv9-life-and-limb/donate"
-                  target="_blank"
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    borderRadius: 3,
-                  }}
-                >
-                  Donate Now
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  component={Link}
-                  href="/about-us"
-                  sx={{
-                    px: 4,
-                    py: 1.5,
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    borderRadius: 3,
-                    color: 'white',
-                    borderColor: 'white',
-                    '&:hover': {
-                      borderColor: 'white',
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    },
-                  }}
-                >
-                  Learn More
-                </Button>
-              </Box>
-          </Grid>
-        </Grid>
-      </Container>
+        {/* Content with Animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ maxWidth: '600px', zIndex: 1 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <Typography
+              variant="h1"
+              sx={{
+                mb: 4,
+                fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
+                lineHeight: 1.1,
+                fontWeight: 700,
+                color: '#333',
+                position: 'relative',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: '-10px',
+                  left: '0',
+                  width: '80px',
+                  height: '4px',
+                  backgroundColor: 'primary.main',
+                  borderRadius: '2px',
+                }
+              }}
+            >
+              Restoring Independence, Free of Charge
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 4,
+                color: '#666',
+                lineHeight: 1.6,
+                fontSize: { xs: '1.1rem', md: '1.25rem' },
+              }}
+            >
+              A nonprofit organization dedicated to providing free prosthetic limbs to
+              amputees across India. Since 2014, Life and Limb has helped hundreds regain mobility
+              and confidence, enabling them to lead fulfilling lives. Join us in our mission to
+              make mobility accessible to all, regardless of financial circumstances.
+            </Typography>
+          </motion.div>
+        </motion.div>
+      </Box>
     </Box>
   );
 };
