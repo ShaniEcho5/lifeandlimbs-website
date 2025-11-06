@@ -191,6 +191,293 @@ const AboutUsPage = () => {
           </Grid>
         </Container>
       </Box>
+      {/* Founder's Message Section */}
+      <Box
+        className="section-padding"
+        sx={{
+          backgroundColor: "background.default",
+          overflow: "visible",
+        }}
+      >
+        <Container maxWidth="xl">
+          <Box sx={{ textAlign: "center", mb: 6 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "primary.main",
+                fontWeight: 600,
+                mb: 2,
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+              }}
+            >
+              A Message from Our Founder
+            </Typography>
+            {/* <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
+              Founder's Message
+            </Typography> */}
+          </Box>
+
+          <Grid container spacing={6}>
+            {/* Sticky Image Card */}
+            <Grid item xs={12} md={5}>
+              <Box
+                sx={{
+                  position: { xs: "relative", md: "sticky" },
+                  top: { md: 100 },
+                  alignSelf: "flex-start",
+                  zIndex: 5,
+                }}
+              >
+                <Card
+                  sx={{
+                    height: { xs: "400px", md: "600px" },
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
+                  }}
+                >
+                  <Box
+                    sx={{ position: "relative", height: "100%", width: "100%" }}
+                  >
+                    <Image
+                      src="/images/Johnson-Samuel.jpg"
+                      alt="Johnson Samuel - Founder of Life and Limb"
+                      fill
+                      style={{
+                        objectFit: "cover",
+                        objectPosition: "center 15%",
+                      }}
+                      priority
+                    />
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        background:
+                          "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%)",
+                        p: 3,
+                      }}
+                    >
+                      <Typography
+                        variant="h4"
+                        sx={{ color: "white", fontWeight: 700, mb: 0.5 }}
+                      >
+                        Johnson Samuel
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        sx={{
+                          color: "rgba(255,255,255,0.9)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        Founder, Life and Limb Charity
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Card>
+              </Box>
+            </Grid>
+
+            {/* Scrollable Content */}
+            <Grid item xs={12} md={7}>
+              <Box
+                sx={{
+                  borderRadius: 3,
+                  backgroundColor: "background.paper",
+
+                  maxHeight: { md: "90vh" },
+                  overflowY: { md: "scroll" },
+                  pr: { md: 1 },
+                  scrollbarWidth: "none", // Firefox
+                  msOverflowStyle: "none", // IE and Edge
+                  "&::-webkit-scrollbar": {
+                    display: "none", // Chrome, Safari, Opera
+                  },
+                }}
+              >
+                <Card
+                  sx={{
+                    borderRadius: 3,
+                    p: { xs: 3, md: 4 },
+                    boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      mb: 3,
+                      lineHeight: 1.8,
+                      fontSize: "1.05rem",
+                      fontStyle: "italic",
+                      color: "primary.main",
+                      fontWeight: 500,
+                    }}
+                  >
+                    "Many people ask me why our charity is so different. My
+                    answer is simple—it is a divine calling."
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    Throughout my life, I have been moved by the struggles of
+                    those without food, clothing, or access to education and
+                    medical care. Yet, as someone blessed with two legs, I never
+                    truly considered what life might be like for those without
+                    them—until one moment changed everything.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    During a family vacation to India in 2013, we visited a
+                    nearby home to meet a family. There, I met the head of the
+                    household, a man who had lost his leg in an accident. Seeing
+                    him confined to his bed, helpless and hopeless, stirred
+                    something deep within me. That night, I couldn't sleep. My
+                    mind was filled with questions—What do people like him go
+                    through each day? How can I help?
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    The very next day, I came across an article about a charity
+                    that provided artificial limbs to those in need. Soon after,
+                    I began noticing more and more people who were living
+                    without legs—each with their own story of pain and
+                    resilience.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    When I returned to America, I immersed myself in learning
+                    about prosthetics. One evening, while watching television, I
+                    saw a contestant say she would use her prize money to buy an
+                    artificial leg for her husband who had lost his in an
+                    accident. That moment sealed my conviction. I felt God was
+                    drawing my heart toward this cause.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    That night, I told my wife that I wanted to go to Kerala and
+                    provide artificial limbs to at least ten people. My family
+                    immediately supported the vision, even our children offering
+                    the small gifts they had received to help others.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    What began as a small family mission in 2014—providing
+                    artificial limbs to 20 people—has since grown into a
+                    lifelong commitment. Each year, we have expanded our reach
+                    with the generous support of my brothers, friends, church
+                    community, and countless well-wishers.
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      backgroundColor: "primary.light",
+                      p: 3,
+                      borderRadius: 2,
+                      mb: 3,
+                      borderLeft: "4px solid",
+                      borderColor: "primary.main",
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        lineHeight: 1.8,
+                        fontSize: "1.05rem",
+                        fontWeight: 500,
+                        color: "primary.dark",
+                      }}
+                    >
+                      Behind every limb we provide is a story of renewed hope.
+                      Children and young adults who once ran freely find
+                      themselves immobilized after an accident or illness. Many
+                      sink into despair; some even lose the will to live. Our
+                      mission is to place a comma where life has tried to put a
+                      full stop—to restore dignity, mobility, and confidence.
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    The true meaning of my life is found in seeing these
+                    individuals take their first steps again, walking tall with
+                    courage and hope. Though I cannot help everyone, I am
+                    profoundly grateful for the opportunity to help even a few
+                    rediscover the joy of living.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 3, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    To date, we have provided artificial limbs to 344 people. We
+                    receive hundreds of applications every year, and while our
+                    resources limit the number we can support, our goal now is
+                    to reach 100 individuals annually.
+                  </Typography>
+
+                  <Typography
+                    variant="body1"
+                    sx={{ mb: 4, lineHeight: 1.8, fontSize: "1.05rem" }}
+                  >
+                    May we continue to stand with those who feel forgotten, and
+                    together, turn their despair into determination. From the
+                    depths of my heart, thank you to everyone who has joined me
+                    on this sacred journey.
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      borderTop: "2px solid",
+                      borderColor: "primary.main",
+                      pt: 3,
+                    }}
+                  >
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        fontStyle: "italic",
+                        color: "text.secondary",
+                        mb: 1,
+                      }}
+                    >
+                      With love and gratitude,
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      sx={{ fontWeight: 600, color: "primary.main" }}
+                    >
+                      Johnson Samuel
+                    </Typography>
+                  </Box>
+                </Card>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
       {/* Mission Section */}
       <Box
