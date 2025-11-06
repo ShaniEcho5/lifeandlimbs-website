@@ -196,13 +196,13 @@ const AboutUsPage = () => {
         className="section-padding"
         sx={{
           backgroundColor: "background.default",
-          overflow: "visible",
+          overflow: "hidden", // Prevent page scroll overlap
         }}
       >
         <Container maxWidth="xl">
           <Box sx={{ textAlign: "center", mb: 6 }}>
             <Typography
-              variant="h6"
+              variant="h2"
               sx={{
                 color: "primary.main",
                 fontWeight: 600,
@@ -213,25 +213,22 @@ const AboutUsPage = () => {
             >
               A Message from Our Founder
             </Typography>
-            {/* <Typography variant="h2" sx={{ mb: 3, fontWeight: 700 }}>
-              Founder's Message
-            </Typography> */}
           </Box>
 
-          <Grid container spacing={6}>
-            {/* Sticky Image Card */}
+          <Grid container spacing={6} alignItems="stretch">
+            {/* Sticky Full-Height Image Card */}
             <Grid item xs={12} md={5}>
               <Box
                 sx={{
                   position: { xs: "relative", md: "sticky" },
-                  top: { md: 100 },
-                  alignSelf: "flex-start",
+                  top: 0,
+                  height: { xs: "400px", md: "100vh" },
                   zIndex: 5,
                 }}
               >
                 <Card
                   sx={{
-                    height: { xs: "400px", md: "600px" },
+                    height: "100%",
                     borderRadius: 3,
                     overflow: "hidden",
                     boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
@@ -282,14 +279,11 @@ const AboutUsPage = () => {
               </Box>
             </Grid>
 
-            {/* Scrollable Content */}
+            {/* Scrollable Text Content */}
             <Grid item xs={12} md={7}>
               <Box
                 sx={{
-                  borderRadius: 3,
-                  backgroundColor: "background.paper",
-
-                  maxHeight: { md: "90vh" },
+                  height: { md: "100vh" },
                   overflowY: { md: "scroll" },
                   pr: { md: 1 },
                   scrollbarWidth: "none", // Firefox
@@ -391,12 +385,12 @@ const AboutUsPage = () => {
 
                   <Box
                     sx={{
-                      backgroundColor: "primary.light",
+                      backgroundColor: "primary.main",
                       p: 3,
                       borderRadius: 2,
                       mb: 3,
                       borderLeft: "4px solid",
-                      borderColor: "primary.main",
+                      borderColor: "primary.light",
                     }}
                   >
                     <Typography
@@ -405,13 +399,13 @@ const AboutUsPage = () => {
                         lineHeight: 1.8,
                         fontSize: "1.05rem",
                         fontWeight: 500,
-                        color: "primary.dark",
+                        color: "white",
                       }}
                     >
                       Behind every limb we provide is a story of renewed hope.
                       Children and young adults who once ran freely find
                       themselves immobilized after an accident or illness. Many
-                      sink into despair; some even lose the will to live. Our
+                      sink into despai r; some even lose the will to live. Our
                       mission is to place a comma where life has tried to put a
                       full stop—to restore dignity, mobility, and confidence.
                     </Typography>
