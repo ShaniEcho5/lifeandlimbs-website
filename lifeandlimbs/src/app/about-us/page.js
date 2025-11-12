@@ -579,12 +579,7 @@ const AboutUsPage = () => {
                 variant="body1"
                 sx={{ mb: 4, lineHeight: 1.8, fontSize: "1.1rem" }}
               >
-                By blending cutting-edge technology with compassion, we aspire
-                to become a global leader in transforming lives. Through
-                innovation and collaboration, we aim to create inclusive
-                communities that empower individuals with limb loss, breaking
-                barriers and enabling them to reclaim their potential and pursue
-                their dreams.
+               
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
