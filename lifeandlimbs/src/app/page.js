@@ -683,7 +683,7 @@ const MissionSection = () => (
                 textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' } // Text shadow on mobile
               }}
             >
-              Empowerment Through Free Prosthetics
+              Transforming Lives, One Step at a Time
             </Typography>
             <Typography 
               variant="body1" 
@@ -695,11 +695,12 @@ const MissionSection = () => (
                 textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' } // Text shadow on mobile
               }}
             >
-              Founded by Sam Johnson, Life and Limb is driven by a simple yet powerful
-              mission: to provide top-quality prosthetic limbs, completely free of charge, to those
-              who need them most. From underserved communities in Kerala to other regions
-              across India, our work focuses on restoring dignity and independence.
-            </Typography>
+At Life and Limb, our mission is to transform lives by restoring mobility,
+independence, and dignity to individuals who have lost a limb and cannot afford
+the cost of prosthetic care. We believe that mobility is more than movement—it is
+the foundation for rebuilding confidence, supporting families, and reclaiming
+one’s place in society.
+             </Typography>
             <Typography 
               variant="h5" 
               sx={{ 
@@ -709,7 +710,6 @@ const MissionSection = () => (
                 textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' }
               }}
             >
-              Aiming to Provide 115 Free Prosthetic Limbs in 2024
             </Typography>
             <Typography 
               variant="body1" 
@@ -720,10 +720,15 @@ const MissionSection = () => (
                 textShadow: { xs: '1px 1px 2px rgba(255,255,255,0.8)', md: 'none' }
               }}
             >
-              We're reaching out to serve 100 individuals this year, many of whom face
-              life-changing challenges due to accidents, illnesses, or other difficult circumstances.
-              By supporting Life and Limb, you're helping these individuals reclaim their
-              lives.
+              Since our founding in 2014, we have been committed to providing the highest
+quality, custom-fit prosthetic limbs completely free of charge to those who are
+physically ready and determined to rebuild their lives. Our team works closely
+with each recipient to ensure every limb is not only functional, but life-
+changing—crafted with precision, compassion, and care.
+Through partnerships, innovation, and a deep belief in human resilience, we
+strive to remove financial and social barriers to mobility, giving every person the
+opportunity to walk with strength, live with dignity, and pursue their dreams
+without limitation.
             </Typography>
           </motion.div>
         </Grid>
