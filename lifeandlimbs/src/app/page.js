@@ -53,15 +53,17 @@ const HeroSection = () => {
   return (
     <Box
       sx={{
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
         width: '100%',
       }}
     >
-      {/* Left Half - Video Section */}
+      {/* Video Section */}
       <Box
         sx={{
-          width: '50%',
+          width: { xs: '100%', md: '50%' },
+          height: { xs: '50vh', md: '100vh' },
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -95,15 +97,16 @@ const HeroSection = () => {
         />
       </Box>
 
-      {/* Right Half - Content Section */}
+      {/* Content Section */}
       <Box
         sx={{
-          width: '50%',
+          width: { xs: '100%', md: '50%' },
+          minHeight: { xs: '50vh', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#f5f5f5',
-          padding: theme.spacing(6),
+          padding: { xs: theme.spacing(4), md: theme.spacing(6) },
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -132,7 +135,12 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ maxWidth: '600px', zIndex: 1 }}
+          style={{ 
+            maxWidth: isMobile ? '100%' : '600px', 
+            zIndex: 1,
+            width: '100%',
+            textAlign: isMobile ? 'center' : 'left'
+          }}
         >
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -142,17 +150,19 @@ const HeroSection = () => {
             <Typography
               variant="h1"
               sx={{
-                mb: 4,
-                fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
-                lineHeight: 1.1,
+                mb: { xs: 3, md: 4 },
+                fontSize: { xs: '1.8rem', sm: '2.2rem', md: '3.5rem', lg: '4rem' },
+                lineHeight: { xs: 1.2, md: 1.1 },
                 fontWeight: 700,
                 color: '#333',
                 position: 'relative',
+                textAlign: { xs: 'center', md: 'left' },
                 '&::after': {
                   content: '""',
                   position: 'absolute',
                   bottom: '-10px',
-                  left: '0',
+                  left: { xs: '50%', md: '0' },
+                  transform: { xs: 'translateX(-50%)', md: 'none' },
                   width: '80px',
                   height: '4px',
                   backgroundColor: 'primary.main',
@@ -172,10 +182,12 @@ const HeroSection = () => {
             <Typography
               variant="h5"
               sx={{
-                mb: 4,
+                mb: { xs: 3, md: 4 },
                 color: '#666',
                 lineHeight: 1.6,
-                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                fontSize: { xs: '0.95rem', sm: '1.1rem', md: '1.25rem' },
+                textAlign: { xs: 'center', md: 'left' },
+                px: { xs: 1, md: 0 },
               }}
             >
               A nonprofit organization dedicated to providing free prosthetic limbs to
