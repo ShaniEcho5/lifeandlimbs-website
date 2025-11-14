@@ -92,6 +92,13 @@ export default async function BlogPost({ params }) {
     }
     
     post = data;
+    
+    // Debug: Log post data to see what we're getting
+    console.log('Blog post data:', {
+      title: post.title,
+      banner_image: post.banner_image,
+      hasBannerImage: !!post.banner_image
+    });
   } catch (error) {
     console.error('Error fetching blog post:', error);
     notFound();
@@ -131,8 +138,16 @@ export default async function BlogPost({ params }) {
       <div className="min-h-screen bg-white">
         {/* Article Header */}
         <header className="relative">
+          {/* Debug Info - Remove this after testing */}
+          {process.env.NODE_ENV === 'development' && (
+            <div style={{ background: 'yellow', padding: '10px', margin: '10px 0' }}>
+              <strong>DEBUG:</strong> banner_image = "{post.banner_image || 'NULL'}" 
+              (Length: {post.banner_image ? post.banner_image.length : 0})
+            </div>
+          )}
+          
           {/* Banner Image */}
-          {post.banner_image && (
+          {post.banner_image && post.banner_image.trim() !== '' && (
             <div className="relative h-64 md:h-80 lg:h-96 w-full">
               <Image
                 src={post.banner_image}
@@ -140,15 +155,19 @@ export default async function BlogPost({ params }) {
                 fill
                 className="object-cover"
                 priority
+                onError={(e) => {
+                  console.error('Banner image failed to load:', post.banner_image);
+                  e.target.style.display = 'none';
+                }}
               />
               <div className="absolute inset-0 bg-black bg-opacity-40" />
             </div>
           )}
 
           {/* Article Title and Meta */}
-          <div className={`${post.banner_image ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
+          <div className={`${post.banner_image && post.banner_image.trim() !== '' ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
             <div className="container mx-auto max-w-4xl">
-              <div className={`${post.banner_image ? 'text-white' : 'text-gray-900'}`}>
+              <div className={`${post.banner_image && post.banner_image.trim() !== '' ? 'text-white' : 'text-gray-900'}`}>
                 {/* Breadcrumb */}
                 <nav className="mb-4">
                   <ol className="flex items-center space-x-2 text-sm">

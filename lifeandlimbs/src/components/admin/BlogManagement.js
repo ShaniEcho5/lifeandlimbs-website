@@ -225,6 +225,11 @@ const BlogManagement = ({ onStatsUpdate }) => {
                       <Typography variant="subtitle2" fontWeight="medium">
                         {blog.title}
                       </Typography>
+                      {blog.banner_image && (
+                        <Typography variant="caption" color="primary" sx={{ fontSize: '0.7rem' }}>
+                          📷 Has banner image
+                        </Typography>
+                      )}
                       <Box sx={{ mt: 0.5 }}>
                         <Button
                           size="small"
