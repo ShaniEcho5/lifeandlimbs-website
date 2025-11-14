@@ -154,40 +154,27 @@ export default async function BlogPost({ params }) {
         {/* Article Header */}
         <header className="relative">
           {/* Debug Info - Remove this after testing */}
-          <div style={{ 
-            background: 'yellow', 
-            padding: '10px', 
-            margin: '10px 0', 
-            fontSize: '14px',
-            fontFamily: 'monospace',
-            border: '2px solid red'
-          }}>
-            <strong>🐛 BANNER IMAGE DEBUG:</strong><br/>
-            Original banner_image = "{post.banner_image || 'NULL/UNDEFINED'}"<br/>
-            Extracted bannerImage = "{bannerImage || 'NULL/UNDEFINED'}"<br/>
-            Length: {bannerImage ? bannerImage.length : 0}<br/>
-            Type: {typeof bannerImage}<br/>
-            Will Show: {!!(bannerImage && bannerImage.trim() !== '') ? 'YES' : 'NO'}
-          </div>
+
           
           {/* Banner Image */}
           {bannerImage && bannerImage.trim() !== '' && (
-            <div className="relative h-64 md:h-80 lg:h-96 w-full">
+            <div className="relative h-64 md:h-80 lg:h-96 w-full mb-8">
               <Image
                 src={bannerImage}
                 alt={post.title}
                 fill
-                className="object-cover"
+                className="object-cover rounded-lg"
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40" />
+              <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg" />
             </div>
           )}
 
           {/* Article Title and Meta */}
-          <div className={`${bannerImage && bannerImage.trim() !== '' ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
+          <div className="bg-gray-50 p-4 md:p-8">
             <div className="container mx-auto max-w-4xl">
-              <div className={`${bannerImage && bannerImage.trim() !== '' ? 'text-white' : 'text-gray-900'}`}>
+              <div className="text-gray-900">
                 {/* Breadcrumb */}
                 <nav className="mb-4">
                   <ol className="flex items-center space-x-2 text-sm">
