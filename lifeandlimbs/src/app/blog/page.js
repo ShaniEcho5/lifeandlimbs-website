@@ -1,22 +1,46 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getPostsMetadata } from '../../lib/blog/utils';
-
-export const metadata = {
-  title: 'Blog | Life and Limb - Stories of Hope and Innovation',
-  description: 'Read inspiring stories, technological advances, and updates from Life and Limb - providing free prosthetic limbs to those in need across India.',
-  keywords: 'life and limb blog, prosthetics stories, healthcare innovation, nonprofit blog, amputee support, mobility restoration',
-  openGraph: {
-    title: 'Blog | Life and Limb',
-    description: 'Read inspiring stories, technological advances, and updates from Life and Limb.',
-    url: 'https://lifeandlimbs.org/blog',
-    siteName: 'Life and Limb',
-    type: 'website',
-  },
-};
 
 export default function BlogPage() {
-  const posts = getPostsMetadata();
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('/api/blog/posts');
+        if (!response.ok) {
+          throw new Error('Failed to fetch posts');
+        }
+        const fetchedPosts = await response.json();
+        
+        // Transform posts to match expected format
+        const transformedPosts = fetchedPosts.map(post => ({
+          ...post,
+          description: post.excerpt,
+          formattedDate: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          }) : 'Draft',
+          date: post.publishedAt
+        }));
+        
+        setPosts(transformedPosts);
+      } catch (err) {
+        console.error('Error fetching posts:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -57,7 +81,19 @@ export default function BlogPage() {
       {/* Blog Posts Grid */}
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
-          {posts.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="text-gray-400 text-6xl mb-4">⏳</div>
+              <h2 className="text-2xl font-semibold text-gray-600 mb-2">Loading posts...</h2>
+              <p className="text-gray-500">Please wait while we fetch the latest content!</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-16">
+              <div className="text-red-400 text-6xl mb-4">⚠️</div>
+              <h2 className="text-2xl font-semibold text-gray-600 mb-2">Error loading posts</h2>
+              <p className="text-gray-500">{error}</p>
+            </div>
+          ) : posts.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-gray-400 text-6xl mb-4">📝</div>
               <h2 className="text-2xl font-semibold text-gray-600 mb-2">No posts yet</h2>
