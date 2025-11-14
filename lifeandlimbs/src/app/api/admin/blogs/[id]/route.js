@@ -21,7 +21,7 @@ export async function PUT(request, { params }) {
       throw new Error('Supabase admin client not available')
     }
 
-    const { id } = params
+    const { id } = await params
     const blogData = await request.json()
     
     // Add updated timestamp
@@ -59,7 +59,7 @@ export async function DELETE(request, { params }) {
       throw new Error('Supabase admin client not available')
     }
 
-    const { id } = params
+    const { id } = await params
 
     const { error } = await supabaseAdmin
       .from('blogs')
