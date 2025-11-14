@@ -179,10 +179,6 @@ export default async function BlogPost({ params }) {
                 fill
                 className="object-cover"
                 priority
-                onError={(e) => {
-                  console.error('Banner image failed to load:', bannerImage);
-                  e.target.style.display = 'none';
-                }}
               />
               <div className="absolute inset-0 bg-black bg-opacity-40" />
             </div>
