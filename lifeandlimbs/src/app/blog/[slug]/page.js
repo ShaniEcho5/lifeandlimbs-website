@@ -1,40 +1,122 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { 
-  getPostBySlug, 
-  getPostSlugs, 
-  generatePostMetadata,
-  generatePostStructuredData,
-  getReadingTime,
-  formatDate 
-} from '../../../lib/blog/utils';
+import { supabase } from '../../../lib/supabase';
+
+// Helper function to get reading time
+function getReadingTime(content) {
+  const wordsPerMinute = 200;
+  const wordCount = content?.split(/\s+/).length || 0;
+  const readingTime = Math.ceil(wordCount / wordsPerMinute);
+  return readingTime;
+}
+
+// Helper function to format date
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return {};
-  return generatePostMetadata(post);
+  
+  try {
+    if (!supabase) return {};
+    
+    const { data: post } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('slug', slug)
+      .eq('status', 'published')
+      .single();
+    
+    if (!post) return {};
+    
+    return {
+      title: `${post.title} | Life and Limb`,
+      description: post.excerpt || post.title,
+      keywords: post.category,
+      openGraph: {
+        title: post.title,
+        description: post.excerpt || post.title,
+        type: 'article',
+        publishedTime: post.published_at,
+        authors: [post.author || 'Life and Limb'],
+      },
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {};
+  }
 }
 
 // Generate static paths for all posts
 export async function generateStaticParams() {
-  const slugs = getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    if (!supabase) return [];
+    
+    const { data: posts } = await supabase
+      .from('blogs')
+      .select('slug')
+      .eq('status', 'published');
+    
+    return posts?.map((post) => ({ slug: post.slug })) || [];
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
 export default async function BlogPost({ params }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) {
+  
+  let post;
+  try {
+    if (!supabase) {
+      notFound();
+    }
+    
+    const { data, error } = await supabase
+      .from('blogs')
+      .select('*')
+      .eq('slug', slug)
+      .eq('status', 'published')
+      .single();
+    
+    if (error || !data) {
+      notFound();
+    }
+    
+    post = data;
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
     notFound();
   }
 
-  const structuredData = generatePostStructuredData(post);
-  const readingTime = getReadingTime(post.rawContent);
-  const formattedDate = formatDate(post.frontmatter.date);
+  const readingTime = getReadingTime(post.content);
+  const formattedDate = formatDate(post.published_at || post.created_at);
+  
+  // Generate structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "author": {
+      "@type": "Organization",
+      "name": post.author || "Life and Limb"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Life and Limb"
+    },
+    "datePublished": post.published_at,
+    "dateModified": post.updated_at
+  };
 
   return (
     <>
@@ -50,11 +132,11 @@ export default async function BlogPost({ params }) {
         {/* Article Header */}
         <header className="relative">
           {/* Banner Image */}
-          {post.frontmatter.banner && (
+          {post.banner_image && (
             <div className="relative h-64 md:h-80 lg:h-96 w-full">
               <Image
-                src={post.frontmatter.banner}
-                alt={post.frontmatter.title}
+                src={post.banner_image}
+                alt={post.title}
                 fill
                 className="object-cover"
                 priority
@@ -64,9 +146,9 @@ export default async function BlogPost({ params }) {
           )}
 
           {/* Article Title and Meta */}
-          <div className={`${post.frontmatter.banner ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
+          <div className={`${post.banner_image ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
             <div className="container mx-auto max-w-4xl">
-              <div className={`${post.frontmatter.banner ? 'text-white' : 'text-gray-900'}`}>
+              <div className={`${post.banner_image ? 'text-white' : 'text-gray-900'}`}>
                 {/* Breadcrumb */}
                 <nav className="mb-4">
                   <ol className="flex items-center space-x-2 text-sm">
@@ -82,16 +164,16 @@ export default async function BlogPost({ params }) {
                       </Link>
                     </li>
                     <li>/</li>
-                    <li className="opacity-90">{post.frontmatter.title}</li>
+                    <li className="opacity-90">{post.title}</li>
                   </ol>
                 </nav>
 
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                  {post.frontmatter.title}
+                  {post.title}
                 </h1>
                 
                 <p className="text-lg md:text-xl opacity-90 mb-6 leading-relaxed">
-                  {post.frontmatter.description}
+                  {post.excerpt}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 text-sm">
@@ -99,19 +181,19 @@ export default async function BlogPost({ params }) {
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
                     </svg>
-                    <time dateTime={post.frontmatter.date}>{formattedDate}</time>
+                    <time dateTime={post.published_at || post.created_at}>{formattedDate}</time>
                   </div>
                   <div className="flex items-center">
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                     </svg>
-                    {readingTime}
+                    {readingTime} min read
                   </div>
                   <div className="flex items-center">
                     <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
                     </svg>
-                    Life and Limb Team
+                    {post.author || 'Life and Limb Team'}
                   </div>
                 </div>
               </div>
@@ -137,7 +219,7 @@ export default async function BlogPost({ params }) {
                 <ShareButton
                   platform="twitter"
                   url={`https://lifeandlimbs.org/blog/${post.slug}`}
-                  title={post.frontmatter.title}
+                  title={post.title}
                 />
                 <ShareButton
                   platform="facebook"
@@ -146,12 +228,12 @@ export default async function BlogPost({ params }) {
                 <ShareButton
                   platform="linkedin"
                   url={`https://lifeandlimbs.org/blog/${post.slug}`}
-                  title={post.frontmatter.title}
-                  summary={post.frontmatter.description}
+                  title={post.title}
+                  summary={post.excerpt}
                 />
                 <ShareButton
                   platform="whatsapp"
-                  text={`${post.frontmatter.title} - https://lifeandlimbs.org/blog/${post.slug}`}
+                  text={`${post.title} - https://lifeandlimbs.org/blog/${post.slug}`}
                 />
               </div>
             </div>
