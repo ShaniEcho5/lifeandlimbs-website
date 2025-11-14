@@ -24,6 +24,7 @@ import {
 } from '@mui/icons-material'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import Image from '@tiptap/extension-image'
 
 // Helper function to generate slug from title
 const generateSlug = (title) => {
@@ -43,12 +44,20 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
     content: '',
     status: 'draft',
     category: '',
-    author: 'Admin'
+    author: 'Admin',
+    banner_image: ''
   })
   const [saving, setSaving] = useState(false)
 
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Image.configure({
+        HTMLAttributes: {
+          class: 'max-w-full h-auto rounded-lg my-4',
+        },
+      }),
+    ],
     content: formData.content,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
@@ -65,7 +74,8 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         content: blog.content || '',
         status: blog.status || 'draft',
         category: blog.category || '',
-        author: blog.author || 'Admin'
+        author: blog.author || 'Admin',
+        banner_image: blog.banner_image || ''
       })
       if (editor) {
         editor.commands.setContent(blog.content || '')
@@ -78,7 +88,8 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         content: '',
         status: 'draft',
         category: '',
-        author: 'Admin'
+        author: 'Admin',
+        banner_image: ''
       }
       setFormData(emptyForm)
       if (editor) {
@@ -105,6 +116,46 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
     }))
   }
 
+  const handleImageUpload = async (file) => {
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to upload image')
+      }
+
+      const data = await response.json()
+      return data.url
+    } catch (error) {
+      console.error('Image upload error:', error)
+      throw error
+    }
+  }
+
+  const addImage = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.onchange = async (e) => {
+      const file = e.target.files?.[0]
+      if (file && editor) {
+        try {
+          const url = await handleImageUpload(file)
+          editor.chain().focus().setImage({ src: url }).run()
+        } catch (error) {
+          onError('Failed to upload image')
+        }
+      }
+    }
+    input.click()
+  }
+
   const handleSave = async (publishNow = false) => {
     if (!formData.title.trim()) {
       onError('Title is required')
@@ -121,7 +172,8 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         excerpt: formData.excerpt,
         author: formData.author || 'Admin',
         category: formData.category,
-        status: publishNow ? 'published' : formData.status
+        status: publishNow ? 'published' : formData.status,
+        banner_image: formData.banner_image
       }
 
       if (blog) {
@@ -230,6 +282,44 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
           </Grid>
           
           <Grid item xs={12}>
+            <Typography variant="subtitle2" gutterBottom>
+              Banner Image
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                const input = document.createElement('input')
+                input.type = 'file'
+                input.accept = 'image/*'
+                input.onchange = async (e) => {
+                  const file = e.target.files?.[0]
+                  if (file) {
+                    try {
+                      const url = await handleImageUpload(file)
+                      setFormData(prev => ({ ...prev, banner_image: url }))
+                    } catch (error) {
+                      onError('Failed to upload banner image')
+                    }
+                  }
+                }
+                input.click()
+              }}
+              fullWidth
+            >
+              {formData.banner_image ? 'Change Banner Image' : 'Upload Banner Image'}
+            </Button>
+            {formData.banner_image && (
+              <Box sx={{ mt: 1 }}>
+                <img
+                  src={formData.banner_image}
+                  alt="Banner preview"
+                  style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '4px' }}
+                />
+              </Box>
+            )}
+          </Grid>
+          
+          <Grid item xs={12}>
             <TextField
               fullWidth
               label="Excerpt"
@@ -246,9 +336,65 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
             <Typography variant="subtitle2" gutterBottom>
               Content
             </Typography>
-            <Paper
-              variant="outlined"
-              sx={{
+            <Paper variant="outlined">
+              {/* Editor Toolbar */}
+              {editor && (
+                <Box sx={{ borderBottom: '1px solid', borderColor: 'divider', p: 1 }}>
+                  <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('bold') ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleBold().run()}
+                    >
+                      Bold
+                    </Button>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('italic') ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleItalic().run()}
+                    >
+                      Italic
+                    </Button>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('heading', { level: 2 }) ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                    >
+                      H2
+                    </Button>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('heading', { level: 3 }) ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+                    >
+                      H3
+                    </Button>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('bulletList') ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleBulletList().run()}
+                    >
+                      • List
+                    </Button>
+                    <Button
+                      size="small"
+                      variant={editor.isActive('orderedList') ? 'contained' : 'outlined'}
+                      onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                    >
+                      1. List
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      onClick={addImage}
+                    >
+                      📷 Image
+                    </Button>
+                  </Box>
+                </Box>
+              )}
+              
+              <Box sx={{
                 minHeight: 300,
                 '& .ProseMirror': {
                   padding: 2,
@@ -257,11 +403,12 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
                   '& h2': { fontSize: '1.5rem', fontWeight: 'bold', mt: 2, mb: 1 },
                   '& h3': { fontSize: '1.25rem', fontWeight: 'bold', mt: 2, mb: 1 },
                   '& p': { mb: 1 },
-                  '& ul, ol': { pl: 3, mb: 1 }
+                  '& ul, ol': { pl: 3, mb: 1 },
+                  '& img': { maxWidth: '100%', height: 'auto', borderRadius: 1, my: 2 }
                 }
-              }}
-            >
-              <EditorContent editor={editor} />
+              }}>
+                <EditorContent editor={editor} />
+              </Box>
             </Paper>
           </Grid>
         </Grid>
