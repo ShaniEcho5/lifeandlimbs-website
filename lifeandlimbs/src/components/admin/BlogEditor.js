@@ -175,9 +175,17 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         status: publishNow ? 'published' : formData.status
       }
 
-      // Only include banner_image if it exists
+      // Try to include banner_image, but don't fail if column doesn't exist
       if (formData.banner_image) {
-        blogData.banner_image = formData.banner_image
+        try {
+          blogData.banner_image = formData.banner_image
+        } catch (error) {
+          console.warn('banner_image column might not exist:', error)
+          // Fallback: store in content metadata as HTML comment
+          if (formData.banner_image) {
+            blogData.content = `<!-- BANNER_IMAGE:${formData.banner_image} -->\n${formData.content}`
+          }
+        }
       }
 
       if (blog) {

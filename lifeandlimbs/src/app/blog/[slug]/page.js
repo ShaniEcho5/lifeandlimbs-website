@@ -94,14 +94,29 @@ export default async function BlogPost({ params }) {
     post = data;
     
     // Debug: Log post data to see what we're getting
-    console.log('Blog post data:', {
+    console.log('🐛 BLOG POST DEBUG:', {
       title: post.title,
+      slug: post.slug,
       banner_image: post.banner_image,
-      hasBannerImage: !!post.banner_image
+      banner_image_type: typeof post.banner_image,
+      banner_image_length: post.banner_image ? post.banner_image.length : 0,
+      hasBannerImage: !!post.banner_image,
+      allKeys: Object.keys(post)
     });
   } catch (error) {
     console.error('Error fetching blog post:', error);
     notFound();
+  }
+
+  // Extract banner image from content if not in banner_image field
+  let bannerImage = post.banner_image
+  if (!bannerImage && post.content) {
+    const bannerMatch = post.content.match(/<!-- BANNER_IMAGE:(.+?) -->/)
+    if (bannerMatch) {
+      bannerImage = bannerMatch[1]
+      // Remove the banner comment from content for display
+      post.content = post.content.replace(/<!-- BANNER_IMAGE:.+? -->\n?/, '')
+    }
   }
 
   const readingTime = getReadingTime(post.content);
@@ -139,24 +154,33 @@ export default async function BlogPost({ params }) {
         {/* Article Header */}
         <header className="relative">
           {/* Debug Info - Remove this after testing */}
-          {process.env.NODE_ENV === 'development' && (
-            <div style={{ background: 'yellow', padding: '10px', margin: '10px 0' }}>
-              <strong>DEBUG:</strong> banner_image = "{post.banner_image || 'NULL'}" 
-              (Length: {post.banner_image ? post.banner_image.length : 0})
-            </div>
-          )}
+          <div style={{ 
+            background: 'yellow', 
+            padding: '10px', 
+            margin: '10px 0', 
+            fontSize: '14px',
+            fontFamily: 'monospace',
+            border: '2px solid red'
+          }}>
+            <strong>🐛 BANNER IMAGE DEBUG:</strong><br/>
+            Original banner_image = "{post.banner_image || 'NULL/UNDEFINED'}"<br/>
+            Extracted bannerImage = "{bannerImage || 'NULL/UNDEFINED'}"<br/>
+            Length: {bannerImage ? bannerImage.length : 0}<br/>
+            Type: {typeof bannerImage}<br/>
+            Will Show: {!!(bannerImage && bannerImage.trim() !== '') ? 'YES' : 'NO'}
+          </div>
           
           {/* Banner Image */}
-          {post.banner_image && post.banner_image.trim() !== '' && (
+          {bannerImage && bannerImage.trim() !== '' && (
             <div className="relative h-64 md:h-80 lg:h-96 w-full">
               <Image
-                src={post.banner_image}
+                src={bannerImage}
                 alt={post.title}
                 fill
                 className="object-cover"
                 priority
                 onError={(e) => {
-                  console.error('Banner image failed to load:', post.banner_image);
+                  console.error('Banner image failed to load:', bannerImage);
                   e.target.style.display = 'none';
                 }}
               />
@@ -165,9 +189,9 @@ export default async function BlogPost({ params }) {
           )}
 
           {/* Article Title and Meta */}
-          <div className={`${post.banner_image && post.banner_image.trim() !== '' ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
+          <div className={`${bannerImage && bannerImage.trim() !== '' ? 'absolute bottom-0 left-0 right-0' : 'bg-gray-50'} p-4 md:p-8`}>
             <div className="container mx-auto max-w-4xl">
-              <div className={`${post.banner_image && post.banner_image.trim() !== '' ? 'text-white' : 'text-gray-900'}`}>
+              <div className={`${bannerImage && bannerImage.trim() !== '' ? 'text-white' : 'text-gray-900'}`}>
                 {/* Breadcrumb */}
                 <nav className="mb-4">
                   <ol className="flex items-center space-x-2 text-sm">
