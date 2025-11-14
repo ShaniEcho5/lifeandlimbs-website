@@ -9,6 +9,17 @@ const nextConfig = {
       },
     ];
   },
+  // Configure image domains for Supabase
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'irlgqmdezqwoppvbrwcz.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
   // Optimize for production builds
   experimental: {
     optimizePackageImports: ['@mui/material', '@mui/icons-material'],
