@@ -51,6 +51,18 @@ export async function POST(request) {
 
     if (error) {
       console.error('Storage upload error:', error)
+      
+      // If bucket doesn't exist, provide helpful error message
+      if (error.message?.includes('bucket') || error.message?.includes('not found')) {
+        return NextResponse.json(
+          { 
+            error: 'Storage bucket not configured. Please create a "blog-images" bucket in Supabase Storage.',
+            details: error.message 
+          },
+          { status: 500 }
+        )
+      }
+      
       throw error
     }
 

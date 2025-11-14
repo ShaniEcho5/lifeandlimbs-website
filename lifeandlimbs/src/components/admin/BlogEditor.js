@@ -172,8 +172,12 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         excerpt: formData.excerpt,
         author: formData.author || 'Admin',
         category: formData.category,
-        status: publishNow ? 'published' : formData.status,
-        banner_image: formData.banner_image
+        status: publishNow ? 'published' : formData.status
+      }
+
+      // Only include banner_image if it exists
+      if (formData.banner_image) {
+        blogData.banner_image = formData.banner_image
       }
 
       if (blog) {
