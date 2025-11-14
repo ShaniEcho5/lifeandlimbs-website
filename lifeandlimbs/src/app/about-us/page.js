@@ -123,7 +123,7 @@ const AboutUsPage = () => {
       </Box>
 
       {/* Our Story Section */}
-      <Box
+      {/* <Box
         className="section-padding"
         sx={{ backgroundColor: "background.default" }}
       >
@@ -190,7 +190,7 @@ const AboutUsPage = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box>
+      </Box> */}
       {/* Founder's Message Section */}
       <Box
         className="section-padding"
