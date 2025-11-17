@@ -74,10 +74,7 @@ export async function generateMetadata({ params }) {
         site: '@lifeandlimb',
       },
 
-      // Additional SEO
-      alternates: {
-        canonical: post.canonical_url || pageUrl,
-      },
+
       
       // Article specific and additional meta tags
       other: {
@@ -87,6 +84,11 @@ export async function generateMetadata({ params }) {
         'article:modified_time': post.updated_at,
         'article:section': post.category,
         'article:tag': post.keywords,
+      },
+
+      // Additional SEO
+      alternates: {
+        canonical: post.canonical_url || pageUrl,
       }
     };
   } catch (error) {
@@ -194,6 +196,12 @@ export default async function BlogPost({ params }) {
 
   return (
     <>
+      {/* Manual Canonical Link - fallback for SEO tools */}
+      <link rel="canonical" href={canonicalUrl} />
+      
+      {/* Additional SEO Meta Tags */}
+      <meta name="robots" content={post.robots || 'index, follow'} />
+      
       {/* Structured Data for SEO */}
       {structuredData && (
         <script

@@ -392,10 +392,13 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
             label={
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 SEO
-                <Chip 
-                  size="small" 
-                  label={`${getSEOScore()}%`} 
-                  color={getSEOScore() >= 80 ? 'success' : getSEOScore() >= 60 ? 'warning' : 'error'}
+                <Box
+                  sx={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: '50%',
+                    backgroundColor: getSEOScore() >= 80 ? '#4caf50' : getSEOScore() >= 60 ? '#ff9800' : '#f44336',
+                  }}
                 />
               </Box>
             } 
@@ -583,15 +586,23 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
             <Box>
               {/* SEO Score */}
               <Box sx={{ mb: 3, p: 2, bgcolor: 'background.paper', borderRadius: 1, border: 1, borderColor: 'divider' }}>
-                <Typography variant="h6" gutterBottom>
-                  SEO Analysis Score: {getSEOScore()}%
-                </Typography>
-                <LinearProgress 
-                  variant="determinate" 
-                  value={getSEOScore()} 
-                  color={getSEOScore() >= 80 ? 'success' : getSEOScore() >= 60 ? 'warning' : 'error'}
-                  sx={{ height: 8, borderRadius: 4 }}
-                />
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Typography variant="h6">
+                    SEO Status:
+                  </Typography>
+                  <Box
+                    sx={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: '50%',
+                      backgroundColor: getSEOScore() >= 80 ? '#4caf50' : getSEOScore() >= 60 ? '#ff9800' : '#f44336',
+                      display: 'inline-block'
+                    }}
+                  />
+                  <Typography variant="body2" color="text.secondary">
+                    {getSEOScore() >= 80 ? 'Excellent' : getSEOScore() >= 60 ? 'Good' : 'Needs Improvement'}
+                  </Typography>
+                </Box>
               </Box>
 
               <Grid container spacing={2}>
