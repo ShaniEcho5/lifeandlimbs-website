@@ -16,16 +16,29 @@ export async function GET() {
     if (error) throw error
 
     // Transform the data to match expected format
-    const transformedPosts = posts?.map(post => ({
-      slug: post.slug,
-      title: post.title,
-      excerpt: post.excerpt,
-      author: post.author,
-      category: post.category,
-      publishedAt: post.published_at,
-      createdAt: post.created_at,
-      updatedAt: post.updated_at
-    })) || []
+    const transformedPosts = posts?.map(post => {
+      // Extract banner image from content if not in banner_image field
+      let bannerImage = post.banner_image
+      if (!bannerImage && post.content) {
+        const bannerMatch = post.content.match(/<!-- BANNER_IMAGE:(.+?) -->/)
+        if (bannerMatch) {
+          bannerImage = bannerMatch[1]
+        }
+      }
+      
+      return {
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt,
+        author: post.author,
+        category: post.category,
+        banner_image: bannerImage,
+        banner: bannerImage, // Add both formats for compatibility
+        publishedAt: post.published_at,
+        createdAt: post.created_at,
+        updatedAt: post.updated_at
+      }
+    }) || []
 
     return Response.json(transformedPosts);
   } catch (error) {
