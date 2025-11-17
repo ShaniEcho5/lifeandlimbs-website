@@ -20,7 +20,9 @@ import {
 } from '@mui/material'
 import {
   Save as SaveIcon,
-  Close as CloseIcon
+  Close as CloseIcon,
+  Image as ImageIcon,
+  CloudUpload as UploadIcon
 } from '@mui/icons-material'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -116,10 +118,11 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
     }))
   }
 
-  const handleImageUpload = async (file) => {
+  const handleImageUpload = async (file, type = 'content') => {
     try {
       const formData = new FormData()
       formData.append('file', file)
+      formData.append('type', type) // 'banner' or 'content'
 
       const response = await fetch('/api/admin/upload', {
         method: 'POST',
@@ -127,7 +130,8 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
       })
 
       if (!response.ok) {
-        throw new Error('Failed to upload image')
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to upload image')
       }
 
       const data = await response.json()
@@ -146,10 +150,36 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
       const file = e.target.files?.[0]
       if (file && editor) {
         try {
-          const url = await handleImageUpload(file)
-          editor.chain().focus().setImage({ src: url }).run()
+          onSuccess && onSuccess('Uploading image...')
+          const url = await handleImageUpload(file, 'content')
+          editor.chain().focus().setImage({ 
+            src: url,
+            alt: file.name.split('.')[0],
+            title: file.name.split('.')[0]
+          }).run()
+          onSuccess && onSuccess('Image uploaded successfully!')
         } catch (error) {
-          onError('Failed to upload image')
+          onError && onError(error.message || 'Failed to upload image')
+        }
+      }
+    }
+    input.click()
+  }
+
+  const addBannerImage = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.onchange = async (e) => {
+      const file = e.target.files?.[0]
+      if (file) {
+        try {
+          onSuccess && onSuccess('Uploading banner image...')
+          const url = await handleImageUpload(file, 'banner')
+          setFormData(prev => ({ ...prev, banner_image: url }))
+          onSuccess && onSuccess('Banner image uploaded successfully!')
+        } catch (error) {
+          onError && onError(error.message || 'Failed to upload banner image')
         }
       }
     }
@@ -299,34 +329,28 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
             </Typography>
             <Button
               variant="outlined"
-              onClick={() => {
-                const input = document.createElement('input')
-                input.type = 'file'
-                input.accept = 'image/*'
-                input.onchange = async (e) => {
-                  const file = e.target.files?.[0]
-                  if (file) {
-                    try {
-                      const url = await handleImageUpload(file)
-                      setFormData(prev => ({ ...prev, banner_image: url }))
-                    } catch (error) {
-                      onError('Failed to upload banner image')
-                    }
-                  }
-                }
-                input.click()
-              }}
+              onClick={addBannerImage}
               fullWidth
+              startIcon={<UploadIcon />}
             >
               {formData.banner_image ? 'Change Banner Image' : 'Upload Banner Image'}
             </Button>
             {formData.banner_image && (
-              <Box sx={{ mt: 1 }}>
+              <Box sx={{ mt: 1, position: 'relative' }}>
                 <img
                   src={formData.banner_image}
                   alt="Banner preview"
                   style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '4px' }}
                 />
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="error"
+                  onClick={() => setFormData(prev => ({ ...prev, banner_image: '' }))}
+                  sx={{ position: 'absolute', top: 8, right: 8 }}
+                >
+                  Remove
+                </Button>
               </Box>
             )}
           </Grid>
@@ -399,8 +423,9 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
                       size="small"
                       variant="outlined"
                       onClick={addImage}
+                      startIcon={<ImageIcon />}
                     >
-                      📷 Image
+                      Image
                     </Button>
                   </Box>
                 </Box>

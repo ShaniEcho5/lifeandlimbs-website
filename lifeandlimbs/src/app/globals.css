@@ -341,3 +341,30 @@ nav[aria-label="Breadcrumb"] li {
     margin: 1rem 0;
   }
 }
+
+/* Enhanced image styling for blog content */
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 2rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out;
+}
+
+.blog-content img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive image handling */
+@media (max-width: 768px) {
+  .blog-content img {
+    margin: 1.5rem 0;
+    transform: none; /* Disable hover effects on mobile */
+  }
+  
+  .blog-content img:hover {
+    transform: none;
+  }
+}

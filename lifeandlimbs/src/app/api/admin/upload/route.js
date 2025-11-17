@@ -22,6 +22,7 @@ export async function POST(request) {
 
     const formData = await request.formData()
     const file = formData.get('file')
+    const type = formData.get('type') || 'content' // 'banner' or 'content'
 
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 })
@@ -32,18 +33,25 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Only image files are allowed' }, { status: 400 })
     }
 
-    // Validate file size (max 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json({ error: 'File size must be less than 5MB' }, { status: 400 })
+    // Set size limits based on type
+    const maxSize = type === 'banner' ? 5 * 1024 * 1024 : 10 * 1024 * 1024 // 5MB for banner, 10MB for content
+    
+    if (file.size > maxSize) {
+      const limit = type === 'banner' ? '5MB' : '10MB'
+      return NextResponse.json({ error: `File size must be less than ${limit}` }, { status: 400 })
     }
 
-    // Generate unique filename
+    // Choose bucket based on type
+    const bucket = type === 'banner' ? 'blog-images' : 'blog-content-images'
+    
+    // Generate unique filename with type prefix
     const fileExtension = file.name.split('.').pop()
-    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExtension}`
+    const prefix = type === 'banner' ? 'banner' : 'content'
+    const fileName = `${prefix}-${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExtension}`
 
     // Upload to Supabase Storage
     const { data, error } = await supabaseAdmin.storage
-      .from('blog-images')
+      .from(bucket)
       .upload(fileName, file, {
         cacheControl: '3600',
         upsert: false
@@ -56,7 +64,7 @@ export async function POST(request) {
       if (error.message?.includes('bucket') || error.message?.includes('not found')) {
         return NextResponse.json(
           { 
-            error: 'Storage bucket not configured. Please create a "blog-images" bucket in Supabase Storage.',
+            error: `Storage bucket "${bucket}" not configured. Please run the Supabase storage setup script.`,
             details: error.message 
           },
           { status: 500 }
@@ -68,12 +76,16 @@ export async function POST(request) {
 
     // Get public URL
     const { data: { publicUrl } } = supabaseAdmin.storage
-      .from('blog-images')
+      .from(bucket)
       .getPublicUrl(fileName)
 
     return NextResponse.json({
+      success: true,
       url: publicUrl,
-      fileName: fileName
+      fileName: fileName,
+      type: type,
+      bucket: bucket,
+      size: file.size
     })
 
   } catch (error) {
