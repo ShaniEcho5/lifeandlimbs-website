@@ -28,7 +28,9 @@ import {
   Edit as EditIcon,
   Delete as DeleteIcon,
   Visibility as ViewIcon,
-  VisibilityOff as HideIcon
+  VisibilityOff as VisibilityOffIcon,
+  Publish as PublishIcon,
+  OpenInNew as OpenInNewIcon
 } from '@mui/icons-material'
 import BlogEditor from './BlogEditor'
 
@@ -104,6 +106,19 @@ const BlogManagement = ({ onStatsUpdate }) => {
     } catch (error) {
       console.error('Error deleting blog:', error)
       showSnackbar('Failed to delete blog', 'error')
+    }
+  }
+
+  const handleViewBlog = (blog) => {
+    if (blog.status === 'published' && blog.slug) {
+      // Open published blog in new tab
+      window.open(`/blog/${blog.slug}`, '_blank')
+      showSnackbar('Opened blog in new tab', 'success')
+    } else if (!blog.slug) {
+      showSnackbar('Blog slug is missing. Please edit and save the blog first.', 'warning')
+    } else {
+      // Show preview or message for draft blogs
+      showSnackbar('Blog must be published to view on site', 'info')
     }
   }
 
@@ -197,7 +212,7 @@ const BlogManagement = ({ onStatsUpdate }) => {
         <Table>
           <TableHead>
             <TableRow sx={{ bgcolor: '#f5f5f5' }}>
-              <TableCell><strong>Title</strong></TableCell>
+              <TableCell><strong>Title & Actions</strong></TableCell>
               <TableCell><strong>Date</strong></TableCell>
               <TableCell><strong>Status</strong></TableCell>
             </TableRow>
@@ -213,8 +228,17 @@ const BlogManagement = ({ onStatsUpdate }) => {
               <TableRow>
                 <TableCell colSpan={3} align="center">
                   <Typography color="text.secondary">
-                    No blogs found
+                    {statusFilter === 'all' ? 'No blogs found' : `No ${statusFilter} blogs found`}
                   </Typography>
+                  {statusFilter !== 'all' && (
+                    <Button 
+                      size="small" 
+                      onClick={() => setStatusFilter('all')}
+                      sx={{ mt: 1 }}
+                    >
+                      View All Blogs
+                    </Button>
+                  )}
                 </TableCell>
               </TableRow>
             ) : (
@@ -230,45 +254,40 @@ const BlogManagement = ({ onStatsUpdate }) => {
                           📷 Has banner image
                         </Typography>
                       )}
-                      <Box sx={{ mt: 0.5 }}>
-                        <Button
+                      <Box sx={{ mt: 0.5, display: 'flex', gap: 1, alignItems: 'center' }}>
+                        <IconButton
                           size="small"
                           onClick={() => handleEditBlog(blog)}
-                          sx={{ 
-                            textTransform: 'none', 
-                            p: 0, 
-                            minWidth: 'auto',
-                            mr: 1,
-                            color: 'primary.main'
-                          }}
+                          title="Edit blog"
+                          sx={{ color: 'primary.main' }}
                         >
-                          Edit
-                        </Button>
-                        <Button
+                          <EditIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                          size="small"
+                          onClick={() => handleViewBlog(blog)}
+                          title={blog.status === 'published' ? 'View on site' : 'Blog must be published to view'}
+                          disabled={blog.status !== 'published'}
+                          sx={{ color: blog.status === 'published' ? 'primary.main' : 'text.disabled' }}
+                        >
+                          <OpenInNewIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
                           size="small"
                           onClick={() => handleToggleStatus(blog)}
-                          sx={{ 
-                            textTransform: 'none', 
-                            p: 0, 
-                            minWidth: 'auto',
-                            mr: 1,
-                            color: 'primary.main'
-                          }}
+                          title={blog.status === 'published' ? 'Unpublish blog' : 'Publish blog'}
+                          sx={{ color: blog.status === 'published' ? 'warning.main' : 'success.main' }}
                         >
-                          View
-                        </Button>
-                        <Button
+                          {blog.status === 'published' ? <VisibilityOffIcon fontSize="small" /> : <PublishIcon fontSize="small" />}
+                        </IconButton>
+                        <IconButton
                           size="small"
                           onClick={() => handleDeleteBlog(blog.id)}
-                          sx={{ 
-                            textTransform: 'none', 
-                            p: 0, 
-                            minWidth: 'auto',
-                            color: 'error.main'
-                          }}
+                          title="Delete blog"
+                          sx={{ color: 'error.main' }}
                         >
-                          Delete
-                        </Button>
+                          <DeleteIcon fontSize="small" />
+                        </IconButton>
                       </Box>
                     </Box>
                   </TableCell>
