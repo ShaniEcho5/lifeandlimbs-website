@@ -43,6 +43,27 @@ export async function GET(request) {
 
     if (draftError) throw draftError
 
+    // Get contact leads count
+    let totalLeads = 0
+    let newLeads = 0
+    
+    try {
+      const { count: leadsCount, error: leadsError } = await supabaseAdmin
+        .from('contact_leads')
+        .select('*', { count: 'exact', head: true })
+
+      if (!leadsError) totalLeads = leadsCount || 0
+
+      const { count: newLeadsCount, error: newLeadsError } = await supabaseAdmin
+        .from('contact_leads')
+        .select('*', { count: 'exact', head: true })
+        .eq('status', 'new')
+
+      if (!newLeadsError) newLeads = newLeadsCount || 0
+    } catch (leadsError) {
+      console.warn('Could not fetch contact leads stats:', leadsError)
+    }
+
     // Skip total views for now since view_count column doesn't exist
     const totalViews = 0
 
@@ -50,7 +71,9 @@ export async function GET(request) {
       totalBlogs: totalBlogs || 0,
       publishedBlogs: publishedBlogs || 0,
       draftBlogs: draftBlogs || 0,
-      totalViews
+      totalViews,
+      totalLeads,
+      newLeads
     }
 
     return NextResponse.json(stats)

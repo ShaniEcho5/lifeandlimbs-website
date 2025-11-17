@@ -21,6 +21,7 @@ import {
 import {
   Dashboard as DashboardIcon,
   Article as BlogIcon,
+  ContactMail as ContactIcon,
   ExitToApp as LogoutIcon,
   Add as AddIcon,
   Edit as EditIcon,
@@ -29,6 +30,7 @@ import {
   VisibilityOff as VisibilityOffIcon
 } from '@mui/icons-material'
 import BlogManagement from '../../components/admin/BlogManagement'
+import ContactLeadsManagement from '../../components/admin/ContactLeadsManagement'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -37,7 +39,9 @@ const AdminDashboard = () => {
     totalBlogs: 0,
     publishedBlogs: 0,
     draftBlogs: 0,
-    totalViews: 0
+    totalViews: 0,
+    totalLeads: 0,
+    newLeads: 0
   })
   const router = useRouter()
 
@@ -84,7 +88,8 @@ const AdminDashboard = () => {
 
   const tabs = [
     { label: 'Dashboard', value: 0 },
-    { label: 'Blog Management', value: 1 }
+    { label: 'Blog Management', value: 1 },
+    { label: 'Contact Leads', value: 2 }
   ]
 
   const renderContent = () => {
@@ -93,29 +98,37 @@ const AdminDashboard = () => {
         return (
           <Box>
             {/* Stats Cards */}
-            <Box sx={{ display: 'flex', gap: 3, mb: 3 }}>
-              <Paper sx={{ p: 3, flex: 1, textAlign: 'center' }}>
+            <Box sx={{ display: 'flex', gap: 3, mb: 3, flexWrap: 'wrap' }}>
+              <Paper sx={{ p: 3, flex: 1, textAlign: 'center', minWidth: '200px' }}>
                 <Typography variant="h4" color="primary" fontWeight="bold">
                   {stats.totalBlogs}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Total
+                  Total Blogs
                 </Typography>
               </Paper>
-              <Paper sx={{ p: 3, flex: 1, textAlign: 'center' }}>
+              <Paper sx={{ p: 3, flex: 1, textAlign: 'center', minWidth: '200px' }}>
                 <Typography variant="h4" color="success.main" fontWeight="bold">
                   {stats.publishedBlogs}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Published
+                  Published Blogs
                 </Typography>
               </Paper>
-              <Paper sx={{ p: 3, flex: 1, textAlign: 'center' }}>
+              <Paper sx={{ p: 3, flex: 1, textAlign: 'center', minWidth: '200px' }}>
                 <Typography variant="h4" color="warning.main" fontWeight="bold">
                   {stats.draftBlogs}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Draft
+                  Draft Blogs
+                </Typography>
+              </Paper>
+              <Paper sx={{ p: 3, flex: 1, textAlign: 'center', minWidth: '200px' }}>
+                <Typography variant="h4" color="info.main" fontWeight="bold">
+                  {stats.totalLeads || 0}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Contact Leads
                 </Typography>
               </Paper>
             </Box>
@@ -123,6 +136,8 @@ const AdminDashboard = () => {
         )
       case 1:
         return <BlogManagement onStatsUpdate={loadStats} />
+      case 2:
+        return <ContactLeadsManagement />
       default:
         return null
     }
@@ -169,7 +184,11 @@ const AdminDashboard = () => {
             <Tab
               key={tab.value}
               label={tab.label}
-              icon={tab.value === 0 ? <DashboardIcon /> : <BlogIcon />}
+              icon={
+                tab.value === 0 ? <DashboardIcon /> : 
+                tab.value === 1 ? <BlogIcon /> : 
+                <ContactIcon />
+              }
               iconPosition="start"
               sx={{ minHeight: 60 }}
             />

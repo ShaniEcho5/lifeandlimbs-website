@@ -62,19 +62,32 @@ const ContactUsPage = () => {
     setIsSubmitting(true);
     setShowError(false);
 
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.message) {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 5000);
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!formData.agreeToTerms) {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 5000);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "3761a92a-d86b-4f69-a6fb-416fc0af6422", //this will change
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           inquiryType: formData.inquiryType,
           message: formData.message,
-          subject: `New Contact Form Submission - ${formData.inquiryType}`,
-          from_name: formData.name,
+          agreeToTerms: formData.agreeToTerms,
         }),
       });
 
