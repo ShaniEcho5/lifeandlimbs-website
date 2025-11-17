@@ -16,13 +16,20 @@ import {
   MenuItem,
   Typography,
   Paper,
-  IconButton
+  IconButton,
+  Tabs,
+  Tab,
+  Chip,
+  LinearProgress,
+  Alert
 } from '@mui/material'
 import {
   Save as SaveIcon,
   Close as CloseIcon,
   Image as ImageIcon,
-  CloudUpload as UploadIcon
+  CloudUpload as UploadIcon,
+  Article as ContentIcon,
+  Search as SEOIcon
 } from '@mui/icons-material'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
@@ -47,9 +54,23 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
     status: 'draft',
     category: '',
     author: 'Admin',
-    banner_image: ''
+    banner_image: '',
+    // SEO fields
+    meta_title: '',
+    meta_description: '',
+    focus_keyword: '',
+    keywords: '',
+    og_title: '',
+    og_description: '',
+    og_image: '',
+    twitter_title: '',
+    twitter_description: '',
+    twitter_image: '',
+    canonical_url: '',
+    robots: 'index, follow'
   })
   const [saving, setSaving] = useState(false)
+  const [activeTab, setActiveTab] = useState(0)
 
   const editor = useEditor({
     extensions: [
@@ -77,7 +98,20 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         status: blog.status || 'draft',
         category: blog.category || '',
         author: blog.author || 'Admin',
-        banner_image: blog.banner_image || ''
+        banner_image: blog.banner_image || '',
+        // SEO fields with smart defaults
+        meta_title: blog.meta_title || blog.title || '',
+        meta_description: blog.meta_description || blog.excerpt || '',
+        focus_keyword: blog.focus_keyword || '',
+        keywords: blog.keywords || '',
+        og_title: blog.og_title || blog.title || '',
+        og_description: blog.og_description || blog.excerpt || '',
+        og_image: blog.og_image || blog.banner_image || '',
+        twitter_title: blog.twitter_title || blog.title || '',
+        twitter_description: blog.twitter_description || blog.excerpt || '',
+        twitter_image: blog.twitter_image || blog.banner_image || '',
+        canonical_url: blog.canonical_url || '',
+        robots: blog.robots || 'index, follow'
       })
       if (editor) {
         editor.commands.setContent(blog.content || '')
@@ -91,7 +125,19 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         status: 'draft',
         category: '',
         author: 'Admin',
-        banner_image: ''
+        banner_image: '',
+        meta_title: '',
+        meta_description: '',
+        focus_keyword: '',
+        keywords: '',
+        og_title: '',
+        og_description: '',
+        og_image: '',
+        twitter_title: '',
+        twitter_description: '',
+        twitter_image: '',
+        canonical_url: '',
+        robots: 'index, follow'
       }
       setFormData(emptyForm)
       if (editor) {
@@ -114,8 +160,46 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
     setFormData(prev => ({
       ...prev,
       title,
-      slug: prev.slug || generateSlug(title)
+      slug: prev.slug || generateSlug(title),
+      // Auto-populate SEO fields if they're empty
+      meta_title: prev.meta_title || title,
+      og_title: prev.og_title || title,
+      twitter_title: prev.twitter_title || title
     }))
+  }
+
+  const handleExcerptChange = (e) => {
+    const excerpt = e.target.value
+    setFormData(prev => ({
+      ...prev,
+      excerpt,
+      // Auto-populate SEO descriptions if they're empty
+      meta_description: prev.meta_description || excerpt,
+      og_description: prev.og_description || excerpt,
+      twitter_description: prev.twitter_description || excerpt
+    }))
+  }
+
+  // SEO Analysis Functions
+  const getSEOScore = () => {
+    let score = 0
+    const checks = {
+      title: formData.title.length > 0 && formData.title.length <= 60,
+      metaTitle: formData.meta_title.length > 0 && formData.meta_title.length <= 60,
+      metaDescription: formData.meta_description.length >= 120 && formData.meta_description.length <= 160,
+      focusKeyword: formData.focus_keyword.length > 0,
+      slug: formData.slug.length > 0 && formData.slug.length <= 75,
+      excerpt: formData.excerpt.length > 0,
+      content: formData.content.length > 300,
+      ogImage: formData.og_image.length > 0 || formData.banner_image.length > 0,
+      keywords: formData.keywords.split(',').filter(k => k.trim()).length >= 3
+    }
+    
+    Object.values(checks).forEach(check => {
+      if (check) score += 11.11 // Each check is worth ~11.11% for 100% total
+    })
+    
+    return Math.round(score)
   }
 
   const handleImageUpload = async (file, type = 'content') => {
@@ -202,7 +286,20 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         excerpt: formData.excerpt,
         author: formData.author || 'Admin',
         category: formData.category,
-        status: publishNow ? 'published' : formData.status
+        status: publishNow ? 'published' : formData.status,
+        // SEO fields
+        meta_title: formData.meta_title || formData.title,
+        meta_description: formData.meta_description || formData.excerpt,
+        focus_keyword: formData.focus_keyword,
+        keywords: formData.keywords,
+        og_title: formData.og_title || formData.title,
+        og_description: formData.og_description || formData.excerpt,
+        og_image: formData.og_image || formData.banner_image,
+        twitter_title: formData.twitter_title || formData.title,
+        twitter_description: formData.twitter_description || formData.excerpt,
+        twitter_image: formData.twitter_image || formData.banner_image,
+        canonical_url: formData.canonical_url,
+        robots: formData.robots || 'index, follow'
       }
 
       // Try to include banner_image, but don't fail if column doesn't exist
@@ -281,19 +378,47 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
         </Box>
       </DialogTitle>
 
-      <DialogContent>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              label="Title"
-              value={formData.title}
-              onChange={handleTitleChange}
-              required
-              variant="outlined"
-              size="small"
-            />
-          </Grid>
+      <DialogContent sx={{ p: 0 }}>
+        {/* Tabs */}
+        <Tabs 
+          value={activeTab} 
+          onChange={(e, newValue) => setActiveTab(newValue)}
+          sx={{ borderBottom: 1, borderColor: 'divider', px: 2 }}
+        >
+          <Tab icon={<ContentIcon />} iconPosition="start" label="Content" />
+          <Tab 
+            icon={<SEOIcon />} 
+            iconPosition="start" 
+            label={
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                SEO
+                <Chip 
+                  size="small" 
+                  label={`${getSEOScore()}%`} 
+                  color={getSEOScore() >= 80 ? 'success' : getSEOScore() >= 60 ? 'warning' : 'error'}
+                />
+              </Box>
+            } 
+          />
+        </Tabs>
+
+        <Box sx={{ p: 2 }}>
+          {/* Content Tab */}
+          {activeTab === 0 && (
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  label="Title"
+                  value={formData.title}
+                  onChange={handleTitleChange}
+                  required
+                  variant="outlined"
+                  size="small"
+                  helperText={`${formData.title.length}/60 characters`}
+                  error={formData.title.length > 60}
+                />
+              </Grid>
           
           <Grid item xs={12} md={6}>
             <TextField
@@ -360,11 +485,13 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
               fullWidth
               label="Excerpt"
               value={formData.excerpt}
-              onChange={(e) => setFormData(prev => ({ ...prev, excerpt: e.target.value }))}
+              onChange={handleExcerptChange}
               multiline
               rows={2}
               variant="outlined"
               size="small"
+              helperText={`${formData.excerpt.length}/160 characters (recommended for meta description)`}
+              error={formData.excerpt.length > 160}
             />
           </Grid>
           
@@ -448,7 +575,209 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
               </Box>
             </Paper>
           </Grid>
-        </Grid>
+            </Grid>
+          )}
+
+          {/* SEO Tab */}
+          {activeTab === 1 && (
+            <Box>
+              {/* SEO Score */}
+              <Box sx={{ mb: 3, p: 2, bgcolor: 'background.paper', borderRadius: 1, border: 1, borderColor: 'divider' }}>
+                <Typography variant="h6" gutterBottom>
+                  SEO Analysis Score: {getSEOScore()}%
+                </Typography>
+                <LinearProgress 
+                  variant="determinate" 
+                  value={getSEOScore()} 
+                  color={getSEOScore() >= 80 ? 'success' : getSEOScore() >= 60 ? 'warning' : 'error'}
+                  sx={{ height: 8, borderRadius: 4 }}
+                />
+              </Box>
+
+              <Grid container spacing={2}>
+                {/* Basic SEO */}
+                <Grid item xs={12}>
+                  <Typography variant="h6" gutterBottom color="primary">
+                    Basic SEO
+                  </Typography>
+                </Grid>
+                
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Meta Title"
+                    value={formData.meta_title}
+                    onChange={(e) => setFormData(prev => ({ ...prev, meta_title: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText={`${formData.meta_title.length}/60 characters. This appears in search engine results.`}
+                    error={formData.meta_title.length > 60}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Meta Description"
+                    value={formData.meta_description}
+                    onChange={(e) => setFormData(prev => ({ ...prev, meta_description: e.target.value }))}
+                    multiline
+                    rows={3}
+                    variant="outlined"
+                    size="small"
+                    helperText={`${formData.meta_description.length}/160 characters. This appears in search engine results.`}
+                    error={formData.meta_description.length < 120 || formData.meta_description.length > 160}
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Focus Keyword"
+                    value={formData.focus_keyword}
+                    onChange={(e) => setFormData(prev => ({ ...prev, focus_keyword: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Main keyword you want to rank for"
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Additional Keywords"
+                    value={formData.keywords}
+                    onChange={(e) => setFormData(prev => ({ ...prev, keywords: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Comma-separated keywords"
+                  />
+                </Grid>
+
+                {/* Social Media SEO */}
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                  <Typography variant="h6" gutterBottom color="primary">
+                    Social Media (Open Graph)
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Facebook/LinkedIn Title"
+                    value={formData.og_title}
+                    onChange={(e) => setFormData(prev => ({ ...prev, og_title: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Title when shared on Facebook/LinkedIn"
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Twitter Title"
+                    value={formData.twitter_title}
+                    onChange={(e) => setFormData(prev => ({ ...prev, twitter_title: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Title when shared on Twitter"
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Social Media Description"
+                    value={formData.og_description}
+                    onChange={(e) => setFormData(prev => ({ 
+                      ...prev, 
+                      og_description: e.target.value,
+                      twitter_description: e.target.value 
+                    }))}
+                    multiline
+                    rows={2}
+                    variant="outlined"
+                    size="small"
+                    helperText="Description when shared on social media"
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Social Media Image URL"
+                    value={formData.og_image}
+                    onChange={(e) => setFormData(prev => ({ 
+                      ...prev, 
+                      og_image: e.target.value,
+                      twitter_image: e.target.value 
+                    }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Image when shared on social media (will use banner image if empty)"
+                  />
+                </Grid>
+
+                {/* Advanced SEO */}
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                  <Typography variant="h6" gutterBottom color="primary">
+                    Advanced SEO
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    fullWidth
+                    label="Canonical URL"
+                    value={formData.canonical_url}
+                    onChange={(e) => setFormData(prev => ({ ...prev, canonical_url: e.target.value }))}
+                    variant="outlined"
+                    size="small"
+                    helperText="Canonical URL (optional)"
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <FormControl fullWidth size="small">
+                    <InputLabel>Robots</InputLabel>
+                    <Select
+                      value={formData.robots}
+                      label="Robots"
+                      onChange={(e) => setFormData(prev => ({ ...prev, robots: e.target.value }))}
+                    >
+                      <MenuItem value="index, follow">Index, Follow</MenuItem>
+                      <MenuItem value="noindex, follow">No Index, Follow</MenuItem>
+                      <MenuItem value="index, nofollow">Index, No Follow</MenuItem>
+                      <MenuItem value="noindex, nofollow">No Index, No Follow</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {/* SEO Preview */}
+                <Grid item xs={12} sx={{ mt: 2 }}>
+                  <Typography variant="h6" gutterBottom color="primary">
+                    Search Engine Preview
+                  </Typography>
+                  <Paper sx={{ p: 2, bgcolor: 'grey.50' }}>
+                    <Typography 
+                      variant="h6" 
+                      sx={{ color: '#1a0dab', fontSize: '18px', lineHeight: 1.3, mb: 0.5 }}
+                    >
+                      {formData.meta_title || formData.title || 'Blog Title'}
+                    </Typography>
+                    <Typography sx={{ color: '#006621', fontSize: '14px', mb: 0.5 }}>
+                      https://lifeandlimbs.org/blog/{formData.slug || 'blog-slug'}
+                    </Typography>
+                    <Typography sx={{ color: '#545454', fontSize: '14px', lineHeight: 1.4 }}>
+                      {formData.meta_description || formData.excerpt || 'Blog description will appear here...'}
+                    </Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Box>
+          )}
+        </Box>
       </DialogContent>
 
       <DialogActions sx={{ p: 2, gap: 1 }}>

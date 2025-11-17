@@ -35,18 +35,59 @@ export async function generateMetadata({ params }) {
       .single();
     
     if (!post) return {};
+
+    const baseUrl = 'https://lifeandlimbs.org';
+    const pageUrl = `${baseUrl}/blog/${post.slug}`;
     
     return {
-      title: `${post.title} | Life and Limb`,
-      description: post.excerpt || post.title,
-      keywords: post.category,
+      title: post.meta_title || `${post.title} | Life and Limb`,
+      description: post.meta_description || post.excerpt || post.title,
+      keywords: post.keywords || post.focus_keyword || post.category,
+      robots: post.robots || 'index, follow',
+      canonical: post.canonical_url || pageUrl,
+      
+      // Open Graph
       openGraph: {
-        title: post.title,
-        description: post.excerpt || post.title,
+        title: post.og_title || post.title,
+        description: post.og_description || post.excerpt || post.title,
         type: 'article',
+        url: pageUrl,
+        siteName: 'Life and Limb',
         publishedTime: post.published_at,
+        modifiedTime: post.updated_at,
         authors: [post.author || 'Life and Limb'],
+        images: post.og_image || post.banner_image ? [{
+          url: post.og_image || post.banner_image,
+          alt: post.title,
+          width: 1200,
+          height: 630,
+        }] : [],
+        locale: 'en_US',
       },
+
+      // Twitter
+      twitter: {
+        card: 'summary_large_image',
+        title: post.twitter_title || post.og_title || post.title,
+        description: post.twitter_description || post.og_description || post.excerpt || post.title,
+        images: post.twitter_image || post.og_image || post.banner_image ? [post.twitter_image || post.og_image || post.banner_image] : [],
+        creator: '@lifeandlimb',
+        site: '@lifeandlimb',
+      },
+
+      // Additional SEO
+      alternates: {
+        canonical: post.canonical_url || pageUrl,
+      },
+      
+      // Article specific
+      other: {
+        'article:author': post.author || 'Life and Limb',
+        'article:published_time': post.published_at,
+        'article:modified_time': post.updated_at,
+        'article:section': post.category,
+        'article:tag': post.keywords,
+      }
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
@@ -118,17 +159,33 @@ export default async function BlogPost({ params }) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.title,
-    "description": post.excerpt,
+    "description": post.meta_description || post.excerpt,
+    "image": post.og_image || bannerImage || "https://lifeandlimbs.org/images/default-blog.jpg",
     "author": {
       "@type": "Organization",
-      "name": post.author || "Life and Limb"
+      "name": post.author || "Life and Limb",
+      "url": "https://lifeandlimbs.org"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Life and Limb"
+      "name": "Life and Limb",
+      "url": "https://lifeandlimbs.org",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lifeandlimbs.org/images/logo.png"
+      }
     },
+    "url": `https://lifeandlimbs.org/blog/${post.slug}`,
     "datePublished": post.published_at,
-    "dateModified": post.updated_at
+    "dateModified": post.updated_at || post.published_at,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://lifeandlimbs.org/blog/${post.slug}`
+    },
+    "keywords": post.keywords || post.focus_keyword,
+    "articleSection": post.category,
+    "wordCount": post.content?.split(' ').length || 0,
+    "inLanguage": "en-US"
   };
 
   return (
