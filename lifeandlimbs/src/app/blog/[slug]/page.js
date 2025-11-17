@@ -44,7 +44,6 @@ export async function generateMetadata({ params }) {
       description: post.meta_description || post.excerpt || post.title,
       keywords: post.keywords || post.focus_keyword || post.category,
       robots: post.robots || 'index, follow',
-      canonical: post.canonical_url || pageUrl,
       
       // Open Graph
       openGraph: {
@@ -80,8 +79,9 @@ export async function generateMetadata({ params }) {
         canonical: post.canonical_url || pageUrl,
       },
       
-      // Article specific
+      // Article specific and additional meta tags
       other: {
+        'robots': post.robots || 'index, follow',
         'article:author': post.author || 'Life and Limb',
         'article:published_time': post.published_at,
         'article:modified_time': post.updated_at,
@@ -153,6 +153,10 @@ export default async function BlogPost({ params }) {
 
   const readingTime = getReadingTime(post.content);
   const formattedDate = formatDate(post.published_at || post.created_at);
+  
+  // Generate canonical URL
+  const baseUrl = 'https://lifeandlimbs.org';
+  const canonicalUrl = post.canonical_url || `${baseUrl}/blog/${post.slug}`;
   
   // Generate structured data for SEO
   const structuredData = {

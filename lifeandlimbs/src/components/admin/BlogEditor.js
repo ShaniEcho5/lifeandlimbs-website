@@ -654,70 +654,7 @@ const BlogEditor = ({ open, onClose, blog, onSave, onError, onSuccess }) => {
                   />
                 </Grid>
 
-                {/* Social Media SEO */}
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <Typography variant="h6" gutterBottom color="primary">
-                    Social Media (Open Graph)
-                  </Typography>
-                </Grid>
 
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    fullWidth
-                    label="Facebook/LinkedIn Title"
-                    value={formData.og_title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, og_title: e.target.value }))}
-                    variant="outlined"
-                    size="small"
-                    helperText="Title when shared on Facebook/LinkedIn"
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    fullWidth
-                    label="Twitter Title"
-                    value={formData.twitter_title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, twitter_title: e.target.value }))}
-                    variant="outlined"
-                    size="small"
-                    helperText="Title when shared on Twitter"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Social Media Description"
-                    value={formData.og_description}
-                    onChange={(e) => setFormData(prev => ({ 
-                      ...prev, 
-                      og_description: e.target.value,
-                      twitter_description: e.target.value 
-                    }))}
-                    multiline
-                    rows={2}
-                    variant="outlined"
-                    size="small"
-                    helperText="Description when shared on social media"
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Social Media Image URL"
-                    value={formData.og_image}
-                    onChange={(e) => setFormData(prev => ({ 
-                      ...prev, 
-                      og_image: e.target.value,
-                      twitter_image: e.target.value 
-                    }))}
-                    variant="outlined"
-                    size="small"
-                    helperText="Image when shared on social media (will use banner image if empty)"
-                  />
-                </Grid>
 
                 {/* Advanced SEO */}
                 <Grid item xs={12} sx={{ mt: 2 }}>
