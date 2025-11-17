@@ -93,16 +93,7 @@ export default async function BlogPost({ params }) {
     
     post = data;
     
-    // Debug: Log post data to see what we're getting
-    console.log('🐛 BLOG POST DEBUG:', {
-      title: post.title,
-      slug: post.slug,
-      banner_image: post.banner_image,
-      banner_image_type: typeof post.banner_image,
-      banner_image_length: post.banner_image ? post.banner_image.length : 0,
-      hasBannerImage: !!post.banner_image,
-      allKeys: Object.keys(post)
-    });
+
   } catch (error) {
     console.error('Error fetching blog post:', error);
     notFound();
@@ -153,23 +144,10 @@ export default async function BlogPost({ params }) {
       <div className="min-h-screen bg-white">
         {/* Article Header */}
         <header className="relative">
-          {/* Temporary Debug Info */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded m-4 text-xs">
-              <strong>🐛 DEBUG:</strong> Banner URL: {bannerImage || 'NO BANNER'}<br/>
-              <strong>Test Direct Access:</strong> 
-              <a href={bannerImage} target="_blank" className="text-blue-600 underline ml-2">
-                Open Image in New Tab
-              </a><br/>
-              <strong>API Test:</strong>
-              <a href="/api/test-image" target="_blank" className="text-blue-600 underline ml-2">
-                Test Image API
-              </a>
-            </div>
-          )}
+
           
           {/* Banner Image */}
-          {bannerImage && bannerImage.trim() !== '' ? (
+          {bannerImage && bannerImage.trim() !== '' && (
             <div className="relative h-64 md:h-80 lg:h-96 w-full mb-8">
               <Image
                 src={bannerImage}
@@ -178,16 +156,9 @@ export default async function BlogPost({ params }) {
                 className="object-cover rounded-lg"
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                onError={() => console.error('❌ Banner image failed to load:', bannerImage)}
               />
               <div className="absolute inset-0 bg-black bg-opacity-30 rounded-lg" />
             </div>
-          ) : (
-            process.env.NODE_ENV === 'development' && (
-              <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded m-4">
-                ⚠️ No banner image found for this post
-              </div>
-            )
           )}
 
           {/* Article Title and Meta */}
