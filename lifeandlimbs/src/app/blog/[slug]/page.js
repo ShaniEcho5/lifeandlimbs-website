@@ -166,21 +166,21 @@ export default async function BlogPost({ params }) {
             <div className="container mx-auto max-w-4xl">
               <div className="text-gray-900">
                 {/* Breadcrumb */}
-                <nav className="mb-4">
-                  <ol className="flex items-center space-x-2 text-sm">
-                    <li>
+                <nav className="mb-4" aria-label="Breadcrumb">
+                  <ol className="flex items-center space-x-2 text-sm list-none">
+                    <li className="list-none">
                       <Link href="/" className="hover:underline opacity-75">
                         Home
                       </Link>
                     </li>
-                    <li>/</li>
-                    <li>
+                    <li className="list-none opacity-50" aria-hidden="true">/</li>
+                    <li className="list-none">
                       <Link href="/blog" className="hover:underline opacity-75">
                         Blog
                       </Link>
                     </li>
-                    <li>/</li>
-                    <li className="opacity-90">{post.title}</li>
+                    <li className="list-none opacity-50" aria-hidden="true">/</li>
+                    <li className="opacity-90 list-none" aria-current="page">{post.title}</li>
                   </ol>
                 </nav>
 

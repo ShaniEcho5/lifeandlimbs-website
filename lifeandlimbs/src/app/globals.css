@@ -200,6 +200,18 @@ button:focus:not(:focus-visible) {
   list-style-type: decimal;
 }
 
+/* Breadcrumb styles - ensure they override blog content styles */
+nav[aria-label="Breadcrumb"] ol {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+nav[aria-label="Breadcrumb"] li {
+  list-style: none !important;
+  margin-bottom: 0 !important;
+}
+
 .blog-content a {
   color: #2563eb;
   text-decoration: underline;
