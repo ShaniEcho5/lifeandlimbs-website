@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '../../../lib/supabase'
+import { sendContactFormNotification } from '../../../lib/email'
 
 export async function POST(request) {
   try {
@@ -54,8 +55,18 @@ export async function POST(request) {
       )
     }
 
-    // Optional: Send notification email to admin (you can implement this later)
-    // await sendNotificationEmail(data)
+    // Send notification email to admin(s)
+    try {
+      const emailResult = await sendContactFormNotification(data)
+      if (emailResult.success) {
+        console.log('Admin notification email sent successfully')
+      } else {
+        console.warn('Failed to send admin notification email:', emailResult.error)
+      }
+    } catch (emailError) {
+      // Log the error but don't fail the form submission
+      console.error('Email notification error:', emailError)
+    }
 
     return NextResponse.json({
       success: true,
