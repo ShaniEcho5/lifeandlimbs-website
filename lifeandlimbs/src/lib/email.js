@@ -119,7 +119,10 @@ Submission Time: ${new Date().toLocaleString()}
     console.log('Contact form notification sent successfully:', {
       messageId: result.messageId,
       recipients: adminEmails,
-      subject: emailSubject
+      subject: emailSubject,
+      from: `"Life and Limbs Website" <${process.env.EMAIL_USER}>`,
+      emailUser: process.env.EMAIL_USER,
+      adminEmailsFromEnv: process.env.ADMIN_EMAILS
     })
     
     return {
