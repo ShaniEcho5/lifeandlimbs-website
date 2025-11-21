@@ -1,25 +1,19 @@
-import nodemailer from 'nodemailer'
-
-// Create transporter using Gmail SMTP
-const createTransporter = () => {
-  return nodemailer.createTransporter({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT),
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  })
-}
-
 // Send contact form notification to admins
 export const sendContactFormNotification = async (formData) => {
   try {
-    const transporter = createTransporter()
+    const nodemailer = require('nodemailer')
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    })
     
     // Get admin emails from environment variable
     const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || []
@@ -148,7 +142,19 @@ Submission Time: ${new Date().toLocaleString()}
 // Test email configuration
 export const testEmailConfiguration = async () => {
   try {
-    const transporter = createTransporter()
+    const nodemailer = require('nodemailer')
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
+      },
+      tls: {
+        rejectUnauthorized: false
+      }
+    })
     
     // Verify the connection
     await transporter.verify()
